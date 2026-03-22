@@ -1,0 +1,63 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "title": "a title",
+      "views": 100
+    },
+    {
+      "id": "2",
+      "title": "another title",
+      "views": 200
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "text": "a comment about post 1",
+      "postId": "1"
+    },
+    {
+      "id": "2",
+      "text": "another comment about post 1",
+      "postId": "1"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "payments": [
+    {
+      "date": "2026-03-25",
+      "amount": "45555",
+      "categoryId": "5454",
+      "deleted": false,
+      "id": "owQqgeBZlgE"
+    },
+    {
+      "date": "2026-03-25",
+      "amount": "55555",
+      "categoryId": "5",
+      "deleted": false,
+      "id": "d5GvT07qJVs"
+    }
+  ],
+  "users": [
+    {
+      "id": "9bdf",
+      "firstName": "Natalia",
+      "lastName": "Maria",
+      "email": "qvidiu123456@gmail.com",
+      "password": "123456"
+    },
+    {
+      "firstName": "Maria",
+      "lastName": "Maria",
+      "email": "qvidiu123456@gmail.com",
+      "password": "123456",
+      "id": "U_Hs7evc5JU"
+    }
+  ],
+  "expenses": [],
+  "$schema": "./node_modules/json-server/schema.json"
+}
