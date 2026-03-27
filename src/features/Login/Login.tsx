@@ -1,18 +1,7 @@
 import { useState, type ChangeEvent, type FormEvent } from 'react';
+import type { LoginData, User } from "./types";
 import styles from './Login.module.css';
 
-interface LoginData {
-    email: string;
-    password: string;
-}
-
-interface User {
-    id: number;
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-}
 
 export function Login() {
     const [loginData, setLoginData] = useState<LoginData>({ email: '', password: '' });
@@ -32,7 +21,7 @@ export function Login() {
         }
 
         try {
-            const response = await fetch('/db.json'); // or your JSON Server endpoint
+            const response = await fetch('/db.json'); 
             if (!response.ok) throw new Error('Failed to fetch users');
             const data: { users: User[] } = await response.json();
 

@@ -9,7 +9,7 @@ export function Payment() {
 
     const [payment, setpayment] = useState<Payment[] | null>(null);
     const [addPayment, setAddPayment] = useState(false);
-    const toogleaddMPayment = () => {
+    const buttonAddMPayment = () => {
         setAddPayment(!addPayment);
     };
     useEffect(() => {
@@ -85,7 +85,7 @@ export function Payment() {
     if (!payment) {
         return (
             <>
-                <strong>Loading payment...</strong>;
+                <strong>Wait....Loading payment...</strong>;
                 {addPayment && (
                     <form onSubmit={showPayment} className={styles.form}>
                         <input type="date" name="date" placeholder="date" />
@@ -98,67 +98,78 @@ export function Payment() {
     }
     return (
         <>
-            <h1>Payment</h1>
+    <h1>Payment</h1>
 
-            <table className={styles.card}>
-                <thead>
-                    <tr>
-                        <th>date</th>
-                        <th>Amount</th>
-                        <th>CategoryId</th>
-                        <th>Delete payment?</th>
-                        <th>Delete permanently</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {payment.map((key) => (
-                        <tr key={key.id}>
-                            <td>{key.date}</td>
-                            <td>{key.amount}</td>
-                            <td>{key.categoryId}</td>
-                            <td className={styles.paymentItem}>{key.deleted ? "Yes" : "No"}
-                                <label className={styles.paymentItem}>
-                                    <input
-                                        type="checkbox"
-                                        checked={key.deleted}
-                                        onChange={() => updatePayment(key)}
-                                    />{" "}
-                                </label>{" "}
-                            </td>
+    {/* CARD CONTAINER */}
+    <div className={styles.card}>
+        {payment.map((key) => (
+            <div key={key.id} className={styles.cardItem}>
+                
+                <div data-label="Date">
+                    Date: <span>{key.date}</span>
+                </div>
 
-                            <td>
-                                <button className={styles.deleteButton} onClick={() => deletePayment(key.id)}>
-                                    Delete
-                                </button>
-                            </td>
+                <div data-label="Amount">
+                    Amount: <span>{key.amount}</span>
+                </div>
 
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-            {addPayment && (
-                <form onSubmit={showPayment} className={styles.form}>
-                    <input type="date" name="date" placeholder="date" />
-                    <input type="text" name="amount" placeholder="amount" />
-                    <input name="categoryId" placeholder="categoryId" />
-                    <button type="submit" className={styles.button}>Add Payment</button>
-                </form>
-            )}
-            <button onClick={toogleaddMPayment} className={styles.button}>
-                {addPayment ? "Back" : "Add new Payment"}
-            </button>
+                <div data-label="CategoryId">
+                    CategoryId: <span>{key.categoryId}</span>
+                </div>
 
-            <div>
-                <ul>
-                    {payment.map((key) => (
+                <div className={styles.paymentItem}>
+                    Delete payment?
+                    <span className={key.deleted ? styles.badgeRed : styles.badgeGreen}>
+                        {key.deleted ? "Yes" : "No"}
+                    </span>
 
-                        <li key={key.id}>
-                            Date: {key.date} Amount {key.amount} CategoryId: {key.categoryId}
-                        </li>
-                    ))}
-                </ul>
+                    <input
+                        type="checkbox"
+                        checked={key.deleted}
+                        onChange={() => updatePayment(key)}
+                    />
+                </div>
+
+                <div data-label="Actions">
+                    <button
+                        className={styles.deleteButton}
+                        onClick={() => deletePayment(key.id)}
+                    >
+                        Delete
+                    </button>
+                </div>
+
             </div>
-        </>
+        ))}
+    </div>
+
+    {addPayment && (
+        <form onSubmit={showPayment} className={styles.addPaymentButton}>
+            <input type="date" name="date" placeholder="date" />
+            <input type="text" name="amount" placeholder="amount" />
+            <input name="categoryId" placeholder="categoryId" />
+
+            <button type="submit" className={styles.button}>
+                Add Payment
+            </button>
+        </form>
+    )}
+
+    <button onClick={buttonAddMPayment} className={styles.addPaymentButton}>
+        {addPayment ? "Back" : "Add new Payment"}
+    </button>
+
+    {/* LISTA SIMPLĂ */}
+    <div> 
+        <ul>
+            {payment.map((key) => (
+                <li key={key.id}>
+                    Date: {key.date} Amount {key.amount} CategoryId: {key.categoryId}
+                </li>
+            ))}
+        </ul>
+    </div>
+</>
     );
 
 }

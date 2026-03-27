@@ -1,21 +1,7 @@
 import { useState, type ChangeEvent, type FormEvent } from 'react';
+import type { RegisterData, User } from "./types";
 import styles from './Register.module.css';
 
-interface RegisterData {
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-}
-
-interface User {
-    id?: number; // JSON server will generate id
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-}
 
 export function Register() {
     const [registerData, setRegisterData] = useState<RegisterData>({

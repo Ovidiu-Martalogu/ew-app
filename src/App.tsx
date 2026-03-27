@@ -1,19 +1,22 @@
-// import { useState } from 'react'
+import { Route, Routes } from "react-router";
 
-// import { Payment } from "./features/Payment/Payment";
-import { Login } from './features/Login/Login';
+import { Nav } from "./components/Nav/Nav";
+import { Payment } from "./features/Payment/Payment";
+import { NotFound } from "./NotFound/NotFound";
 import { Register } from "./features/Register/Register";
+import { Login } from "./features/Login/Login";
 
-function App() {
-  // const [count, setCount] = useState(0)
-
+export default function App() {
   return (
     <>
-      <Register />;
-      <Login />;
-      {/* <Payment /> */}
+      <Nav />
+      <Routes>
+        <Route path="/payments" element={<Payment/>} />
+        <Route path="/register" element={<Register/>} />
+        <Route path="/login" element={<Login/>} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </>
   )
 }
 
-export default App

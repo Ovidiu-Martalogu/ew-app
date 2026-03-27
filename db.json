@@ -28,18 +28,74 @@
   },
   "payments": [
     {
-      "date": "2026-03-25",
-      "amount": "45555",
-      "categoryId": "5454",
+      "date": "2026-03-05",
+      "amount": "700",
+      "categoryId": "222",
       "deleted": false,
-      "id": "owQqgeBZlgE"
+      "id": "y3n-I7b"
+    },
+    {
+      "date": "2026-03-05",
+      "amount": "700",
+      "categoryId": "222",
+      "deleted": false,
+      "id": "0OqVLbe"
+    },
+    {
+      "date": "2026-03-05",
+      "amount": "700",
+      "categoryId": "222",
+      "deleted": false,
+      "id": "ab4hiR6"
+    },
+    {
+      "date": "2026-03-05",
+      "amount": "700",
+      "categoryId": "222",
+      "deleted": false,
+      "id": "IGkbUXz"
+    },
+    {
+      "date": "2026-03-05",
+      "amount": "700",
+      "categoryId": "222",
+      "deleted": false,
+      "id": "knFCa6V"
+    },
+    {
+      "date": "2026-03-05",
+      "amount": "700",
+      "categoryId": "222",
+      "deleted": false,
+      "id": "2tD9aKn"
+    },
+    {
+      "date": "2026-03-26",
+      "amount": "34",
+      "categoryId": "2",
+      "deleted": false,
+      "id": "aiCPdMn"
     },
     {
       "date": "2026-03-25",
-      "amount": "55555",
-      "categoryId": "5",
+      "amount": "222222",
+      "categoryId": "1",
       "deleted": false,
-      "id": "d5GvT07qJVs"
+      "id": "uVIEjhT"
+    },
+    {
+      "date": "2026-03-25",
+      "amount": "12",
+      "categoryId": "1",
+      "deleted": false,
+      "id": "ECV9Qm7"
+    },
+    {
+      "date": "2026-03-25",
+      "amount": "444",
+      "categoryId": "13",
+      "deleted": false,
+      "id": "O3s7R95"
     }
   ],
   "users": [
@@ -58,6 +114,5 @@
       "id": "U_Hs7evc5JU"
     }
   ],
-  "expenses": [],
-  "$schema": "./node_modules/json-server/schema.json"
+  "expenses": []
 }
