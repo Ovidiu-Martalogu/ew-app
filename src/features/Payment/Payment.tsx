@@ -30,15 +30,18 @@ export function Payment() {
         const data = new FormData(form);
         const date = data.get("date");
         const amount = data.get("amount");
-        const categoryId = data.get("categoryId");
-
+        const category = data.get("category");
+        if (!date ||!amount || !category) {
+            alert("Please fill all the rouds");
+            return;
+        }
         const newPayment = await fetch(apiUrl, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ date, amount, categoryId, deleted: false }),
-        }).then((res) => res.json());
+            body: JSON.stringify({ date, amount, category, deleted: false }),
+        }).then((response) => response.json());
 
         setpayment([...(payment ?? []), newPayment]);
     }
@@ -69,16 +72,16 @@ export function Payment() {
         );
     }
     async function deletePayment(id: number) {
-        const item = payment?.find(p => p.id === id);
+        const item = payment?.find(key => key.id === id);
 
-         if (item?.deleted !== true) {
-             alert("If you want to delete, please mark the registration!");
-             return;
-    }
-            await fetch(`${apiUrl}/${id}`, {
-                method: "DELETE",
-            });
-       
+        if (item?.deleted !== true) {
+            alert("If you want to delete, please mark the registration!");
+            return;
+        }
+        await fetch(`${apiUrl}/${id}`, {
+            method: "DELETE",
+        });
+
         // update local state
         setpayment((prev) =>
             prev ? prev.filter((key) => key.id !== id) : prev
@@ -106,7 +109,7 @@ export function Payment() {
                     <form onSubmit={showPayment} className={styles.form}>
                         <input type="date" name="date" placeholder="date" />
                         <input type="text" name="amount" placeholder="amount" />
-                        <input name="categoryId" placeholder="categoryId" />
+                        <input name="category" placeholder="category" />
                         <button type="submit" className={styles.button}>Add Payment</button>
                     </form>)}
             </>
@@ -141,13 +144,7 @@ export function Payment() {
                             <tr key={key.id}>
                                 <td>{key.date}</td>
                                 <td>{key.amount}</td>
-
-                                <td>
-                                    <span className={styles[`cat${key.categoryId}`]}>
-                                        {key.categoryId}
-                                    </span>
-                                </td>
-
+                                <td>{key.category}</td>
                                 <td>
                                     <input
                                         type="checkbox"
@@ -173,10 +170,15 @@ export function Payment() {
             {/* FORM */}
             {addPayment && (
                 <form onSubmit={showPayment} className={styles.form}>
-                    <input type="date" name="date" className={styles.input} />
-                    <input type="text" name="amount" className={styles.input} />
-                    <input name="categoryId" className={styles.input} />
-
+                    <label id="date">Select the date:
+                        <input type="date" id="date" name="date" className={styles.input} />
+                    </label>
+                    <label id="amount"> Insert the amount:
+                        <input type="text" name="amount" className={styles.input} />
+                    </label>
+                    <label id="category"> Insert the category:
+                        <input name="category" className={styles.input} />
+                    </label>
                     <button type="submit" className={styles.button}>
                         Add Payment
                     </button>

@@ -30,30 +30,65 @@
     {
       "date": "2026-03-19",
       "amount": "2300",
-      "categoryId": "8",
-      "deleted": false,
+      "category": "rata banca",
+      "deleted": true,
       "id": "KI5CeLJ"
     },
     {
-      "date": "2026-03-19",
-      "amount": "2300",
-      "categoryId": "9",
+      "date": "2026-03-23",
+      "amount": "700",
+      "category": "Kaufland",
       "deleted": false,
-      "id": "vGkXiuT"
+      "id": "eWKCe1G"
     },
     {
-      "date": "2026-03-19",
-      "amount": "2300",
-      "categoryId": "12",
+      "date": "2026-03-25",
+      "amount": "120",
+      "category": "Lidl",
       "deleted": false,
-      "id": "LU4keih"
+      "id": "79qqnlV"
+    },
+    {
+      "date": "2026-03-27",
+      "amount": "150",
+      "category": "profi",
+      "deleted": false,
+      "id": "9f175rY"
+    },
+    {
+      "date": "2026-03-28",
+      "amount": "255",
+      "category": "asigurare masina",
+      "deleted": false,
+      "id": "D03Er8T"
+    },
+    {
+      "date": "2026-03-17",
+      "amount": "235",
+      "category": "cumparaturi",
+      "deleted": false,
+      "id": "lCY1wub"
+    },
+    {
+      "date": "2026-03-17",
+      "amount": "600",
+      "category": "reparatii",
+      "deleted": false,
+      "id": "QhsKOqd"
+    },
+    {
+      "date": "2026-03-18",
+      "amount": "500",
+      "category": "adisasi",
+      "deleted": false,
+      "id": "fl7j3ZJ"
     },
     {
       "date": "2026-03-24",
-      "amount": "700",
-      "categoryId": "222",
+      "amount": "60",
+      "category": "cina",
       "deleted": false,
-      "id": "mMgJ8p6"
+      "id": "esVuy_A"
     }
   ],
   "users": [
