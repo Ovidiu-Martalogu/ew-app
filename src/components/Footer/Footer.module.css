@@ -1,0 +1,105 @@
+.footer {
+    margin-top: auto;
+    background: #111827;
+    color: white;
+    padding: 0.5rem 1rem;
+}
+
+.footerContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.logoImg {
+    height: 40px;
+    margin-right: 8px;
+}
+
+.ew {
+    font-weight: bold;
+    color: #f310ab;
+}
+
+.app {
+    color: #00d4ff;
+}
+
+.menu {
+    display: flex;
+    list-style: none;
+ }
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-size: 1rem;
+}
+
+.menu a.active {
+    color: #00d4ff;
+}
+
+
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: 2px; /* mai compact */
+}
+
+.links a {
+    color: #d1d5db;
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.links a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+.bottom {
+    margin-top: 0.3rem;
+    text-align: center;
+    border-top: 1px solid #374151;
+    padding-top: 0.3rem;
+    font-size: 0.8rem;
+    color: #9ca3af;
+}
+
+
+@media (max-width: 768px) {
+    .menuToggle {
+        display: block;
+    }
+
+    .menu {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background: #111;
+        flex-direction: column;
+        width: 200px;
+        padding: 10px;
+        display: none;
+    }
+
+    .show {
+        display: flex;
+    }
+
+    .pushRight {
+        margin-left: 0;
+    }
+}

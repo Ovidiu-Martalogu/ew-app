@@ -6,12 +6,13 @@ import styles from './Payment.module.css';
 const apiUrl = `${import.meta.env.VITE_API_URL}/payments`;
 
 export function Payment() {
-
     const [payment, setpayment] = useState<Payment[] | null>(null);
     const [addPayment, setAddPayment] = useState(false);
+    const [sortField, setSortField] = useState<"date" | "amount" | null>(null);
     const buttonAddMPayment = () => {
         setAddPayment(!addPayment);
     };
+
     useEffect(() => {
         fetch(apiUrl)
             .then((response) => response.json())
@@ -70,18 +71,33 @@ export function Payment() {
     async function deletePayment(id: number) {
         const item = payment?.find(p => p.id === id);
 
-        if (item?.deleted) {
+         if (item?.deleted !== true) {
+             alert("If you want to delete, please mark the registration!");
+             return;
+    }
             await fetch(`${apiUrl}/${id}`, {
                 method: "DELETE",
             });
-        }
+       
         // update local state
         setpayment((prev) =>
             prev ? prev.filter((key) => key.id !== id) : prev
         );
 
     }
+    const sortedPayments = [...(payment ?? [])].sort((a, b) => {
+        if (!sortField) return 0;
 
+        if (sortField === "amount") {
+            return Number(a.amount) - Number(b.amount);
+        }
+
+        if (sortField === "date") {
+            return new Date(a.date).getTime() - new Date(b.date).getTime();
+        }
+
+        return 0;
+    });
     if (!payment) {
         return (
             <>
@@ -96,80 +112,80 @@ export function Payment() {
             </>
         )
     }
+
     return (
         <>
-    <h1>Payment</h1>
+            <h1 className={styles.title}>Payment</h1>
 
-    {/* CARD CONTAINER */}
-    <div className={styles.card}>
-        {payment.map((key) => (
-            <div key={key.id} className={styles.cardItem}>
-                
-                <div data-label="Date">
-                    Date: <span>{key.date}</span>
-                </div>
-
-                <div data-label="Amount">
-                    Amount: <span>{key.amount}</span>
-                </div>
-
-                <div data-label="CategoryId">
-                    CategoryId: <span>{key.categoryId}</span>
-                </div>
-
-                <div className={styles.paymentItem}>
-                    Delete payment?
-                    <span className={key.deleted ? styles.badgeRed : styles.badgeGreen}>
-                        {key.deleted ? "Yes" : "No"}
-                    </span>
-
-                    <input
-                        type="checkbox"
-                        checked={key.deleted}
-                        onChange={() => updatePayment(key)}
-                    />
-                </div>
-
-                <div data-label="Actions">
-                    <button
-                        className={styles.deleteButton}
-                        onClick={() => deletePayment(key.id)}
-                    >
-                        Delete
-                    </button>
-                </div>
-
+            {/* SORT BUTTONS */}
+            <div className={styles.sortBar}>
+                <button onClick={() => setSortField("date")}>Sort by Date</button>
+                <button onClick={() => setSortField("amount")}>Sort by Amount</button>
             </div>
-        ))}
-    </div>
 
-    {addPayment && (
-        <form onSubmit={showPayment} className={styles.addPaymentButton}>
-            <input type="date" name="date" placeholder="date" />
-            <input type="text" name="amount" placeholder="amount" />
-            <input name="categoryId" placeholder="categoryId" />
+            {/* TABLE */}
+            <div className={styles.tableContainer}>
+                <table className={styles.table}>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Category</th>
+                            <th>Deleted</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
 
-            <button type="submit" className={styles.button}>
-                Add Payment
+                    <tbody>
+                        {sortedPayments.map((key) => (
+                            <tr key={key.id}>
+                                <td>{key.date}</td>
+                                <td>{key.amount}</td>
+
+                                <td>
+                                    <span className={styles[`cat${key.categoryId}`]}>
+                                        {key.categoryId}
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <input
+                                        type="checkbox"
+                                        checked={key.deleted}
+                                        onChange={() => updatePayment(key)}
+                                    />
+                                </td>
+
+                                <td>
+                                    <button
+                                        className={styles.deleteButton}
+                                        onClick={() => deletePayment(key.id)}
+                                    >
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+
+            {/* FORM */}
+            {addPayment && (
+                <form onSubmit={showPayment} className={styles.form}>
+                    <input type="date" name="date" className={styles.input} />
+                    <input type="text" name="amount" className={styles.input} />
+                    <input name="categoryId" className={styles.input} />
+
+                    <button type="submit" className={styles.button}>
+                        Add Payment
+                    </button>
+                </form>
+            )}
+
+            <button onClick={buttonAddMPayment} className={styles.addPaymentButton}>
+                {addPayment ? "Back" : "Add new Payment"}
             </button>
-        </form>
-    )}
-
-    <button onClick={buttonAddMPayment} className={styles.addPaymentButton}>
-        {addPayment ? "Back" : "Add new Payment"}
-    </button>
-
-    {/* LISTA SIMPLĂ */}
-    <div> 
-        <ul>
-            {payment.map((key) => (
-                <li key={key.id}>
-                    Date: {key.date} Amount {key.amount} CategoryId: {key.categoryId}
-                </li>
-            ))}
-        </ul>
-    </div>
-</>
+        </>
     );
-
 }

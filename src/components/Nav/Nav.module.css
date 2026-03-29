@@ -1,83 +1,95 @@
+
 .topNav {
-  --bgColor: var(--color-dark-gray);
-
   display: flex;
-  gap: 2rem;
   align-items: center;
-  background-color: var(--bgColor);
-
-  @media (prefers-color-scheme: dark) {
-    --bgColor: var(--color-light-gray)
-  }
-
-  & a {
-    display: inline-block;
-    padding: 1rem;
-
-    color: var(--color-text-light);
-    text-decoration: none;
-
-    @media (prefers-color-scheme: dark) {
-      color: var(--color-text-dark);
-    }
-  }
-
-  & > menu {
-    display: flex;
-    flex-grow: 1;
-    /* gap: 1rem; */
-
-    padding: 0;
-    margin: 0;
-
-    list-style: none;
-  }
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background: #111827;
+  
 }
 
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+}
+
+.logoImg {
+  height: 40px;
+  margin-right: 8px;
+}
+
+.ew {
+  font-weight: bold;
+   color: #f310ab;
+}
+
+.app {
+  color: #00d4ff;
+}
+
+/* Desktop menu */
+.menu {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+
+/* Push register to right */
 .pushRight {
   margin-left: auto;
 }
 
-a.logo {
-  color: var(--color-brand-primary);
-
-  font-family: "Caveat", cursive;
-  font-size: 4rem;
+/* Links */
+.menu a {
+  color: white;
+  text-decoration: none;
   font-weight: bold;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-size: 1rem;
+  }
+  .menu a:hover{
+      color: #00d4ff;
+  }
+
+.menu a.active {
+  color: #00d4ff;
 }
 
-
-
-/* LOGO */
-
-.logoImg {
-  height: 5rem; /* adjust size */
-  width: auto;
+/* Hamburger button */
+.menuToggle {
+  display: none;
+  font-size: 26px;
+  background: none;
+  border: none;
+  color: white;
   cursor: pointer;
 }
-/*LOGO TEXT   */
-.ew-app {
-      font-size: 42px;
-    font-weight: 700;
-    letter-spacing: 1px;
-}
 
-/* EW */
-.ew {
-  color: #0b3c8c; /* albastru */
-}
+/* MOBILE */
+@media (max-width: 768px) {
+  .menuToggle {
+    display: block;
+  }
 
-/* APP */
-.app {
-  color: #2e7d32; /* verde */
-}
+  .menu {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: #111;
+    flex-direction: column;
+    width: 200px;
+    padding: 10px;
+    display: none;
+  }
 
-/* efect modern */
-.ew-app span {
-  transition: 0.3s ease;
-}
+  .show {
+    display: flex;
+  }
 
-.ew-app span:hover {
-  opacity: 0.8;
-  transform: translateY(-2px);
+  .pushRight {
+    margin-left: 0;
+  }
 }
