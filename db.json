@@ -28,13 +28,6 @@
   },
   "payments": [
     {
-      "date": "2026-03-19",
-      "amount": "2300",
-      "category": "rata banca",
-      "deleted": true,
-      "id": "KI5CeLJ"
-    },
-    {
       "date": "2026-03-23",
       "amount": "700",
       "category": "Kaufland",

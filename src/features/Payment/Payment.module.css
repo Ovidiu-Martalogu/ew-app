@@ -92,3 +92,8 @@
 .deleteButton:hover {
     background-color: red;
 }
+
+.editButton{
+     background-color: #1a1919;
+    
+}

@@ -27,7 +27,7 @@
     border: 1px solid #ccc;
 }
 
-button {
+.button {
     width: 100%;
     padding: 0.7rem;
     font-size: 1rem;
@@ -38,8 +38,8 @@ button {
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #45a049;
+.button:hover {
+    background-color: #b6d310;
 }
 
 .status {

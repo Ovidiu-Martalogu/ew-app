@@ -110,7 +110,7 @@ export function Payment() {
                         <input type="date" name="date" placeholder="date" />
                         <input type="text" name="amount" placeholder="amount" />
                         <input name="category" placeholder="category" />
-                        <button type="submit" className={styles.button}>Add Payment</button>
+                        <button type="submit" className={styles.addPaymentButton}>Add Payment</button>
                     </form>)}
             </>
         )
@@ -134,10 +134,11 @@ export function Payment() {
                             <th>Date</th>
                             <th>Amount</th>
                             <th>Category</th>
-                            <th>Deleted</th>
+                            <th>Edit</th>
+                            <th>Select to delete</th>
                             <th>Actions</th>
                         </tr>
-                    </thead>
+                    </thead>F
 
                     <tbody>
                         {sortedPayments.map((key) => (
@@ -145,6 +146,14 @@ export function Payment() {
                                 <td>{key.date}</td>
                                 <td>{key.amount}</td>
                                 <td>{key.category}</td>
+                                 <td>
+                                    <button
+                                        className={styles.editButton}
+                                        onClick={() => deletePayment(key.id)}
+                                    >
+                                        Edit
+                                    </button>
+                                </td>
                                 <td>
                                     <input
                                         type="checkbox"

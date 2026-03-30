@@ -66,7 +66,7 @@ export function Login() {
                         required
                     />
                 </div>
-                <button type="submit">Autentifică-te</button>
+                <button className={styles.button} type="submit">Autentifică-te</button>
             </form>
             {status && <p className={styles.status}>{status}</p>}
             {welcomeMessage && <div className={styles.welcomeMessage}>{welcomeMessage}</div>}
