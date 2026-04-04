@@ -28,76 +28,20 @@
   },
   "payments": [
     {
-      "date": "2026-03-23",
-      "amount": "700",
-      "category": "Kaufland",
-      "deleted": false,
-      "id": "eWKCe1G"
-    },
-    {
-      "date": "2026-03-25",
-      "amount": "120",
-      "category": "Lidl",
-      "deleted": false,
-      "id": "79qqnlV"
-    },
-    {
-      "date": "2026-03-27",
-      "amount": "150",
-      "category": "profi",
-      "deleted": false,
-      "id": "9f175rY"
-    },
-    {
-      "date": "2026-03-28",
-      "amount": "255",
-      "category": "asigurare masina",
-      "deleted": false,
-      "id": "D03Er8T"
-    },
-    {
-      "date": "2026-03-17",
-      "amount": "235",
-      "category": "cumparaturi",
-      "deleted": false,
-      "id": "lCY1wub"
-    },
-    {
-      "date": "2026-03-17",
+      "date": "2026-04-08",
       "amount": "600",
-      "category": "reparatii",
+      "category": "rate",
       "deleted": false,
-      "id": "QhsKOqd"
-    },
-    {
-      "date": "2026-03-18",
-      "amount": "500",
-      "category": "adisasi",
-      "deleted": false,
-      "id": "fl7j3ZJ"
-    },
-    {
-      "date": "2026-03-24",
-      "amount": "60",
-      "category": "cina",
-      "deleted": false,
-      "id": "esVuy_A"
+      "id": 1
     }
   ],
   "users": [
     {
-      "id": "9bdf",
+      "email": "qvidiu123456@gmail.com",
+      "password": "$2a$10$hkDkhkU7b64V2yskAFbs9ulA/4qoAnhChOlKqGp47FrGmujmvWsA2",
       "firstName": "Natalia",
       "lastName": "Maria",
-      "email": "qvidiu123456@gmail.com",
-      "password": "123456"
-    },
-    {
-      "firstName": "Maria",
-      "lastName": "Maria",
-      "email": "qvidiu123456@gmail.com",
-      "password": "123456",
-      "id": "U_Hs7evc5JU"
+      "id": 1
     }
   ],
   "expenses": []

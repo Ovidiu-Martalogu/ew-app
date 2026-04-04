@@ -3,6 +3,7 @@ import type { LoginData, User } from "./types";
 import styles from './Login.module.css';
 
 
+
 export function Login() {
     const [loginData, setLoginData] = useState<LoginData>({ email: '', password: '' });
     const [status, setStatus] = useState('');
@@ -21,7 +22,13 @@ export function Login() {
         }
 
         try {
-            const response = await fetch('/db.json'); 
+            const response = await fetch('http://localhost:3000/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(loginData)
+            });
+            console.log(response);
+            // const response = await fetch('/db.json'); 
             if (!response.ok) throw new Error('Failed to fetch users');
             const data: { users: User[] } = await response.json();
 
