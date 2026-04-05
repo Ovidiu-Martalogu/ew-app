@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { Payment , SortChoice} from "./types";
+import type { Payment, SortChoice } from "./types";
 
 import styles from './Payment.module.css';
 
@@ -108,6 +108,9 @@ export function Payment() {
 
         return sortChoice === "descending" ? -result : result;
     });
+    const total = sortedPayments.reduce((sum, p) => {
+        return sum + Number(p.amount);
+    }, 0);
     if (!payment) {
         return (
             <>
@@ -208,6 +211,10 @@ export function Payment() {
                         ))}
                     </tbody>
                 </table>
+            </div>
+            <div>
+                
+                <h2>Total: {total.toFixed(2)}</h2>
             </div>
 
             {/* FORM */}

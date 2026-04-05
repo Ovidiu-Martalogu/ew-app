@@ -54,6 +54,13 @@
       "category": "ceva",
       "deleted": false,
       "id": 4
+    },
+    {
+      "date": "2026-04-10",
+      "amount": "350",
+      "category": "cumparaturi",
+      "deleted": false,
+      "id": 5
     }
   ],
   "users": [
