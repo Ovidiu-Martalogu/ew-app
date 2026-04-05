@@ -9,7 +9,7 @@ export function Payment() {
     const [payment, setpayment] = useState<Payment[] | null>(null);
     const [addPayment, setAddPayment] = useState(false);
     const [sortField, setSortField] = useState<"date" | "amount" | null>(null);
-    const buttonAddMPayment = () => {
+    const buttonAddPayment = () => {
         setAddPayment(!addPayment);
     };
 
@@ -138,7 +138,7 @@ export function Payment() {
                             <th>Select to delete</th>
                             <th>Actions</th>
                         </tr>
-                    </thead>F
+                    </thead>
 
                     <tbody>
                         {sortedPayments.map((key) => (
@@ -194,7 +194,7 @@ export function Payment() {
                 </form>
             )}
 
-            <button onClick={buttonAddMPayment} className={styles.addPaymentButton}>
+            <button onClick={buttonAddPayment} className={styles.addPaymentButton}>
                 {addPayment ? "Back" : "Add new Payment"}
             </button>
         </>

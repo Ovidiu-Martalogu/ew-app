@@ -13,15 +13,28 @@ export function Nav() {
         <span className={styles.ew}>EW</span>
         <span>-</span>
         <span className={styles.app}>APP</span>
-      </Link>
 
+      </Link>
+      <menu className={`${styles.menu} ${open ? styles.show : ""}`}>
+        <li>
+          <NavLink to="/" onClick={() => setOpen(false)}>
+            Home
+          </NavLink>
+        </li>
+      </menu>
       <menu className={`${styles.menu} ${open ? styles.show : ""}`}>
         <li>
           <NavLink to="/payments" onClick={() => setOpen(false)}>
             Payments
           </NavLink>
         </li>
-        </menu>
+        <li>
+          <NavLink to="/income" onClick={() => setOpen(false)}>
+            Income
+          </NavLink>
+        </li>
+
+      </menu>
 
       {/* Hamburger button */}
       <button
@@ -33,7 +46,7 @@ export function Nav() {
       </button>
 
       <menu className={`${styles.menu} ${open ? styles.show : ""}`}>
-         <li className={styles.pushRight}>
+        <li className={styles.pushRight}>
           <NavLink to="/register" onClick={() => setOpen(false)}>
             Register
           </NavLink>

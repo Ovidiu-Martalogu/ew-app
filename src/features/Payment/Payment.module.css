@@ -1,4 +1,3 @@
-
 .form {
     display: flex;
     flex-direction: column;
@@ -9,9 +8,9 @@
     margin-bottom: 0.5rem;
 }
 
-.input{
+.input {
     display: flex;
-    
+
     margin-bottom: 0.5rem;
 }
 
@@ -54,10 +53,11 @@
 .sortBar button {
     padding: 6px 10px;
     border: none;
-    border-radius: 8px;
+    border-radius:1rem;
     cursor: pointer;
     background: #111827;
     color: white;
+    background-color: rgba(27, 27, 28, 0.54);
 }
 
 
@@ -79,21 +79,28 @@
     background-color: rgba(27, 27, 28, 0.54);
     padding: 0.5rem;
     margin: 0.5rem;
+    color: white;
+      border-radius: 1rem;
+
 }
 
 .addPaymentButton:hover {
     background-color: #1e3a8a;
 }
 
-.deleteButton {
-    background-color: #363535;
+.deleteButton,
+.editButton {
+    background-color: #575656;
+    color: white;
+    border-radius: 1rem;
+
 }
 
 .deleteButton:hover {
     background-color: red;
 }
 
-.editButton{
-     background-color: #1a1919;
-    
+.editButton:hover {
+    background-color: #1e3a8a;
+
 }

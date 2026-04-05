@@ -46,5 +46,13 @@
   ],
   "expenses": [],
   "login": [],
-  "income":[]
+  "income": [
+    {
+      "date": "2026-04-08",
+      "amount": "600",
+      "category": "rate",
+      "deleted": false,
+      "id": 1
+    }
+  ]
 }
