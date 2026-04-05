@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
-import type { Payment } from "./types";
+import type { Payment , SortChoice} from "./types";
 
 import styles from './Payment.module.css';
 
 const apiUrl = `${import.meta.env.VITE_API_URL}/payments`;
 
+
+
 export function Payment() {
     const [payment, setpayment] = useState<Payment[] | null>(null);
     const [addPayment, setAddPayment] = useState(false);
     const [sortField, setSortField] = useState<"date" | "amount" | null>(null);
+    const [sortChoice, setSortChoice] = useState<SortChoice>("ascending");
     const buttonAddPayment = () => {
         setAddPayment(!addPayment);
     };
@@ -31,7 +34,7 @@ export function Payment() {
         const date = data.get("date");
         const amount = data.get("amount");
         const category = data.get("category");
-        if (!date ||!amount || !category) {
+        if (!date || !amount || !category) {
             alert("Please fill all the rouds");
             return;
         }
@@ -88,18 +91,22 @@ export function Payment() {
         );
 
     }
+    //sort payments
     const sortedPayments = [...(payment ?? [])].sort((a, b) => {
         if (!sortField) return 0;
 
+        let result = 0;
+
         if (sortField === "amount") {
-            return Number(a.amount) - Number(b.amount);
+            result = Number(a.amount) - Number(b.amount);
         }
 
         if (sortField === "date") {
-            return new Date(a.date).getTime() - new Date(b.date).getTime();
+            result =
+                new Date(a.date).getTime() - new Date(b.date).getTime();
         }
 
-        return 0;
+        return sortChoice === "descending" ? -result : result;
     });
     if (!payment) {
         return (
@@ -122,8 +129,35 @@ export function Payment() {
 
             {/* SORT BUTTONS */}
             <div className={styles.sortBar}>
-                <button onClick={() => setSortField("date")}>Sort by Date</button>
-                <button onClick={() => setSortField("amount")}>Sort by Amount</button>
+                <button onClick={() => setSortField("date")}>
+                    <label htmlFor="sort">
+                        Sort by Date{" "}
+                        <select
+                            name="sort"
+                            id="sort"
+                            className={styles.selectAmount}
+                            onChange={(e) => setSortChoice(e.target.value as SortChoice)}
+                        >
+                            <option value="ascending">Ascending</option>
+                            <option value="descending">Descending</option>
+                        </select>
+                    </label>
+                </button>
+
+                <button onClick={() => setSortField("amount")}>
+                    <label htmlFor="sortAmount">
+                        Sort by Amount{" "}
+                        <select
+                            name="sortAmount"
+                            id="sortAmount"
+                            className={styles.selectAmount}
+                            onChange={(e) => setSortChoice(e.target.value as SortChoice)}
+                        >
+                            <option value="ascending">Ascending</option>
+                            <option value="descending">Descending</option>
+                        </select>
+                    </label>
+                </button>
             </div>
 
             {/* TABLE */}
@@ -146,7 +180,7 @@ export function Payment() {
                                 <td>{key.date}</td>
                                 <td>{key.amount}</td>
                                 <td>{key.category}</td>
-                                 <td>
+                                <td>
                                     <button
                                         className={styles.editButton}
                                         onClick={() => deletePayment(key.id)}

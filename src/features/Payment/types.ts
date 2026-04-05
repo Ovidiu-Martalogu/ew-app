@@ -5,3 +5,5 @@ export type Payment = {
     category:string;
     deleted:boolean
 }
+
+export type SortChoice = "ascending" | "descending";

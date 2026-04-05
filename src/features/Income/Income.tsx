@@ -60,7 +60,7 @@ export function Income() {
                         <input name="category" className={styles.input} />
                     </label>
                     <button type="submit" className={styles.button}>
-                        Add Payment
+                        Add Income
                     </button>
                 </form>
             )}

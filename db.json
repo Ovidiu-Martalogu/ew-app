@@ -33,6 +33,27 @@
       "category": "rate",
       "deleted": false,
       "id": 1
+    },
+    {
+      "date": "2026-04-01",
+      "amount": "700",
+      "category": "Kaufland",
+      "deleted": false,
+      "id": 2
+    },
+    {
+      "date": "2026-04-01",
+      "amount": "1200",
+      "category": "lidl",
+      "deleted": false,
+      "id": 3
+    },
+    {
+      "date": "2026-04-13",
+      "amount": "8000",
+      "category": "ceva",
+      "deleted": false,
+      "id": 4
     }
   ],
   "users": [
