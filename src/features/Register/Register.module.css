@@ -1,58 +1,85 @@
-.card {
-    min-width: 300px;
-    padding: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    margin: 1rem;
-}
+.brandForm {
+    display: grid;
 
-.card h2 {
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-    text-align: center;
-}
+    &>h1 {
+        grid-column: 1 / -1;
+    }
 
-.form-group {
-    margin-bottom: 1rem;
-    display: flex;
-    flex-direction: column;
-}
+    &>label,
+    &>button {
+        margin-top: 1rem;
+    }
 
-.form-group input {
-    padding: 0.5rem;
-    font-size: 1rem;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-}
+    & input:is([type=text], [type=password], [type=url], [type=email], [type=number]),
+    & textarea {
+        padding: .5rem;
 
-button {
-    width: 100%;
-    padding: 0.7rem;
-    font-size: 1rem;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
+        border: 1px solid var(--color-dark-gray);
+        border-radius: 3px;
+        color: var(--color-dark-gray);
+        font-family: inherit;
 
-button:hover {
-    background-color: #45a049;
-}
+        &:focus {
+            outline: 2px solid var(--color-brand-highlight);
+            outline-offset: -3px;
+        }
+    }
 
-.status {
-    margin-top: 0.5rem;
-    color: #d32f2f;
-    font-weight: bold;
-    text-align: center;
-}
+    & button {
+        --bgColor: var(--color-brand-primary);
 
-.welcomeMessage {
-    font-size: 22px;
-    font-weight: bold;
-    color: #4CAF50;
-    text-align: center;
-    margin-top: 20px;
+        padding: .5rem 1rem;
+
+        background-color: var(--bgColor);
+        color: var(--color-light-gray);
+        border: 1px solid var(--color-dark-gray);
+        border-radius: 3px;
+        cursor: pointer;
+
+        &:hover {
+            box-shadow: inset 2px 2px 5px color-mix(in srgb, var(--color-dark-gray) 70%, transparent);
+        }
+
+        &:focus,
+        &:active {
+            --bgColor: color-mix(in srgb, var(--color-brand-primary) 70%, #fff)
+        }
+    }
+
+    & .errorMessage {
+        color: var(--color-warning);
+        margin-top: 0;
+    }
+
+
+    @media screen and (min-width: 510px) {
+        gap: 1rem;
+        grid-template-columns: 150px 1fr;
+
+        margin: 0 auto;
+        max-width: 760px;
+
+        &>button {
+            grid-column-start: 2;
+            justify-self: start;
+        }
+
+        &>label {
+            align-self: center;
+            justify-self: end;
+
+            &:has(+ textarea) {
+                align-self: start;
+            }
+        }
+
+        &>label,
+        &>button {
+            margin-top: 0;
+        }
+
+        & .errorMessage {
+            grid-column-start: 2;
+        }
+    }
 }

@@ -6,8 +6,10 @@ import { Register } from "./features/Register/Register";
 import { Login } from "./features/Login/Login";
 import { FirstPage } from "./features/First-page/FirstPage";
 import { Footer } from "./components/Footer/Footer";
+import { Income } from "./features/Income/Income";
 
 import "./App.css";
+import './Forms.css';
 
 export default function App() {
   return (
@@ -21,6 +23,7 @@ export default function App() {
             <Route path="/payments" element={<Payment />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/income" element={<Income/>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

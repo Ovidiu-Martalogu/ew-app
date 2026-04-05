@@ -38,11 +38,13 @@
   "users": [
     {
       "email": "qvidiu123456@gmail.com",
-      "password": "$2a$10$hkDkhkU7b64V2yskAFbs9ulA/4qoAnhChOlKqGp47FrGmujmvWsA2",
+      "password": "$2a$10$0/G22pKfgUz8FE2JhN31HuGgm/q8s8Cq5YuCZbUHRED/q/21a1D3O",
       "firstName": "Natalia",
       "lastName": "Maria",
       "id": 1
     }
   ],
-  "expenses": []
+  "expenses": [],
+  "login": [],
+  "income":[]
 }

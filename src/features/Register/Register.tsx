@@ -1,124 +1,114 @@
-import { useState, type ChangeEvent, type FormEvent } from 'react';
-import type { RegisterData, User } from "./types";
-import styles from './Register.module.css';
+import { useState } from "react";
+import { useZodValidation } from "../hooks/useZodValidation";
+import { Api } from "../utils/api";
+import * as z from "zod";
 
 
-export function Register() {
-    const [registerData, setRegisterData] = useState<RegisterData>({
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
-        confirmPassword: ''
+const registerApi = new Api("register");
+
+const validationSchema = z
+    .object({
+        email: z.email("Please provide a valid email address."),
+        password: z
+            .string()
+            .min(6, "Your password needs to be at least 6 characters long."),
+        retypePassword: z.string().min(6, "Please type your password again."),
+        firstName: z.string().nonempty("Please tell us how to call you."),
+        lastName: z.string().nonempty("Let us know your last name."),
+    })
+    .refine((data) => data.password === data.retypePassword, {
+        message: "Passwords don't match.",
+        path: ["retypePassword"],
     });
 
-    const [status, setStatus] = useState('');
-    const [welcomeMessage, setWelcomeMessage] = useState('');
+export function Register() {
+    const [formValues, setFormValues] = useState({
+        email: "",
+        password: "",
+        retypePassword: "",
+        firstName: "",
+        lastName: "",
+    });
+    const { errors, isValid } = useZodValidation(validationSchema);
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setRegisterData({ ...registerData, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    function handleSubmit(e: React.SubmitEvent) {
         e.preventDefault();
 
-        if (registerData.password !== registerData.confirmPassword) {
-            setStatus('Parolele nu coincid!');
-            return;
+
+        if (!isValid(formValues)) return;
+
+        const { retypePassword, ...dataForServer } = formValues;
+
+        void registerApi.create(dataForServer).then((res) => console.log(res));
+    }
+
+    function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+        
+
+        if (errors) {
+            isValid(formValues);
         }
 
-        const newUser: User = {
-            firstName: registerData.firstName,
-            lastName: registerData.lastName,
-            email: registerData.email,
-            password: registerData.password
-        };
-
-        try {
-            const response = await fetch('http://localhost:3000/users', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(newUser)
-            });
-
-            if (!response.ok) throw new Error('Eroare la înregistrare');
-
-            setStatus('Înregistrare reușită!');
-            setWelcomeMessage(`Bun venit, ${newUser.firstName} ${newUser.lastName}!`);
-
-            // Reset form
-            setRegisterData({
-                firstName: '',
-                lastName: '',
-                email: '',
-                password: '',
-                confirmPassword: ''
-            });
-        } catch (error) {
-            console.error(error);
-            setStatus('Eroare la server. Încearcă din nou.');
-        }
-    };
+        setFormValues({ ...formValues, [e.target.name]: e.target.value });
+    }
 
     return (
-        <div className={styles.card}>
-            <h2>Înregistrează un cont</h2>
-            <form onSubmit={handleSubmit}>
-                <div className={styles['form-group']}>
-                    <input
-                        type="text"
-                        name="firstName"
-                        placeholder="Prenume"
-                        value={registerData.firstName}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className={styles['form-group']}>
-                    <input
-                        type="text"
-                        name="lastName"
-                        placeholder="Nume"
-                        value={registerData.lastName}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className={styles['form-group']}>
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        value={registerData.email}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className={styles['form-group']}>
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="Parola"
-                        value={registerData.password}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className={styles['form-group']}>
-                    <input
-                        type="password"
-                        name="confirmPassword"
-                        placeholder="Confirmă parola"
-                        value={registerData.confirmPassword}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <button type="submit">Înregistrează-te</button>
-            </form>
+        <form className="brandForm" onSubmit={handleSubmit}>
+            <h1>Register</h1>
 
-            {status && <p className={styles.status}>{status}</p>}
-            {welcomeMessage && <div className={styles.welcomeMessage}>{welcomeMessage}</div>}
-        </div>
+            <label htmlFor="email">Email</label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                value={formValues.email}
+                onChange={handleInputChange}
+            />
+            {errors?.email && <p className="errorMessage">{errors.email}</p>}
+
+            <label htmlFor="password">Password</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                value={formValues.password}
+                onChange={handleInputChange}
+            />
+            {errors?.password && <p className="errorMessage">{errors.password}</p>}
+
+            <label htmlFor="retypePassword">Retype Password</label>
+            <input
+                type="password"
+                id="retypePassword"
+                name="retypePassword"
+                value={formValues.retypePassword}
+                onChange={handleInputChange}
+            />
+            {errors?.retypePassword && (
+                <p className="errorMessage">{errors.retypePassword}</p>
+            )}
+
+            <label htmlFor="firstName">First Name</label>
+            <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                value={formValues.firstName}
+                onChange={handleInputChange}
+            />
+            {errors?.firstName && <p className="errorMessage">{errors.firstName}</p>}
+
+            <label htmlFor="lastName">Last Name</label>
+            <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                value={formValues.lastName}
+                onChange={handleInputChange}
+            />
+            {errors?.lastName && <p className="errorMessage">{errors.lastName}</p>}
+
+            <button type="submit">Register</button>
+        </form>
     );
 }
