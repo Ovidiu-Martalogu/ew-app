@@ -26,37 +26,20 @@ export function Footer() {
                 <div className={styles.links}>
                     <h4>Links</h4>
                     <menu className={`${styles.links} ${open ? styles.show : ""}`}>
-                       
-                        <li>
-                            <NavLink to="/" onClick={() => setOpen(false)}>
-                                Home
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/payments" onClick={() => setOpen(false)}>
-                                Payments
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/register" onClick={() => setOpen(false)}>
-                                Register
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/login" onClick={() => setOpen(false)}>
-                                Login
-                            </NavLink>
-                        </li>
+                        <NavLink to="/" onClick={() => setOpen(false)}>
+                            Home
+                        </NavLink>
+                        <NavLink to="/payments" onClick={() => setOpen(false)}>
+                            Payments
+                        </NavLink>
+                        <NavLink to="/register" onClick={() => setOpen(false)}>
+                            Register
+                        </NavLink>
+                        <NavLink to="/login" onClick={() => setOpen(false)}>
+                            Login
+                        </NavLink>
                     </menu>
                 </div>
-
-                {/* <div className={styles.links}>
-                    <h4>Support</h4>
-                    <a href="#">Help</a>
-                    <a href="#">Contact</a>
-                    <a href="#">FAQ</a>
-                </div> */}
-
             </div>
 
             <div className={styles.bottom}>

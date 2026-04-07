@@ -68,17 +68,58 @@
       "category": "Kaufland",
       "deleted": false,
       "id": 6
-    }
-  ],
-  "users": [
+    },
     {
-      "email": "qvidiu123456@gmail.com",
-      "password": "$2a$10$0/G22pKfgUz8FE2JhN31HuGgm/q8s8Cq5YuCZbUHRED/q/21a1D3O",
-      "firstName": "Natalia",
-      "lastName": "Maria",
-      "id": 1
+      "date": "2026-04-08",
+      "amount": "900",
+      "category": "Kaufland",
+      "deleted": false,
+      "id": 6
+    },
+    {
+      "date": "2026-04-08",
+      "amount": "620",
+      "category": "Kaufland",
+      "deleted": false,
+      "id": 6
+    },
+    {
+      "date": "2026-04-08",
+      "amount": "120",
+      "category": "Lidl",
+      "deleted": false,
+      "id": 6
+    },
+    {
+      "date": "2026-04-08",
+      "amount": "600",
+      "category": "rate",
+      "deleted": false,
+      "id": 6
+    },
+    {
+      "date": "2026-04-08",
+      "amount": "600",
+      "category": "aparat",
+      "deleted": false,
+      "id": 6
+    },
+    {
+      "date": "2026-04-08",
+      "amount": "70",
+      "category": "farmacie",
+      "deleted": false,
+      "id": 6
+    },
+    {
+      "date": "2026-04-08",
+      "amount": "30",
+      "category": "cafea",
+      "deleted": false,
+      "id": 6
     }
   ],
+  "users": [],
   "expenses": [],
   "login": [],
   "income": [
@@ -87,6 +128,39 @@
       "date": "2026-04-08",
       "amount": "600",
       "category": "salariu"
+    },
+    {
+      "id": 2,
+      "date": "2026-04-08",
+      "amount": "7000",
+      "category": "bonus"
+    },
+    {
+      "id": 1,
+      "date": "2026-04-08",
+      "amount": "1600",
+      "category": "comision"
+    },
+    {
+      "date": "2026-04-06",
+      "amount": "600",
+      "category": "imprumut",
+      "deleted": false,
+      "id": 3
+    },
+    {
+      "date": "2026-04-06",
+      "amount": "320",
+      "category": "dobanda",
+      "deleted": false,
+      "id": 4
+    },
+    {
+      "date": "2026-04-05",
+      "amount": "23344",
+      "category": "imprumut",
+      "deleted": false,
+      "id": 5
     }
   ]
 }
