@@ -61,6 +61,13 @@
       "category": "cumparaturi",
       "deleted": false,
       "id": 5
+    },
+    {
+      "date": "2026-04-08",
+      "amount": "600",
+      "category": "Kaufland",
+      "deleted": false,
+      "id": 6
     }
   ],
   "users": [

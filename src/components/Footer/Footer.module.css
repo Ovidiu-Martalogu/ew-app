@@ -14,7 +14,6 @@
     margin: 0 auto;
 }
 
-/* LEFT SIDE */
 .logo {
     display: flex;
     align-items: center;
@@ -38,8 +37,8 @@
     color: #00d4ff;
 }
 
-/* descriere */
-.footerContent p {
+
+.text {
     font-size: 0.8rem;
     color: #9ca3af;
     margin: 0.3rem 0 0;
@@ -47,18 +46,18 @@
     line-height: 1.4;
 }
 
-/* RIGHT SIDE */
+
 .links {
     display: flex;
-    flex-direction: column;
-    gap: 6px;
+     gap: 6px;
+
 }
 
 .links strong {
     margin-bottom: 6px;
     font-size: 0.85rem;
     color: white;
-}
+} 
 
 .links a {
     color: #9ca3af;
@@ -66,16 +65,18 @@
     font-size: 0.8rem;
     transition: 0.2s;
     padding-left: 0;
+    
 }
+
 
 .links a:hover {
     color: white;
     padding-left: 4px;
 }
 
-/* BOTTOM */
+
 .bottom {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     text-align: center;
     border-top: 1px solid #374151;
     padding-top: 0.6rem;
@@ -83,7 +84,7 @@
     color: #6b7280;
 }
 
-/* MOBILE */
+
 @media (max-width: 768px) {
     .footerContent {
         flex-direction: column;

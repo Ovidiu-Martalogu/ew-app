@@ -26,6 +26,7 @@ export function Footer() {
                 <div className={styles.links}>
                     <h4>Links</h4>
                     <menu className={`${styles.links} ${open ? styles.show : ""}`}>
+                       
                         <li>
                             <NavLink to="/" onClick={() => setOpen(false)}>
                                 Home
