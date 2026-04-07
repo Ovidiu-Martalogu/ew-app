@@ -1,29 +1,32 @@
 .footer {
-    margin-top: auto;
     background: #111827;
     color: white;
-    padding: 0.5rem 1rem;
+    padding: 1rem 1.2rem;
 }
 
 .footerContent {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    gap: 1rem;
+    align-items: flex-start;
+    gap: 1.5rem;
     flex-wrap: wrap;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
+/* LEFT SIDE */
 .logo {
     display: flex;
     align-items: center;
     text-decoration: none;
     color: white;
     font-size: 0.9rem;
+    margin-bottom: 0.5rem;
 }
 
 .logoImg {
-    height: 40px;
-    margin-right: 8px;
+    height: 30px;
+    margin-right: 6px;
 }
 
 .ew {
@@ -35,71 +38,60 @@
     color: #00d4ff;
 }
 
-.menu {
-    display: flex;
-    list-style: none;
- }
-
-.menu a {
-    color: white;
-    text-decoration: none;
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-    font-size: 1rem;
+/* descriere */
+.footerContent p {
+    font-size: 0.8rem;
+    color: #9ca3af;
+    margin: 0.3rem 0 0;
+    max-width: 260px;
+    line-height: 1.4;
 }
 
-.menu a.active {
-    color: #00d4ff;
-}
-
-
+/* RIGHT SIDE */
 .links {
     display: flex;
     flex-direction: column;
-    gap: 2px; /* mai compact */
+    gap: 6px;
+}
+
+.links strong {
+    margin-bottom: 6px;
+    font-size: 0.85rem;
+    color: white;
 }
 
 .links a {
-    color: #d1d5db;
+    color: #9ca3af;
     text-decoration: none;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    transition: 0.2s;
+    padding-left: 0;
 }
 
 .links a:hover {
     color: white;
-    text-decoration: underline;
+    padding-left: 4px;
 }
 
+/* BOTTOM */
 .bottom {
-    margin-top: 0.3rem;
+    margin-top: 1rem;
     text-align: center;
     border-top: 1px solid #374151;
-    padding-top: 0.3rem;
-    font-size: 0.8rem;
-    color: #9ca3af;
+    padding-top: 0.6rem;
+    font-size: 0.7rem;
+    color: #6b7280;
 }
 
-
+/* MOBILE */
 @media (max-width: 768px) {
-    .menuToggle {
-        display: block;
-    }
-
-    .menu {
-        position: absolute;
-        top: 60px;
-        right: 0;
-        background: #111;
+    .footerContent {
         flex-direction: column;
-        width: 200px;
-        padding: 10px;
-        display: none;
+        align-items: flex-start;
+        gap: 1rem;
     }
 
-    .show {
-        display: flex;
-    }
-
-    .pushRight {
-        margin-left: 0;
+    .links {
+        width: 100%;
     }
 }

@@ -22,7 +22,7 @@ export function Payment() {
 
             .then((data) => setpayment(data));
 
-        // console.log(setmovie(data));
+        
     }, []);
 
     async function showPayment(e: React.SubmitEvent<HTMLFormElement>) {
