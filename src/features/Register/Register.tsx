@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useZodValidation } from "../hooks/useZodValidation";
 import { Api } from "../utils/api";
 import * as z from "zod";
+import styles from "./Register.module.css"
 
 
 const registerApi = new Api("register");
@@ -43,7 +44,7 @@ export function Register() {
     }
 
     function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-        
+
 
         if (errors) {
             isValid(formValues);
@@ -53,62 +54,67 @@ export function Register() {
     }
 
     return (
-        <form className="brandForm" onSubmit={handleSubmit}>
+        <div className={styles.container}>
             <h1>Register</h1>
+            <form onSubmit={handleSubmit}>
 
-            <label htmlFor="email">Email</label>
-            <input
-                type="email"
-                id="email"
-                name="email"
-                value={formValues.email}
-                onChange={handleInputChange}
-            />
-            {errors?.email && <p className="errorMessage">{errors.email}</p>}
+                <div className={styles['form-group']}>
+                    <label htmlFor="firstName">First Name</label>
+                    <input
+                        type="text"
+                        id="firstName"
+                        name="firstName"
+                        value={formValues.firstName}
+                        onChange={handleInputChange}
+                    />
+                    {errors?.firstName && <p className="errorMessage">{errors.firstName}</p>}
 
-            <label htmlFor="password">Password</label>
-            <input
-                type="password"
-                id="password"
-                name="password"
-                value={formValues.password}
-                onChange={handleInputChange}
-            />
-            {errors?.password && <p className="errorMessage">{errors.password}</p>}
+                    <label htmlFor="lastName">Last Name</label>
+                    <input
+                        type="text"
+                        id="lastName"
+                        name="lastName"
+                        value={formValues.lastName}
+                        onChange={handleInputChange}
+                    />
+                    {errors?.lastName && <p className="errorMessage">{errors.lastName}</p>}
 
-            <label htmlFor="retypePassword">Retype Password</label>
-            <input
-                type="password"
-                id="retypePassword"
-                name="retypePassword"
-                value={formValues.retypePassword}
-                onChange={handleInputChange}
-            />
-            {errors?.retypePassword && (
-                <p className="errorMessage">{errors.retypePassword}</p>
-            )}
+                    <label htmlFor="email">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formValues.email}
+                        onChange={handleInputChange}
+                    />
+                    {errors?.email && <p className="errorMessage">{errors.email}</p>}
 
-            <label htmlFor="firstName">First Name</label>
-            <input
-                type="text"
-                id="firstName"
-                name="firstName"
-                value={formValues.firstName}
-                onChange={handleInputChange}
-            />
-            {errors?.firstName && <p className="errorMessage">{errors.firstName}</p>}
+                    <label htmlFor="password">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        value={formValues.password}
+                        onChange={handleInputChange}
+                    />
+                    {errors?.password && <p className="errorMessage">{errors.password}</p>}
 
-            <label htmlFor="lastName">Last Name</label>
-            <input
-                type="text"
-                id="lastName"
-                name="lastName"
-                value={formValues.lastName}
-                onChange={handleInputChange}
-            />
-            {errors?.lastName && <p className="errorMessage">{errors.lastName}</p>}
+                    <label htmlFor="retypePassword">Retype Password</label>
+                    <input
+                        type="password"
+                        id="retypePassword"
+                        name="retypePassword"
+                        value={formValues.retypePassword}
+                        onChange={handleInputChange}
+                    />
+                    {errors?.retypePassword && (
+                        <p className={styles.errorMessage}>{errors.retypePassword}</p>
+                    )}
 
-            <button type="submit">Register</button>
-        </form>
+                    <button className={styles.button} type="submit">Register</button>
+                </div>
+            </form>
+        </div>
+
     );
 }

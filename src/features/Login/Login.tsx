@@ -51,7 +51,7 @@ export function Login() {
 
     return (
         <div className={styles.card}>
-            <h2>Autentificare</h2>
+            <h2>Login</h2>
             <form onSubmit={handleSubmit}>
                 <div className={styles['form-group']}>
                     <input
@@ -67,13 +67,13 @@ export function Login() {
                     <input
                         type="password"
                         name="password"
-                        placeholder="Parola"
+                        placeholder="Password"
                         value={loginData.password}
                         onChange={handleChange}
                         required
                     />
                 </div>
-                <button className={styles.button} type="submit">Autentifică-te</button>
+                <button className={styles.button} type="submit">Login</button>
             </form>
             {status && <p className={styles.status}>{status}</p>}
             {welcomeMessage && <div className={styles.welcomeMessage}>{welcomeMessage}</div>}
