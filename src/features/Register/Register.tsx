@@ -1,10 +1,15 @@
 import { useState } from "react";
 import { useZodValidation } from "../hooks/useZodValidation";
+import { Navigate } from "react-router";
 import { Api } from "../utils/api";
+import { useAuth } from "../../context/useAuth";
 import * as z from "zod";
 import styles from "./Register.module.css"
 
 
+
+
+// const registerApi = `${import.meta.env.VITE_API_URL}/register`;
 const registerApi = new Api("register");
 
 const validationSchema = z
@@ -32,6 +37,8 @@ export function Register() {
     });
     const { errors, isValid } = useZodValidation(validationSchema);
 
+    const { login, user } = useAuth();
+
     function handleSubmit(e: React.SubmitEvent) {
         e.preventDefault();
 
@@ -40,18 +47,37 @@ export function Register() {
 
         const { retypePassword, ...dataForServer } = formValues;
 
-        void registerApi.create(dataForServer).then((res) => console.log(res));
+        // void registerApi.create(dataForServer).then((res) => console.log(res));
+        void registerApi.create(dataForServer).then((res) => {
+    login(res); 
+});
     }
 
+    // function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+
+
+    //     if (errors) {
+    //         isValid(formValues);
+    //     }
+
+    //     setFormValues({ ...formValues, [e.target.name]: e.target.value });
+    // }
+    
     function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-
-
-        if (errors) {
-            isValid(formValues);
-        }
-
-        setFormValues({ ...formValues, [e.target.name]: e.target.value });
+        const updatedValues = {
+            ...formValues,
+            [e.target.name]: e.target.value
+        };
+        
+        setFormValues(updatedValues);
+        
+        isValid(updatedValues); // validezi NOILE valori
     }
+    
+    if (user) {
+        return <Navigate to="/" />
+    }
+
 
     return (
         <div className={styles.container}>
@@ -108,7 +134,7 @@ export function Register() {
                         onChange={handleInputChange}
                     />
                     {errors?.retypePassword && (
-                        <p className={styles.errorMessage}>{errors.retypePassword}</p>
+                        <p className="errorMessage">{errors.retypePassword}</p>
                     )}
 
                     <button className={styles.button} type="submit">Register</button>

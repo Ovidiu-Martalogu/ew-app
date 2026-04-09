@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router";
+import { useAuth } from "../../context/useAuth";
 import logo from "./logoimg.jpg";
 import styles from "./Nav.module.css";
 
 export function Nav() {
   const [open, setOpen] = useState(false);
-
+  const { user, logout } = useAuth();
   return (
     <nav className={styles.topNav}>
       <Link to="/" className={styles.logo}>
@@ -33,9 +34,16 @@ export function Nav() {
             Income
           </NavLink>
         </li>
-
+        
+        {user && <li className={styles.wellcomeMsg}>
+          Welcome, <strong className={styles.app}>{user.firstName}!</strong>
+        
+        </li>}
+          <Link to="/login" onClick={logout}>Logout</Link>
+     
       </menu>
-
+ {!user && (
+  <>
       {/* Hamburger button */}
       <button
         className={styles.menuToggle}
@@ -56,7 +64,10 @@ export function Nav() {
             Login
           </NavLink>
         </li>
+        
       </menu>
+      </>
+        )}
     </nav>
   );
 }

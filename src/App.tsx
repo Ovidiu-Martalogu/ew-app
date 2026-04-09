@@ -7,13 +7,14 @@ import { Login } from "./features/Login/Login";
 import { FirstPage } from "./features/First-page/FirstPage";
 import { Footer } from "./components/Footer/Footer";
 import { Income } from "./features/Income/Income";
-
+import { AuthContextProvider } from "../src/context/AuthContextProvider";
 import "./App.css";
 import './Forms.css';
 
 export default function App() {
   return (
-    <>
+    
+    <AuthContextProvider>
       <div className="app">
         <Nav />
 
@@ -30,7 +31,8 @@ export default function App() {
 
         <Footer />
       </div>
-    </>
+      </AuthContextProvider>
+   
   )
 }
 

@@ -119,7 +119,15 @@
       "id": 6
     }
   ],
-  "users": [],
+  "users": [
+    {
+      "email": "qvidiu123456@gmail.com",
+      "password": "$2a$10$EwAixCn887ke9b9nT7vff.LPjpAeMS5obze1I8UrdHdR5dIQyJtD6",
+      "firstName": "Natalia",
+      "lastName": "Maria",
+      "id": 1
+    }
+  ],
   "expenses": [],
   "login": [],
   "income": [
