@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router";
-import { useAuth } from "../../Auth/context/useAuth";
+import { useAuth } from "../../features/Auth/context/useAuth";
 import logo from "./logoimg.jpg";
 import styles from "./Nav.module.css";
+
+
+
 
 export function Nav() {
   const [open, setOpen] = useState(false);

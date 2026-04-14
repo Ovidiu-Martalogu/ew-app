@@ -43,20 +43,7 @@
     }
   ],
   "users": [
-    {
-      "email": "qvidiu123456@gmail.com",
-      "password": "$2a$10$In0LKnOA.mcLXrotQP1GjehWAq34MAErXE8nXwlF6JomGV1C8L/oO",
-      "firstName": "Natalia",
-      "lastName": "Maria",
-      "id": 1
-    },
-    {
-      "email": "1@gmail.com",
-      "password": "$2a$10$YycpNq63Tby0HK8Aa72kWO3WF1ZvyYIRrBGvLFiei4yaTVOCKU.5C",
-      "firstName": "Natalia",
-      "lastName": "Maria",
-      "id": 2
-    }
+   
   ],
   "expenses": [],
   "login": [],

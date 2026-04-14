@@ -1,7 +1,7 @@
 import { type ReactNode } from "react";
 import { AuthContext } from "./AuthContext";
-import type { Auth } from "./types";
-import { useStorageState } from "../hooks/useStorageState";
+import type { Auth } from "../types";
+import { useStorageState } from "../../../hooks/useStorageState";
 
 const initialAuthValue: Auth = {
   accessToken: null,
