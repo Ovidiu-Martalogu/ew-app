@@ -7,13 +7,14 @@ import { Login } from "../src/features/Auth/Login";
 import { FirstPage } from "./features/First-page/FirstPage";
 import { Footer } from "./components/Footer/Footer";
 import { Income } from "./features/Income/Income";
+import { Report } from "./features/Report/Report"
 import { AuthContextProvider } from "../src/features/Auth/context/AuthContextProvider";
 import "./App.css";
 import './Forms.css';
 
 export default function App() {
   return (
-    
+
     <AuthContextProvider>
       <div className="app">
         <Nav />
@@ -21,18 +22,19 @@ export default function App() {
         <main className="content" >
           <Routes>
             <Route path="/" element={<FirstPage />} />
+            <Route path="/report" element={<Report />} />
             <Route path="/payments" element={<Payment />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/income" element={<Income/>} />
+            <Route path="/income" element={<Income />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
 
         <Footer />
       </div>
-      </AuthContextProvider>
-   
+    </AuthContextProvider>
+
   )
 }
 
