@@ -50,9 +50,9 @@ export function Payment() {
     }
 
 
-    async function updatePayment(payment: Payment) {
+    async function checkForDeletePayment(payment: Payment) {
 
-        const updated = {
+        const checkDeletePayment = {
             ...payment,
             deleted: !payment.deleted,
         };
@@ -61,7 +61,7 @@ export function Payment() {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ deleted: updated.deleted }),
+            body: JSON.stringify({ deleted: checkDeletePayment.deleted }),
         }).then((response) => response.json());
 
 
@@ -69,7 +69,7 @@ export function Payment() {
         setpayment((prev) =>
             prev
                 ? prev.map((key) =>
-                    key.id === payment.id ? updated : key
+                    key.id === payment.id ? checkDeletePayment : key
                 )
                 : prev
         );
@@ -195,7 +195,7 @@ export function Payment() {
                                     <input
                                         type="checkbox"
                                         checked={key.deleted}
-                                        onChange={() => updatePayment(key)}
+                                        onChange={() => checkForDeletePayment(key)}
                                     />
                                 </td>
 

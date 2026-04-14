@@ -28,46 +28,11 @@
   },
   "payments": [
     {
-      "date": "2026-04-08",
-      "amount": "600",
-      "category": "rate",
-      "deleted": false,
-      "id": 1
-    },
-    {
-      "date": "2026-04-01",
-      "amount": "700",
-      "category": "Kaufland",
-      "deleted": false,
-      "id": 2
-    },
-    {
-      "date": "2026-04-01",
-      "amount": "1200",
-      "category": "lidl",
-      "deleted": false,
-      "id": 3
-    },
-    {
-      "date": "2026-04-13",
-      "amount": "8000",
-      "category": "ceva",
-      "deleted": false,
-      "id": 4
-    },
-    {
       "date": "2026-04-10",
       "amount": "350",
       "category": "cumparaturi",
       "deleted": false,
       "id": 5
-    },
-    {
-      "date": "2026-04-08",
-      "amount": "600",
-      "category": "Kaufland",
-      "deleted": false,
-      "id": 6
     },
     {
       "date": "2026-04-08",
@@ -122,7 +87,7 @@
   "users": [
     {
       "email": "qvidiu123456@gmail.com",
-      "password": "$2a$10$EwAixCn887ke9b9nT7vff.LPjpAeMS5obze1I8UrdHdR5dIQyJtD6",
+      "password": "$2a$10$UlE.px84EFTiL6RGdiT/fuNFB65Ii6bH96BAPh.hLg726.cq07tX2",
       "firstName": "Natalia",
       "lastName": "Maria",
       "id": 1
@@ -132,22 +97,18 @@
   "login": [],
   "income": [
     {
-      "id": 1,
-      "date": "2026-04-08",
-      "amount": "600",
-      "category": "salariu"
-    },
-    {
       "id": 2,
       "date": "2026-04-08",
-      "amount": "7000",
-      "category": "bonus"
+      "amount": 7100,
+      "category": "bonus",
+      "deleted": false
     },
     {
       "id": 1,
       "date": "2026-04-08",
       "amount": "1600",
-      "category": "comision"
+      "category": "comision",
+      "deleted": false
     },
     {
       "date": "2026-04-06",
@@ -169,6 +130,34 @@
       "category": "imprumut",
       "deleted": false,
       "id": 5
+    },
+    {
+      "date": "2026-04-14",
+      "amount": "23344",
+      "category": "incasari",
+      "deleted": false,
+      "id": 6
+    },
+    {
+      "date": "2026-04-13",
+      "amount": "2000",
+      "category": "salariu",
+      "deleted": false,
+      "id": 7
+    },
+    {
+      "date": "2026-04-05",
+      "amount": "500",
+      "category": "deplasare",
+      "deleted": false,
+      "id": 8
+    },
+    {
+      "date": "2026-04-07",
+      "amount": "12000",
+      "category": "salariu",
+      "deleted": false,
+      "id": 10
     }
   ]
 }
