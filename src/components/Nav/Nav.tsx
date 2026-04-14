@@ -41,8 +41,8 @@ export function Nav() {
         {user && <li className={styles.wellcomeMsg}>
           Welcome, <strong className={styles.app}>{user.firstName}!</strong>
         
-        </li>}
           <Link to="/login" onClick={logout}>Logout</Link>
+        </li>}
      
       </menu>
  {!user && (
