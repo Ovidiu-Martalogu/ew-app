@@ -12,30 +12,38 @@ export function Payment() {
     const [addPayment, setAddPayment] = useState(false);
     const [sortField, setSortField] = useState<"date" | "amount" | null>(null);
     const [sortChoice, setSortChoice] = useState<SortChoice>("ascending");
+
+    const [editingId, setEditingId] = useState<number | null>(null);
+    const [editForm, setEditForm] = useState({
+        date: "",
+        amount: "",
+        category: "",
+    });
+
     const buttonAddPayment = () => {
         setAddPayment(!addPayment);
     };
-
+    //get Payment from DB
     useEffect(() => {
         fetch(apiUrl)
             .then((response) => response.json())
 
             .then((data) => setpayment(data));
 
-        
+
     }, []);
 
-    async function showPayment(e: React.SubmitEvent<HTMLFormElement>) {
+    async function addPaymentsToDB(e: React.SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
         if (!addPayment) return;
 
-        const form = e.target;
+        const form = e.currentTarget;
         const data = new FormData(form);
         const date = data.get("date");
         const amount = data.get("amount");
         const category = data.get("category");
         if (!date || !amount || !category) {
-            alert("Please fill all the rouds");
+            alert("Please fill all the fields");
             return;
         }
         const newPayment = await fetch(apiUrl, {
@@ -43,12 +51,39 @@ export function Payment() {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ date, amount, category, deleted: false }),
+            body: JSON.stringify({ date, amount: Number(amount), category, deleted: false }),
         }).then((response) => response.json());
 
         setpayment([...(payment ?? []), newPayment]);
+        setAddPayment(false);
     }
 
+    async function saveEdit(id: number) {
+        const updated = {
+            ...editForm,
+            amount: Number(editForm.amount),
+        };
+
+        const response = await fetch(`${apiUrl}/${id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updated),
+        });
+
+        const data = await response.json();
+
+        setpayment((prev) =>
+            prev
+                ? prev.map((item) =>
+                    item.id === id ? data : item
+                )
+                : prev
+        );
+
+        setEditingId(null);
+    }
 
     async function checkForDeletePayment(payment: Payment) {
 
@@ -116,7 +151,7 @@ export function Payment() {
             <>
                 <strong>Wait....Loading payment...</strong>;
                 {addPayment && (
-                    <form onSubmit={showPayment} className={styles.form}>
+                    <form onSubmit={addPaymentsToDB} className={styles.form}>
                         <input type="date" name="date" placeholder="date" />
                         <input type="text" name="amount" placeholder="amount" />
                         <input name="category" placeholder="category" />
@@ -180,16 +215,75 @@ export function Payment() {
                     <tbody>
                         {sortedPayments.map((key) => (
                             <tr key={key.id}>
-                                <td>{key.date}</td>
-                                <td>{key.amount}</td>
-                                <td>{key.category}</td>
+                              
                                 <td>
+                                    {editingId === key.id ? (
+                                        <input
+                                            type="date"
+                                            value={editForm.date}
+                                            onChange={(e) =>
+                                                setEditForm({ ...editForm, date: e.target.value })
+                                            }
+                                        />
+                                    ) : (
+                                        key.date
+                                    )}
+                                </td>
+
+                                <td>
+                                    {editingId === key.id ? (
+                                        <input
+                                            type="text"
+                                            value={editForm.amount}
+                                            onChange={(e) =>
+                                                setEditForm({ ...editForm, amount: e.target.value })
+                                            }
+                                        />
+                                    ) : (
+                                        key.amount
+                                    )}
+                                </td>
+
+                                <td>
+                                    {editingId === key.id ? (
+                                        <input
+                                            value={editForm.category}
+                                            onChange={(e) =>
+                                                setEditForm({ ...editForm, category: e.target.value })
+                                            }
+                                        />
+                                    ) : (
+                                        key.category
+                                    )}
+                                </td>
+
+                                <td>
+
+                                    {/* aici editButton */}
                                     <button
-                                        className={styles.editButton}
-                                        onClick={() => deletePayment(key.id)}
+                                        onClick={() => {
+                                            setEditingId(key.id);
+                                            setEditForm({
+                                                date: key.date,
+                                                amount: String(key.amount),
+                                                category: key.category,
+                                            });
+                                        }}
                                     >
                                         Edit
                                     </button>
+                                    {editingId === key.id && (
+                                        <>
+
+                                            <button onClick={() => saveEdit(key.id)}>
+                                                Save
+                                            </button>
+                                            <button onClick={() => setEditingId(null)}>
+                                                Cancel
+                                            </button>
+                                        </>
+                                    )}
+
                                 </td>
                                 <td>
                                     <input
@@ -213,13 +307,13 @@ export function Payment() {
                 </table>
             </div>
             <div>
-                
+
                 <h2>Total: {total.toFixed(2)}</h2>
             </div>
 
             {/* FORM */}
             {addPayment && (
-                <form onSubmit={showPayment} className={styles.form}>
+                <form onSubmit={addPaymentsToDB} className={styles.form}>
                     <label id="date">Select the date:
                         <input type="date" id="date" name="date" className={styles.input} />
                     </label>

@@ -28,20 +28,6 @@
   },
   "payments": [
     {
-      "date": "2026-04-10",
-      "amount": "350",
-      "category": "cumparaturi",
-      "deleted": false,
-      "id": 5
-    },
-    {
-      "date": "2026-04-08",
-      "amount": "900",
-      "category": "Kaufland",
-      "deleted": false,
-      "id": 6
-    },
-    {
       "date": "2026-04-08",
       "amount": "620",
       "category": "Kaufland",
@@ -149,7 +135,7 @@
       "date": "2026-04-05",
       "amount": "500",
       "category": "deplasare",
-      "deleted": false,
+      "deleted": true,
       "id": 8
     },
     {
