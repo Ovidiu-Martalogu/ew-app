@@ -45,9 +45,7 @@ export function Register() {
         const { retypePassword, ...dataForServer } = formValues;
 
         // void registerApi.create(dataForServer).then((res) => console.log(res));
-        void registerApi.create(dataForServer).then((res) => {
-    login(res); 
-});
+        void registerApi.create(dataForServer).then((response) => {login(response);});
     }
 
     // function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
