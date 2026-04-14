@@ -40,10 +40,16 @@ export function Payment() {
         const form = e.currentTarget;
         const data = new FormData(form);
         const date = data.get("date");
-        const amount = data.get("amount");
+        const amount = Number(data.get("amount"));
         const category = data.get("category");
+      
+
+        if(!amount){
+                alert("Please enter only values for amount"); 
         if (!date || !amount || !category) {
             alert("Please fill all the fields");
+            
+            }
             return;
         }
         const newPayment = await fetch(apiUrl, {
@@ -153,7 +159,7 @@ export function Payment() {
                 {addPayment && (
                     <form onSubmit={addPaymentsToDB} className={styles.form}>
                         <input type="date" name="date" placeholder="date" />
-                        <input type="text" name="amount" placeholder="amount" />
+                        <input type="number" name="amount" placeholder="amount" />
                         <input name="category" placeholder="category" />
                         <button type="submit" className={styles.addPaymentButton}>Add Payment</button>
                     </form>)}

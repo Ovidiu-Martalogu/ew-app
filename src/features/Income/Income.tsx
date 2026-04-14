@@ -39,8 +39,12 @@ export function Income() {
         const amount = form.get("amount");
         const category = form.get("category");
 
-        if (!date || !amount || !category) {
-            alert("Please fill all the rouds");
+        if (!amount) {
+            alert("Please enter only values for amount");
+            if (!date || !amount || !category) {
+                alert("Please fill all the fields");
+
+            }
             return;
         }
 
@@ -248,14 +252,14 @@ export function Income() {
                             </button>
                             {editingId === key.id && (
                                 <>
-                                
-                                <button onClick={() => saveEdit(key.id)}>
-                                    Save
-                                </button>
-                            <button onClick={() => setEditingId(null)}>
-                                Cancel
-                            </button>
-                            </>
+
+                                    <button onClick={() => saveEdit(key.id)}>
+                                        Save
+                                    </button>
+                                    <button onClick={() => setEditingId(null)}>
+                                        Cancel
+                                    </button>
+                                </>
                             )}
                             <button onClick={() => checkForDelete(key)}>Check</button>
                             <input

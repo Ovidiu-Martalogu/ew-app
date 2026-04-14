@@ -28,46 +28,18 @@
   },
   "payments": [
     {
-      "date": "2026-04-08",
-      "amount": "620",
-      "category": "Kaufland",
+      "date": "2026-04-13",
+      "amount": 2300,
+      "category": "rata",
       "deleted": false,
-      "id": 6
+      "id": 8
     },
     {
-      "date": "2026-04-08",
-      "amount": "120",
-      "category": "Lidl",
+      "date": "2026-04-07",
+      "amount": 500,
+      "category": "cumparaturi",
       "deleted": false,
-      "id": 6
-    },
-    {
-      "date": "2026-04-08",
-      "amount": "600",
-      "category": "rate",
-      "deleted": false,
-      "id": 6
-    },
-    {
-      "date": "2026-04-08",
-      "amount": "600",
-      "category": "aparat",
-      "deleted": false,
-      "id": 6
-    },
-    {
-      "date": "2026-04-08",
-      "amount": "70",
-      "category": "farmacie",
-      "deleted": false,
-      "id": 6
-    },
-    {
-      "date": "2026-04-08",
-      "amount": "30",
-      "category": "cafea",
-      "deleted": false,
-      "id": 6
+      "id": 11
     }
   ],
   "users": [
