@@ -1,13 +1,10 @@
 import { useState } from "react";
 import { useZodValidation } from "../hooks/useZodValidation";
 import { Navigate } from "react-router";
-import { Api } from "../utils/api";
-import { useAuth } from "../../context/useAuth";
+import { Api } from "../../utils/api";
+import { useAuth } from "../context/useAuth";
 import * as z from "zod";
 import styles from "./Register.module.css"
-
-
-
 
 // const registerApi = `${import.meta.env.VITE_API_URL}/register`;
 const registerApi = new Api("register");

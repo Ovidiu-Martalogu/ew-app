@@ -45,10 +45,17 @@
   "users": [
     {
       "email": "qvidiu123456@gmail.com",
-      "password": "$2a$10$UlE.px84EFTiL6RGdiT/fuNFB65Ii6bH96BAPh.hLg726.cq07tX2",
+      "password": "$2a$10$In0LKnOA.mcLXrotQP1GjehWAq34MAErXE8nXwlF6JomGV1C8L/oO",
       "firstName": "Natalia",
       "lastName": "Maria",
       "id": 1
+    },
+    {
+      "email": "1@gmail.com",
+      "password": "$2a$10$YycpNq63Tby0HK8Aa72kWO3WF1ZvyYIRrBGvLFiei4yaTVOCKU.5C",
+      "firstName": "Natalia",
+      "lastName": "Maria",
+      "id": 2
     }
   ],
   "expenses": [],
@@ -107,7 +114,7 @@
       "date": "2026-04-05",
       "amount": "500",
       "category": "deplasare",
-      "deleted": true,
+      "deleted": false,
       "id": 8
     },
     {

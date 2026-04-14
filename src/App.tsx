@@ -2,12 +2,12 @@ import { Route, Routes } from "react-router";
 import { Nav } from "./components/Nav/Nav";
 import { Payment } from "./features/Payment/Payment";
 import { NotFound } from "./NotFound/NotFound";
-import { Register } from "./features/Register/Register";
-import { Login } from "./features/Login/Login";
+import { Register } from "./Auth/Register/Register";
+import { Login } from "./Auth/Login/Login";
 import { FirstPage } from "./features/First-page/FirstPage";
 import { Footer } from "./components/Footer/Footer";
 import { Income } from "./features/Income/Income";
-import { AuthContextProvider } from "../src/context/AuthContextProvider";
+import { AuthContextProvider } from "./Auth/context/AuthContextProvider";
 import "./App.css";
 import './Forms.css';
 

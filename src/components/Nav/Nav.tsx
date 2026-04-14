@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router";
-import { useAuth } from "../../context/useAuth";
+import { useAuth } from "../../Auth/context/useAuth";
 import logo from "./logoimg.jpg";
 import styles from "./Nav.module.css";
 
