@@ -1,4 +1,5 @@
 .topNav {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -6,7 +7,7 @@
   background: #111827;
 }
 
-/* Logo */
+
 .logo {
   display: flex;
   align-items: center;
@@ -28,7 +29,7 @@
   color: #00d4ff;
 }
 
-/* Desktop menu */
+
 .menu {
   display: flex;
   list-style: none;
@@ -37,7 +38,7 @@
 
 }
 
-/* Push register to right */
+
 .wellcomeMsg {
   display: flex;
   color: #f310ab;
@@ -45,12 +46,19 @@
   flex-wrap: wrap;
   align-content: space-around;
   justify-content: center;
-  margin: 0.5rem;
+  margin: 0.8rem;
+
 }
+
+.logout {
+  margin-left: 0.7rem;
+}
+
 .pushRight {
   display: flex;
 }
-/* Links */
+
+
 .menu a {
   color: white;
   text-decoration: none;
@@ -63,6 +71,7 @@
     sans-serif;
   font-size: 1rem;
 }
+
 .menu a:hover {
   color: #00d4ff;
 }
@@ -71,7 +80,7 @@
   color: #00d4ff;
 }
 
-/* Hamburger button */
+
 .menuToggle {
   display: none;
   font-size: 26px;
@@ -81,25 +90,33 @@
   cursor: pointer;
 }
 
-/* MOBILE */
+
 @media (max-width: 768px) {
   .menuToggle {
     display: block;
   }
 
   .menu {
-    position: absolute;
-    top: 60px;
+    position: fixed;
+    top: 0;
     right: 0;
+    height: 100vh;
+    width: 260px;
     background: #111;
     flex-direction: column;
-    width: 200px;
-    padding: 10px;
-    display: none;
+    padding: 2rem 1rem;
+    gap: 1rem;
+
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+
+    display: flex;
+    
   }
 
-  .show {
-    display: flex;
+  .menu.show {
+    transform: translateX(0);
   }
 
   .pushRight {

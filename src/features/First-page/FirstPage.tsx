@@ -5,16 +5,20 @@ import styles from "./firstpage.module.css";
 
 const apiUrl = `${import.meta.env.VITE_API_URL}/firstpage`;
 
+type CardContent = {
+    cardTitle: string;
+    cardSubtitle: string;
+};
+
 type Card = {
     title: string;
     subtitle: string;
     sectionTitle: string;
-    card1: string;
-    card2: string;
-    card3: string;
+    card1: CardContent;
+    card2: CardContent;
+    card3: CardContent;
     footerTitle: string;
     footerSubtitle: string;
-
 };
 
 
@@ -35,7 +39,7 @@ export function FirstPage() {
             .catch(error => console.error(error));
     }, []);
 
-  
+
     if (!firstPage.length) return <p>Loading...</p>;
 
 

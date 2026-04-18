@@ -42,7 +42,15 @@
       "id": 11
     }
   ],
-  "users": [],
+  "users": [
+    {
+      "email": "qvidiu123456@gmail.com",
+      "password": "$2a$10$Em2o68cI1ZTmvMvf7levxe7GeRjfb0InppnAS.8G5Wpqx2BDdmA5y",
+      "firstName": "Natalia",
+      "lastName": "Maria",
+      "id": 1
+    }
+  ],
   "expenses": [],
   "login": [],
   "income": [
@@ -111,6 +119,27 @@
     }
   ],
   "firstpage": [
+    {
+      "title": "Monitor your expenses easily and efficiently",
+      "subtitle": "Keep your finances under control, create budgets, and see where your money goes, all in one modern app.",
+      "sectionTitle": "Features",
+      "footerTitle": "Take control of your money",
+      "footerSubtitle": "Start today and see the difference.",
+      "card1": {
+        "cardTitle": "Real-time monitoring",
+        "cardSubtitle": "Add expenses and track them instantly."
+      },
+      "card2": {
+        "cardTitle": "Customized budgets",
+        "cardSubtitle": "Set limits for each spending category."
+      },
+      "card3": {
+        "cardTitle": "Detailed reports",
+        "cardSubtitle": "Analyze your financial habits with clear graphs."
+      }
+    }
+  ],
+  "firstPage": [
     {
       "title": "Monitor your expenses easily and efficiently",
       "subtitle": "Keep your finances under control, create budgets, and see where your money goes, all in one modern app.",

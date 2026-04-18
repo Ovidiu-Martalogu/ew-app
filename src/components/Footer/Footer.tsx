@@ -1,7 +1,8 @@
 import { useState } from "react";
-
 import { Link, NavLink } from "react-router";
+
 import logo from "./logoimg.jpg";
+
 import styles from "./Footer.module.css";
 
 export function Footer() {
