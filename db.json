@@ -42,9 +42,7 @@
       "id": 11
     }
   ],
-  "users": [
-   
-  ],
+  "users": [],
   "expenses": [],
   "login": [],
   "income": [
@@ -110,6 +108,25 @@
       "category": "salariu",
       "deleted": false,
       "id": 10
+    }
+  ],
+  "firstpage": [
+    {
+      "title": "Monitor your expenses easily and efficiently",
+      "subtitle": "Keep your finances under control, create budgets, and see where your money goes, all in one modern app.",
+      "sectionTitle": "Features",
+      "card1": {
+        "cardTitle": "Real-time monitoring",
+        "cardSubtitle": "Add expenses and track them instantly."
+      },
+      "card2": {
+        "cardTitle": "Customized budgets",
+        "cardSubtitle": "Set limits for each spending category."
+      },
+      "card3": {
+        "cardTitle": "Detailed reports",
+        "cardSubtitle": "Analyze your financial habits with clear graphs."
+      }
     }
   ]
 }
