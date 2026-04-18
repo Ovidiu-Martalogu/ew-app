@@ -52,17 +52,18 @@
 }
 
 /* CTA */
-.upAndDownText {
+.titleAndFooter {
     text-align: center;
     padding: 60px 20px;
+    
 }
 
-.upAndDownText h3 {
+.titleAndFooter h3 {
     font-size: 24px;
     margin-bottom: 10px;
 }
 
-.upAndDownText p {
+.titleAndFooter p {
     color: #6b7280;
     margin-bottom: 20px;
 }

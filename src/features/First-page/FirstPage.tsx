@@ -41,13 +41,13 @@ export function FirstPage() {
 
     return (
         <div className={styles.container}>
-            <section className={styles.upAndDownText}>
+            <section className={styles.titleAndFooter}>
                 {firstPage.map((firstP, i) =>
                 (
                     <div key={i}>
-                        <h2 className={styles.title}>
+                        <h3 className={styles.title}>
                             {firstP.title}
-                        </h2>
+                        </h3>
                         <p className={styles.subtitle}>
                             {firstP.subtitle}
                         </p>
@@ -104,7 +104,7 @@ export function FirstPage() {
                 </div>
             </section>
 
-            <section className={styles.upAndDownText}>
+            <section className={styles.titleAndFooter}>
                 {firstPage.map((firstF, i) => (
                     <div key={i}>
                         <h3>{firstF.footerTitle}</h3>
