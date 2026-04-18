@@ -53,7 +53,7 @@ export function Income() {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ date, amount: Number(editForm.amount), category, deleted: false }),
+            body: JSON.stringify({ date, amount, category, deleted: false }),
         }).then((response) => response.json());
 
         setIncome([...(income ?? []), newIncome]);

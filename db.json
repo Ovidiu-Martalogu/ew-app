@@ -116,6 +116,20 @@
       "category": "salariu",
       "deleted": false,
       "id": 10
+    },
+    {
+      "date": "2026-04-17",
+      "amount": "2300",
+      "category": "salariu",
+      "deleted": false,
+      "id": 12
+    },
+    {
+      "date": "2026-04-15",
+      "amount": "2300",
+      "category": "imprumut",
+      "deleted": false,
+      "id": 13
     }
   ],
   "firstpage": [
