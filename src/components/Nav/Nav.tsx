@@ -45,11 +45,11 @@ export function Nav() {
           </NavLink>
         </li>
 
-        {user && <li className={styles.wellcomeMsg}>
+        {user && <link className={styles.wellcomeMsg}>
           Welcome, <strong className={styles.app}>{user.firstName}!</strong>
 
           <Link to="/login" onClick={logout}>Logout</Link>
-        </li>}
+        </link>}
 
       </menu>
       {!user && (

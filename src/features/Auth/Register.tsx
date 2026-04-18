@@ -18,7 +18,7 @@ export function Register() {
   });
   const { errors, isValid } = useZodValidation(validationSchema);
 
-  const {login, user} = useAuth();
+  const { login, user } = useAuth();
 
   function handleSubmit(e: React.SubmitEvent) {
     e.preventDefault();
@@ -42,16 +42,16 @@ export function Register() {
     // const inputName = e.target.name as keyof typeof formValues;
     // newFormValues[inputName] = value;
 
-    const newValues = {...formValues, [e.target.name]: e.target.value};
+    const newValues = { ...formValues, [e.target.name]: e.target.value };
 
-    if(errors) {
+    if (errors) {
       isValid(newValues);
     }
 
-    setFormValues(newValues);    
-  }  
+    setFormValues(newValues);
+  }
 
-  if(user) {
+  if (user) {
     return <Navigate to="/" />
   }
 
@@ -59,6 +59,25 @@ export function Register() {
     <form className="brandForm" onSubmit={handleSubmit}>
       <h1>Register</h1>
 
+      <label htmlFor="firstName">First Name</label>
+      <input
+        type="text"
+        id="firstName"
+        name="firstName"
+        value={formValues.firstName}
+        onChange={handleInputChange}
+      />
+      {errors?.firstName && <p className="errorMessage">{errors.firstName}</p>}
+
+      <label htmlFor="lastName">Last Name</label>
+      <input
+        type="text"
+        id="lastName"
+        name="lastName"
+        value={formValues.lastName}
+        onChange={handleInputChange}
+      />
+      {errors?.lastName && <p className="errorMessage">{errors.lastName}</p>}
       <label htmlFor="email">Email</label>
       <input
         type="email"
@@ -91,25 +110,6 @@ export function Register() {
         <p className="errorMessage">{errors.retypePassword}</p>
       )}
 
-      <label htmlFor="firstName">First Name</label>
-      <input
-        type="text"
-        id="firstName"
-        name="firstName"
-        value={formValues.firstName}
-        onChange={handleInputChange}
-      />
-      {errors?.firstName && <p className="errorMessage">{errors.firstName}</p>}
-
-      <label htmlFor="lastName">Last Name</label>
-      <input
-        type="text"
-        id="lastName"
-        name="lastName"
-        value={formValues.lastName}
-        onChange={handleInputChange}
-      />
-      {errors?.lastName && <p className="errorMessage">{errors.lastName}</p>}
 
       <button type="submit">Register</button>
     </form>
