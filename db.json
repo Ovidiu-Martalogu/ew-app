@@ -49,6 +49,13 @@
       "firstName": "Natalia",
       "lastName": "Maria",
       "id": 1
+    },
+    {
+      "email": "a@admin.com",
+      "password": "$2a$10$jMZn8sTzSMnxigDrkOcQo.h0UTNVbSLt2GDvPZW7Ae9bV8yH/5ELu",
+      "firstName": "Ovi",
+      "lastName": "Ovidiu",
+      "id": 2
     }
   ],
   "expenses": [],
