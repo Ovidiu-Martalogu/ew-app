@@ -44,10 +44,10 @@
   ],
   "users": [
     {
+      "firstName": "didi",
+      "lastName": "stan",
       "email": "qvidiu123456@gmail.com",
-      "password": "$2a$10$Em2o68cI1ZTmvMvf7levxe7GeRjfb0InppnAS.8G5Wpqx2BDdmA5y",
-      "firstName": "Natalia",
-      "lastName": "Maria",
+      "password": "$2a$10$3KHBdCc6dOOmrPswoUef.OkfWDrlqULBlPQ3Is5IzNsxmdyE0EDuK",
       "id": 1
     },
     {
