@@ -74,7 +74,7 @@ export function Nav() {
             </li>
 
             <li className={styles.logout}>
-              <Link to="/login" onClick={logout}>
+              <Link to="/" onClick={logout}>
                 Logout
               </Link>
             </li>
