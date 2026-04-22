@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { FirstPage } from "../First-page/FirstPage";
 
-import styles from "../../features/Auth/context/EditUser.module.css"
+import styles from "../../features/Auth/EditUser.module.css"
 
 const apiUrl = `${import.meta.env.VITE_API_URL}/users`;
 
@@ -14,11 +14,11 @@ type User = {
     password: number;
 };
 
-console.log("API URL:", apiUrl);
+// console.log("API URL:", apiUrl);
 export function EditUser() {
     const [user, setUser] = useState<User | null>(null);
 
-    console.log(Object.keys(localStorage));
+    // console.log(Object.keys(localStorage));
 
     useEffect(() => {
         const authRaw = localStorage.getItem("auth");
@@ -83,6 +83,13 @@ export function EditUser() {
     return (
         <>
             <h2>Edit your data</h2>
+            <h4>Important:</h4>
+            <p>To change your data,
+                without changing your password,</p>
+            <p>
+                you need to confirm your changes with your current password,</p>
+            <p>
+                else you can set your new password</p>
 
             {user && (
                 <form onSubmit={updateUser} className={styles.brandForm}>
@@ -121,7 +128,7 @@ export function EditUser() {
                     </div>
 
                     <div className={styles.formGroup}>
-                        <label htmlFor="password">Change Password</label>
+                        <label htmlFor="password"> Password</label>
                         <input
                             type="password"
                             id="password"
@@ -131,7 +138,7 @@ export function EditUser() {
                     </div>
 
                     <div className={styles.formGroup}>
-                        <label htmlFor="retypepassword">Retype your new Password</label>
+                        <label htmlFor="retypepassword">Retype your Password</label>
                         <input
                             type="password"
                             id="retypepassword"

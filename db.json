@@ -40,10 +40,37 @@
       "category": "cumparaturi",
       "deleted": false,
       "id": 11
+    },
+    {
+      "date": "2026-04-07",
+      "amount": 1500,
+      "category": "rata",
+      "deleted": false,
+      "id": 11
+    },
+    {
+      "date": "2026-04-07",
+      "amount": 350,
+      "category": "cumparaturi",
+      "deleted": false,
+      "id": 11
+    },
+    {
+      "date": "2026-04-07",
+      "amount": 200,
+      "category": "Lidl",
+      "deleted": false,
+      "id": 11
     }
   ],
   "users": [
-    
+    {
+      "firstName": "Maria",
+      "lastName": "Natalia",
+      "email": "qvidiu123456@gmail.com",
+      "password": "$2a$10$wm2gMrgBHwvOrEMED86tkOXE2UM/mI.eL0abiEa/vDsttjZVGbr7q",
+      "id": 1
+    }
   ],
   "expenses": [],
   "login": [],
@@ -124,6 +151,13 @@
       "category": "imprumut",
       "deleted": false,
       "id": 13
+    },
+    {
+      "date": "2026-04-21",
+      "amount": "300",
+      "category": "comision",
+      "deleted": false,
+      "id": 14
     }
   ],
   "firstpage": [

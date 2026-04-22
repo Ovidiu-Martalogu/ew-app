@@ -1,9 +1,13 @@
 
 import { useEffect, useState } from "react";
 import styles from "./firstpage.module.css";
+import { Link } from "react-router";
+import { EditUser } from "../Auth/EditUser";
 
 
 const apiUrl = `${import.meta.env.VITE_API_URL}/firstpage`;
+
+
 
 type CardContent = {
     cardTitle: string;
@@ -44,7 +48,14 @@ export function FirstPage() {
 
 
     return (
+
         <div className={styles.container}>
+
+            <li className={styles.wellcomeMsg}>
+                <Link to="/user" onClick={EditUser}>
+                    <strong className={styles.app}>Edit</strong>
+                </Link>
+            </li>
             <section className={styles.titleAndFooter}>
                 {firstPage.map((firstP, i) =>
                 (
