@@ -1,3 +1,21 @@
+## UTILS:
+# Project run with:
+ 
+pnpm install
+pnpm start
+
+#### 
+The project refers to monitoring income and expenses
+
+# Register and Login from navbar
+
+#
+
+
+
+
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
