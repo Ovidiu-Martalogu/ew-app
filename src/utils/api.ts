@@ -15,19 +15,24 @@ type MakeRequestParams = RequestInit & {
   limit?: number;
 };
 
-export class Api<Data> {
+export class Api {
   public resource: string;
-  private headers = {
-    'Content-Type': 'application/json',
-  };
+  private headers = new Headers();
+  public itemCount = 0;
 
   constructor(resource: string) {
     this.resource = resource;
+    this.headers.append('Content-Type', 'application/json');
   }
 
-  private async handleResponse(this: void, res: Response) {
+  public setAsAuthRequired(accessToken: string) {
+    this.headers.set('Authorization', `Bearer ${accessToken}`);
+  }
+
+  private async handleResponse<Data>(res: Response) {
     const data = (await res.json()) as Data | string;
     if (res.ok && typeof data !== "string") {
+      this.itemCount = Number(res.headers.get('x-total-count'));
       return data;
     }
 
@@ -40,7 +45,7 @@ export class Api<Data> {
     throw new ApiError(res.status, message);
   }
 
-  private makeRequest(options: MakeRequestParams) {
+  private makeRequest<R>(options: MakeRequestParams): Promise<R> {
     const baseUrl = `/api/${this.resource}`;
     let urlEnding = "";
 
@@ -66,36 +71,32 @@ export class Api<Data> {
       urlEnding += `?${search}`;
     }
 
+    fetchInit.headers = this.headers;
+
     return fetch(`${baseUrl}${urlEnding}`, fetchInit)
-      .then(this.handleResponse)
-      .catch((err: unknown) => {
-        console.warn(err);
-        return null;
-      });
+      .then(this.handleResponse.bind(this)<R>);
   }
 
-  public create(body: Record<string, string>) {
-    return this.makeRequest({
+  public create<R>(body: unknown) {
+    return this.makeRequest<R>({
       method: 'POST',
       body: JSON.stringify(body),
-      headers: this.headers,
     });
   }
 
-  public readOne(id: number | string) {
-    return this.makeRequest({id: String(id)});
+  public readOne<R>(id: number | string) {
+    return this.makeRequest<R>({ id: String(id) });
   }
 
-  public readAll(page = 1, limit = 10) {
-    return this.makeRequest({page, limit});
+  public readAll<R>(page = 1, limit = 10) {
+    return this.makeRequest<R>({ page, limit });
   }
 
-  public update(id: number, body: Record<string, string>) {
-    return this.makeRequest({
+  public update<R>(id: number, body: Record<string, string>) {
+    return this.makeRequest<R>({
       id: String(id),
       method: 'PATCH',
       body: JSON.stringify(body),
-      headers: this.headers,
     });
   }
   public remove(id: number) {

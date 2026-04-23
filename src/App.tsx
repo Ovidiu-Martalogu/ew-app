@@ -11,7 +11,7 @@ import { Footer } from "./components/Footer/Footer";
 import { Report } from "./features/Report/Report"
 import { AuthContextProvider } from "../src/features/Auth/context/AuthContextProvider";
 import "./App.css";
-import './Forms.css';
+
 import { EditFirstPage } from "./features/First-page/EditFirstPage";
 
 export default function App() {

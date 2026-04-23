@@ -6,7 +6,10 @@ import { registerSchema as validationSchema } from "./validationSchemas";
 import { useAuth } from "./context/useAuth";
 import type { Auth } from "./types";
 
+import styles from "../../features/Auth/EditUser.module.css"
+
 const registerApi = new Api("register");
+
 
 export function Register() {
   const [formValues, setFormValues] = useState({
@@ -23,12 +26,6 @@ export function Register() {
   function handleSubmit(e: React.SubmitEvent) {
     e.preventDefault();
 
-    // const data = new FormData(e.target);
-    // const jsonData = Object.fromEntries(data.entries()) as Record<
-    //   keyof z.infer<typeof validationSchema>,
-    //   string
-    // >;
-
     if (!isValid(formValues)) return;
 
     const { retypePassword, ...dataForServer } = formValues;
@@ -37,11 +34,7 @@ export function Register() {
   }
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-    // const value = e.target.value;
-    // const newFormValues = {...formValues};
-    // const inputName = e.target.name as keyof typeof formValues;
-    // newFormValues[inputName] = value;
-
+   
     const newValues = { ...formValues, [e.target.name]: e.target.value };
 
     if (errors) {
@@ -56,9 +49,8 @@ export function Register() {
   }
 
   return (
-    <form className="brandForm" onSubmit={handleSubmit}>
+    <form className={styles.brandForm} onSubmit={handleSubmit}>
       <h1>Register</h1>
-
       <label htmlFor="firstName">First Name</label>
       <input
         type="text"
@@ -111,7 +103,9 @@ export function Register() {
       )}
 
 
+
       <button type="submit">Register</button>
     </form>
   );
 }
+

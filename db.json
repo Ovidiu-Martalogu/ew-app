@@ -39,28 +39,28 @@
       "amount": 500,
       "category": "cumparaturi",
       "deleted": false,
-      "id": 11
+      "id": 12
     },
     {
       "date": "2026-04-07",
       "amount": 1500,
       "category": "rata",
       "deleted": false,
-      "id": 11
+      "id": 13
     },
     {
       "date": "2026-04-07",
       "amount": 350,
       "category": "cumparaturi",
       "deleted": false,
-      "id": 11
+      "id": 14
     },
     {
       "date": "2026-04-07",
       "amount": 200,
       "category": "Lidl",
       "deleted": false,
-      "id": 11
+      "id": 15
     }
   ],
   "users": [
