@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import styles from "./firstpage.module.css";
 import { Link } from "react-router";
-import { EditUser } from "../Auth/EditUser";
+import { EditFirstPage } from "./EditFirstPage";
 
 
 const apiUrl = `${import.meta.env.VITE_API_URL}/firstpage`;
@@ -51,9 +51,9 @@ export function FirstPage() {
 
         <div className={styles.container}>
 
-            <li className={styles.wellcomeMsg}>
-                <Link to="/user" onClick={EditUser}>
-                    <strong className={styles.app}>Edit</strong>
+            <li className={styles.editPage}>
+                <Link to="/editPage" onClick={EditFirstPage}>
+                    <strong className={styles.editPage}>Edit this page</strong>
                 </Link>
             </li>
             <section className={styles.titleAndFooter}>

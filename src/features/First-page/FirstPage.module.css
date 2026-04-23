@@ -51,7 +51,7 @@
     margin-bottom: 10px;
 }
 
-/* CTA */
+
 .titleAndFooter {
     text-align: center;
     padding: 60px 20px;
@@ -66,5 +66,10 @@
 .titleAndFooter p {
     color: #6b7280;
     margin-bottom: 20px;
+}
+
+.editPage{
+    text-decoration: none;
+
 }
 

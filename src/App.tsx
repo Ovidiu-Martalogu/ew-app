@@ -12,6 +12,7 @@ import { Report } from "./features/Report/Report"
 import { AuthContextProvider } from "../src/features/Auth/context/AuthContextProvider";
 import "./App.css";
 import './Forms.css';
+import { EditFirstPage } from "./features/First-page/EditFirstPage";
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/income" element={<Income />} />
             <Route path="/user" element={<EditUser />} />
+            <Route path="/editPage" element={<EditFirstPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
