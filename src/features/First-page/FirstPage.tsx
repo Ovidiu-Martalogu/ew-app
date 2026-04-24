@@ -49,7 +49,7 @@ export function FirstPage() {
 
     return (
 
-        <div className={styles.container}>
+        <div className={styles.content1}>
 
             <li className={styles.editPage}>
                 <Link to="/editPage" onClick={EditFirstPage}>

@@ -34,7 +34,7 @@ export function Register() {
   }
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-   
+
     const newValues = { ...formValues, [e.target.name]: e.target.value };
 
     if (errors) {
@@ -49,63 +49,69 @@ export function Register() {
   }
 
   return (
-    <form className={styles.brandForm} onSubmit={handleSubmit}>
-      <h1>Register</h1>
-      <label htmlFor="firstName">First Name</label>
-      <input
-        type="text"
-        id="firstName"
-        name="firstName"
-        value={formValues.firstName}
-        onChange={handleInputChange}
-      />
-      {errors?.firstName && <p className="errorMessage">{errors.firstName}</p>}
+    <>
 
-      <label htmlFor="lastName">Last Name</label>
-      <input
-        type="text"
-        id="lastName"
-        name="lastName"
-        value={formValues.lastName}
-        onChange={handleInputChange}
-      />
-      {errors?.lastName && <p className="errorMessage">{errors.lastName}</p>}
-      <label htmlFor="email">Email</label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        value={formValues.email}
-        onChange={handleInputChange}
-      />
-      {errors?.email && <p className="errorMessage">{errors.email}</p>}
+      <form className={styles.brandForm} onSubmit={handleSubmit}>
+        <h1>Register</h1>
+        <label htmlFor="firstName">First Name</label>
+        <input
+          type="text"
+          id="firstName"
+          name="firstName"
+          value={formValues.firstName}
+          onChange={handleInputChange}
+        />
+        {errors?.firstName && <p className="errorMessage">{errors.firstName}</p>}
 
-      <label htmlFor="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        value={formValues.password}
-        onChange={handleInputChange}
-      />
-      {errors?.password && <p className="errorMessage">{errors.password}</p>}
+        <label htmlFor="lastName">Last Name</label>
+        <input
+          type="text"
+          id="lastName"
+          name="lastName"
+          value={formValues.lastName}
+          onChange={handleInputChange}
+        />
+        {errors?.lastName && <p className="errorMessage">{errors.lastName}</p>}
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={formValues.email}
+          onChange={handleInputChange}
+        />
+        {errors?.email && <p className="errorMessage">{errors.email}</p>}
 
-      <label htmlFor="retypePassword">Retype Password</label>
-      <input
-        type="password"
-        id="retypePassword"
-        name="retypePassword"
-        value={formValues.retypePassword}
-        onChange={handleInputChange}
-      />
-      {errors?.retypePassword && (
-        <p className="errorMessage">{errors.retypePassword}</p>
-      )}
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          value={formValues.password}
+          onChange={handleInputChange}
+        />
+        {errors?.password && <p className="errorMessage">{errors.password}</p>}
+
+        <label htmlFor="retypePassword">Retype Password</label>
+        <input
+          type="password"
+          id="retypePassword"
+          name="retypePassword"
+          value={formValues.retypePassword}
+          onChange={handleInputChange}
+        />
+        {errors?.retypePassword && (
+          <p className="errorMessage">{errors.retypePassword}</p>
+        )}
 
 
 
-      <button type="submit">Register</button>
-    </form>
+        <button type="submit">Register</button>
+      </form>
+      <div>
+        <img src="../public/graphs_1.jpeg" alt="picture" />
+      </div>
+    </>
   );
 }
 

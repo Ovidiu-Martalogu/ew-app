@@ -1,33 +1,17 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family:
-    system-ui,
-    -apple-system,
-    Segoe UI,
-    Roboto,
-    sans-serif;
-  background: #a5cbfa;
-  font-size: 1rem;
-}
-
-
 .app {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #111827;
 }
-
 
 .content {
   flex: 1;
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0.5rem;
-  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
-
 
 @media (max-width: 768px) {
   .content {

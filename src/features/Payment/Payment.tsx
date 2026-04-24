@@ -42,13 +42,13 @@ export function Payment() {
         const date = data.get("date");
         const amount = Number(data.get("amount"));
         const category = data.get("category");
-      
 
-        if(!amount){
-                alert("Please enter only values for amount"); 
-        if (!date || !amount || !category) {
-            alert("Please fill all the fields");
-            
+
+        if (!amount) {
+            alert("Please enter only values for amount");
+            if (!date || !amount || !category) {
+                alert("Please fill all the fields");
+
             }
             return;
         }
@@ -169,175 +169,177 @@ export function Payment() {
 
     return (
         <>
-            <h1 className={styles.title}>Payment</h1>
+            <div className={styles.content}>
 
-            {/* SORT BUTTONS */}
-            <div className={styles.sortBar}>
-                <button onClick={() => setSortField("date")}>
-                    <label htmlFor="sort">
-                        Sort by Date{" "}
-                        <select
-                            name="sort"
-                            id="sort"
-                            className={styles.selectAmount}
-                            onChange={(e) => setSortChoice(e.target.value as SortChoice)}
-                        >
-                            <option value="ascending">Ascending</option>
-                            <option value="descending">Descending</option>
-                        </select>
-                    </label>
-                </button>
 
-                <button onClick={() => setSortField("amount")}>
-                    <label htmlFor="sortAmount">
-                        Sort by Amount{" "}
-                        <select
-                            name="sortAmount"
-                            id="sortAmount"
-                            className={styles.selectAmount}
-                            onChange={(e) => setSortChoice(e.target.value as SortChoice)}
-                        >
-                            <option value="ascending">Ascending</option>
-                            <option value="descending">Descending</option>
-                        </select>
-                    </label>
-                </button>
-            </div>
+                <h1 className={styles.title}>Payment</h1>
 
-            {/* TABLE */}
-            <div className={styles.tableContainer}>
-                <table className={styles.table}>
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Amount</th>
-                            <th>Category</th>
-                            <th>Edit</th>
-                            <th>Select to delete</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {sortedPayments.map((key) => (
-                            <tr key={key.id}>
-                              
-                                <td>
-                                    {editingId === key.id ? (
-                                        <input
-                                            type="date"
-                                            value={editForm.date}
-                                            onChange={(e) =>
-                                                setEditForm({ ...editForm, date: e.target.value })
-                                            }
-                                        />
-                                    ) : (
-                                        key.date
-                                    )}
-                                </td>
-
-                                <td>
-                                    {editingId === key.id ? (
-                                        <input
-                                            type="text"
-                                            value={editForm.amount}
-                                            onChange={(e) =>
-                                                setEditForm({ ...editForm, amount: e.target.value })
-                                            }
-                                        />
-                                    ) : (
-                                        key.amount
-                                    )}
-                                </td>
-
-                                <td>
-                                    {editingId === key.id ? (
-                                        <input
-                                            value={editForm.category}
-                                            onChange={(e) =>
-                                                setEditForm({ ...editForm, category: e.target.value })
-                                            }
-                                        />
-                                    ) : (
-                                        key.category
-                                    )}
-                                </td>
-
-                                <td>
-
-                                    {/* aici editButton */}
-                                    <button
-                                        onClick={() => {
-                                            setEditingId(key.id);
-                                            setEditForm({
-                                                date: key.date,
-                                                amount: String(key.amount),
-                                                category: key.category,
-                                            });
-                                        }}
-                                    >
-                                        Edit
-                                    </button>
-                                    {editingId === key.id && (
-                                        <>
-
-                                            <button onClick={() => saveEdit(key.id)}>
-                                                Save
-                                            </button>
-                                            <button onClick={() => setEditingId(null)}>
-                                                Cancel
-                                            </button>
-                                        </>
-                                    )}
-
-                                </td>
-                                <td>
-                                    <input
-                                        type="checkbox"
-                                        checked={key.deleted}
-                                        onChange={() => checkForDeletePayment(key)}
-                                    />
-                                </td>
-
-                                <td>
-                                    <button
-                                        className={styles.deleteButton}
-                                        onClick={() => deletePayment(key.id)}
-                                    >
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-            <div>
-
-                <h2>Total: {total.toFixed(2)}</h2>
-            </div>
-
-            {/* FORM */}
-            {addPayment && (
-                <form onSubmit={addPaymentsToDB} className={styles.form}>
-                    <label id="date">Select the date:
-                        <input type="date" id="date" name="date" className={styles.input} />
-                    </label>
-                    <label id="amount"> Insert the amount:
-                        <input type="text" name="amount" className={styles.input} />
-                    </label>
-                    <label id="category"> Insert the category:
-                        <input name="category" className={styles.input} />
-                    </label>
-                    <button type="submit" className={styles.button}>
-                        Add Payment
+                <div className={styles.sortBar}>
+                    <button onClick={() => setSortField("date")}>
+                        <label htmlFor="sort">
+                            Sort by Date{" "}
+                            <select
+                                name="sort"
+                                id="sort"
+                                className={styles.selectAmount}
+                                onChange={(e) => setSortChoice(e.target.value as SortChoice)}
+                            >
+                                <option value="ascending">Ascending</option>
+                                <option value="descending">Descending</option>
+                            </select>
+                        </label>
                     </button>
-                </form>
-            )}
 
-            <button onClick={buttonAddPayment} className={styles.addPaymentButton}>
-                {addPayment ? "Back" : "Add new Payment"}
-            </button>
+                    <button onClick={() => setSortField("amount")}>
+                        <label htmlFor="sortAmount">
+                            Sort by Amount{" "}
+                            <select
+                                name="sortAmount"
+                                id="sortAmount"
+                                className={styles.selectAmount}
+                                onChange={(e) => setSortChoice(e.target.value as SortChoice)}
+                            >
+                                <option value="ascending">Ascending</option>
+                                <option value="descending">Descending</option>
+                            </select>
+                        </label>
+                    </button>
+                </div>
+
+                <div className={styles.tableContainer}>
+                    <table className={styles.table}>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Amount</th>
+                                <th>Category</th>
+                                <th>Edit</th>
+                                <th>Select to delete</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {sortedPayments.map((key) => (
+                                <tr key={key.id}>
+
+                                    <td>
+                                        {editingId === key.id ? (
+                                            <input
+                                                type="date"
+                                                value={editForm.date}
+                                                onChange={(e) =>
+                                                    setEditForm({ ...editForm, date: e.target.value })
+                                                }
+                                            />
+                                        ) : (
+                                            key.date
+                                        )}
+                                    </td>
+
+                                    <td>
+                                        {editingId === key.id ? (
+                                            <input
+                                                type="text"
+                                                value={editForm.amount}
+                                                onChange={(e) =>
+                                                    setEditForm({ ...editForm, amount: e.target.value })
+                                                }
+                                            />
+                                        ) : (
+                                            key.amount
+                                        )}
+                                    </td>
+
+                                    <td>
+                                        {editingId === key.id ? (
+                                            <input
+                                                value={editForm.category}
+                                                onChange={(e) =>
+                                                    setEditForm({ ...editForm, category: e.target.value })
+                                                }
+                                            />
+                                        ) : (
+                                            key.category
+                                        )}
+                                    </td>
+
+                                    <td>
+
+
+                                        <button
+                                            onClick={() => {
+                                                setEditingId(key.id);
+                                                setEditForm({
+                                                    date: key.date,
+                                                    amount: String(key.amount),
+                                                    category: key.category,
+                                                });
+                                            }}
+                                        >
+                                            Edit
+                                        </button>
+                                        {editingId === key.id && (
+                                            <>
+
+                                                <button onClick={() => saveEdit(key.id)}>
+                                                    Save
+                                                </button>
+                                                <button onClick={() => setEditingId(null)}>
+                                                    Cancel
+                                                </button>
+                                            </>
+                                        )}
+
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            checked={key.deleted}
+                                            onChange={() => checkForDeletePayment(key)}
+                                        />
+                                    </td>
+
+                                    <td>
+                                        <button
+                                            className={styles.deleteButton}
+                                            onClick={() => deletePayment(key.id)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+
+                    <h2>Total: {total.toFixed(2)}</h2>
+                </div>
+
+
+                {addPayment && (
+                    <form onSubmit={addPaymentsToDB} className={styles.form}>
+                        <label id="date">Select the date:
+                            <input type="date" id="date" name="date" className={styles.input} />
+                        </label>
+                        <label id="amount"> Insert the amount:
+                            <input type="text" name="amount" className={styles.input} />
+                        </label>
+                        <label id="category"> Insert the category:
+                            <input name="category" className={styles.input} />
+                        </label>
+                        <button type="submit" className={styles.button}>
+                            Add Payment
+                        </button>
+                    </form>
+                )}
+
+                <button onClick={buttonAddPayment} className={styles.addPaymentButton}>
+                    {addPayment ? "Back" : "Add new Payment"}
+                </button>
+            </div>
         </>
     );
 }

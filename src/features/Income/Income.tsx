@@ -161,149 +161,151 @@ export function Income() {
     return (
 
         <>
-            <h1>income money</h1>
+            <div className={styles.content}>
+                <h1>income money</h1>
 
-            <div className={styles.sortBar}>
-                <button onClick={() => setSortField("date")}>
-                    <label htmlFor="sort">
-                        Sort by Date{" "}
-                        <select
-                            name="sort"
-                            id="sort"
-                            className={styles.selectAmount}
-                            onChange={(e) => setSortChoice(e.target.value as SortChoice)}
-                        >
-                            <option value="ascending">Ascending</option>
-                            <option value="descending">Descending</option>
-                        </select>
-                    </label>
-                </button>
-                <button onClick={() => setSortField("amount")}>
-                    <label htmlFor="sortAmount">
-                        Sort by Amount{" "}
-                        <select
-                            name="sortAmount"
-                            id="sortAmount"
-                            className={styles.selectAmount}
-                            onChange={(e) => setSortChoice(e.target.value as SortChoice)}
-                        >
-                            <option value="ascending">Ascending</option>
-                            <option value="descending">Descending</option>
-                        </select>
-                    </label>
-                </button>
-            </div>
-
-            <div className={styles.cardContainer}>
-                {sortedIncome?.map((key) => (
-                    <div
-                        key={key.id}
-                        className={styles.card}
-                        style={{
-                            borderLeft: `6px solid ${getCategoryColor(key.category)}`,
-                        }}
-                    >
-                        {editingId === key.id ? (
-                            <>
-                                <input
-                                    type="date"
-                                    value={editForm.date}
-                                    onChange={(e) =>
-                                        setEditForm({ ...editForm, date: e.target.value })
-                                    }
-                                />
-
-                                <input
-                                    type="text"
-                                    value={editForm.amount}
-                                    onChange={(e) =>
-                                        setEditForm({ ...editForm, amount: e.target.value })
-                                    }
-                                />
-
-                                <input
-                                    value={editForm.category}
-                                    onChange={(e) =>
-                                        setEditForm({ ...editForm, category: e.target.value })
-                                    }
-                                />
-                            </>
-                        ) : (
-                            <>
-                                <h3>{key.category}</h3>
-                                <p><strong>Date:</strong> {key.date}</p>
-                                <p><strong>Amount:</strong> {key.amount}</p>
-                            </>
-                        )}
-
-                        <div className={styles.cardActions}>
-                            {/* aici editButton */}
-                            <button
-                                onClick={() => {
-                                    setEditingId(key.id);
-                                    setEditForm({
-                                        date: key.date,
-                                        amount: String(key.amount),
-                                        category: key.category,
-                                    });
-                                }}
+                <div className={styles.sortBar}>
+                    <button onClick={() => setSortField("date")}>
+                        <label htmlFor="sort">
+                            Sort by Date{" "}
+                            <select
+                                name="sort"
+                                id="sort"
+                                className={styles.selectAmount}
+                                onChange={(e) => setSortChoice(e.target.value as SortChoice)}
                             >
-                                Edit
-                            </button>
-                            {editingId === key.id && (
-                                <>
+                                <option value="ascending">Ascending</option>
+                                <option value="descending">Descending</option>
+                            </select>
+                        </label>
+                    </button>
+                    <button onClick={() => setSortField("amount")}>
+                        <label htmlFor="sortAmount">
+                            Sort by Amount{" "}
+                            <select
+                                name="sortAmount"
+                                id="sortAmount"
+                                className={styles.selectAmount}
+                                onChange={(e) => setSortChoice(e.target.value as SortChoice)}
+                            >
+                                <option value="ascending">Ascending</option>
+                                <option value="descending">Descending</option>
+                            </select>
+                        </label>
+                    </button>
+                </div>
 
-                                    <button onClick={() => saveEdit(key.id)}>
-                                        Save
-                                    </button>
-                                    <button onClick={() => setEditingId(null)}>
-                                        Cancel
-                                    </button>
+                <div className={styles.cardContainer}>
+                    {sortedIncome?.map((key) => (
+                        <div
+                            key={key.id}
+                            className={styles.card}
+                            style={{
+                                borderLeft: `6px solid ${getCategoryColor(key.category)}`,
+                            }}
+                        >
+                            {editingId === key.id ? (
+                                <>
+                                    <input
+                                        type="date"
+                                        value={editForm.date}
+                                        onChange={(e) =>
+                                            setEditForm({ ...editForm, date: e.target.value })
+                                        }
+                                    />
+
+                                    <input
+                                        type="text"
+                                        value={editForm.amount}
+                                        onChange={(e) =>
+                                            setEditForm({ ...editForm, amount: e.target.value })
+                                        }
+                                    />
+
+                                    <input
+                                        value={editForm.category}
+                                        onChange={(e) =>
+                                            setEditForm({ ...editForm, category: e.target.value })
+                                        }
+                                    />
+                                </>
+                            ) : (
+                                <>
+                                    <h3>{key.category}</h3>
+                                    <p><strong>Date:</strong> {key.date}</p>
+                                    <p><strong>Amount:</strong> {key.amount}</p>
                                 </>
                             )}
-                            <button onClick={() => checkForDelete(key)}>Check</button>
-                            <input
-                                type="checkbox"
-                                checked={key.deleted}
-                                onChange={() => checkForDelete(key)}
-                            />
-                            <button onClick={() => deleteIncome(key.id)}>Delete</button>
+
+                            <div className={styles.cardActions}>
+
+                                <button
+                                    onClick={() => {
+                                        setEditingId(key.id);
+                                        setEditForm({
+                                            date: key.date,
+                                            amount: String(key.amount),
+                                            category: key.category,
+                                        });
+                                    }}
+                                >
+                                    Edit
+                                </button>
+                                {editingId === key.id && (
+                                    <>
+
+                                        <button onClick={() => saveEdit(key.id)}>
+                                            Save
+                                        </button>
+                                        <button onClick={() => setEditingId(null)}>
+                                            Cancel
+                                        </button>
+                                    </>
+                                )}
+                                <button onClick={() => checkForDelete(key)}>Check</button>
+                                <input
+                                    type="checkbox"
+                                    checked={key.deleted}
+                                    onChange={() => checkForDelete(key)}
+                                />
+                                <button onClick={() => deleteIncome(key.id)}>Delete</button>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
+
+                <div>
+                    <h2>Total: {total.toFixed(2)}</h2>
+                </div>
+
+
+                {addIncome && (
+                    <form onSubmit={addIncomeToDB} className={styles.form}>
+                        <label>
+                            Select the date:
+                            <input type="date" name="date" className={styles.input} />
+                        </label>
+
+                        <label>
+                            Insert the amount:
+                            <input type="text" name="amount" className={styles.input} />
+                        </label>
+
+                        <label>
+                            Insert the category:
+                            <input name="category" className={styles.input} />
+                        </label>
+
+                        <button type="submit" className={styles.button}>
+                            Add Income
+                        </button>
+                    </form>
+                )}
+
+                <button onClick={buttonAddIncome} className={styles.addIncomeButton}>
+                    {addIncome ? "Back" : "Add new Income"}
+                </button>
             </div>
-
-            <div>
-                <h2>Total: {total.toFixed(2)}</h2>
-            </div>
-
-            {/* FORM */}
-            {addIncome && (
-                <form onSubmit={addIncomeToDB} className={styles.form}>
-                    <label>
-                        Select the date:
-                        <input type="date" name="date" className={styles.input} />
-                    </label>
-
-                    <label>
-                        Insert the amount:
-                        <input type="text" name="amount" className={styles.input} />
-                    </label>
-
-                    <label>
-                        Insert the category:
-                        <input name="category" className={styles.input} />
-                    </label>
-
-                    <button type="submit" className={styles.button}>
-                        Add Income
-                    </button>
-                </form>
-            )}
-
-            <button onClick={buttonAddIncome} className={styles.addIncomeButton}>
-                {addIncome ? "Back" : "Add new Income"}
-            </button>
         </>
 
 
