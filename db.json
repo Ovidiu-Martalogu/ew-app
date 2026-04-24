@@ -64,13 +64,7 @@
     }
   ],
   "users": [
-    {
-      "firstName": "Maria",
-      "lastName": "Natalia",
-      "email": "qvidiu123456@gmail.com",
-      "password": "$2a$10$wm2gMrgBHwvOrEMED86tkOXE2UM/mI.eL0abiEa/vDsttjZVGbr7q",
-      "id": 1
-    }
+   
   ],
   "expenses": [],
   "login": [],

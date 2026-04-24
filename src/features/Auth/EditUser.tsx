@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { FirstPage } from "../First-page/FirstPage";
 
-import styles from "../../features/Auth/EditUser.module.css"
+import styles from "../../features/Auth/EditUser.module.css";
 
 const apiUrl = `${import.meta.env.VITE_API_URL}/users`;
 
@@ -11,36 +11,56 @@ type User = {
     firstName: string;
     lastName: string;
     email: string;
-    password: number;
+    password?: string;
 };
 
-// console.log("API URL:", apiUrl);
+
+function getAuth() {
+    const authRaw = localStorage.getItem("auth");
+    if (!authRaw) return null;
+    return JSON.parse(authRaw);
+}
+
+function getAuthHeaders(): HeadersInit {
+    const auth = getAuth();
+
+    return {
+        "Content-Type": "application/json",
+        ...(auth?.accessToken
+            ? { Authorization: `Bearer ${auth.accessToken}` }
+            : {}),
+    };
+}
+
 export function EditUser() {
     const [user, setUser] = useState<User | null>(null);
-
-    // console.log(Object.keys(localStorage));
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        const authRaw = localStorage.getItem("auth");
-        if (!authRaw) return;
+        const auth = getAuth();
+        if (!auth?.user?.id) return;
 
-        const auth = JSON.parse(authRaw);
-
-
-        fetch(`${apiUrl}/${auth.user.id}`)
-            .then(res => res.json())
-            .then(data => setUser(data))
-            .catch(err => console.error(err));
-
+        fetch(`${apiUrl}/${auth.user.id}`, {
+            headers: getAuthHeaders(),
+        })
+            .then(async (res) => {
+                if (!res.ok) {
+                    throw new Error("Failed to fetch user (401 or server error)");
+                }
+                return res.json();
+            })
+            .then((data) => setUser(data))
+            .catch((err) => {
+                console.error(err);
+                setError(err.message);
+            });
     }, []);
 
     async function updateUser(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        const authRaw = localStorage.getItem("auth");
-        if (!authRaw) return;
-
-        const auth = JSON.parse(authRaw);
+        const auth = getAuth();
+        if (!auth?.user?.id) return;
 
         const form = new FormData(e.currentTarget);
 
@@ -50,13 +70,12 @@ export function EditUser() {
         const password = form.get("password") as string;
         const retypePassword = form.get("retypepassword") as string;
 
-
         if (password && password !== retypePassword) {
             alert("Passwords do not match");
             return;
         }
 
-        const body: any = {
+        const body: Record<string, string> = {
             firstName,
             lastName,
             email,
@@ -66,88 +85,91 @@ export function EditUser() {
             body.password = password;
         }
 
-        await fetch(`${apiUrl}/${auth.user.id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${auth.accessToken}`
-            },
-            body: JSON.stringify(body),
-        });
+        try {
+            const res = await fetch(`${apiUrl}/${auth.user.id}`, {
+                method: "PUT",
+                headers: getAuthHeaders(),
+                body: JSON.stringify(body),
+            });
 
-        alert("User updated!");
-        localStorage.removeItem("auth");
-        window.location.href = "/login";
+            if (!res.ok) {
+                throw new Error("Failed to update user");
+            }
+
+            alert("User updated successfully");
+
+            localStorage.removeItem("auth");
+            window.location.href = "/login";
+        } catch (err: any) {
+            console.error(err);
+            alert(err.message);
+        }
     }
 
     return (
         <>
+            <div>
+                <h2>Edit your data</h2>
+                <h4>Important:</h4>
+                <p>To change your data, without changing your password,</p>
+                <p> you need to confirm your changes with your current password,</p>
+                <p> else you can set your new password</p>
+            </div>
             <h2>Edit your data</h2>
-            <h4>Important:</h4>
-            <p>To change your data,
-                without changing your password,</p>
-            <p>
-                you need to confirm your changes with your current password,</p>
-            <p>
-                else you can set your new password</p>
+
+            {error && <p className={styles.errorMsg}>{error}</p>}
 
             {user && (
                 <form onSubmit={updateUser} className={styles.brandForm}>
-
                     <div className={styles.formGroup}>
-                        <label htmlFor="firstName">Change First Name</label>
+                        <label htmlFor="firstName">First Name</label>
                         <input
                             type="text"
                             id="firstName"
                             name="firstName"
-                            placeholder={`Your first name is ${user.firstName}`}
                             defaultValue={user.firstName}
                         />
                     </div>
 
                     <div className={styles.formGroup}>
-                        <label htmlFor="lastName">Change Last Name</label>
+                        <label htmlFor="lastName">Last Name</label>
                         <input
                             type="text"
                             id="lastName"
                             name="lastName"
-                            placeholder={`Your last name is ${user.lastName}`}
                             defaultValue={user.lastName}
                         />
                     </div>
 
                     <div className={styles.formGroup}>
-                        <label htmlFor="email">Change Email</label>
+                        <label htmlFor="email">Email</label>
                         <input
                             type="text"
                             id="email"
                             name="email"
-                            placeholder={`Your email is ${user.email}`}
                             defaultValue={user.email}
                         />
                     </div>
 
                     <div className={styles.formGroup}>
-                        <label htmlFor="password"> Password</label>
+                        <label htmlFor="password">New Password</label>
                         <input
                             type="password"
                             id="password"
                             name="password"
-                            placeholder="Set your new password"
                         />
                     </div>
 
                     <div className={styles.formGroup}>
-                        <label htmlFor="retypepassword">Retype your Password</label>
+                        <label htmlFor="retypePassword">Retype Password</label>
                         <input
                             type="password"
-                            id="retypepassword"
-                            name="retypepassword"
-                            placeholder="Retype your new Password"
+                            id="retypePassword"
+                            name="retypePassword"
                         />
                     </div>
 
-                    <button type="submit">Change</button>
+                    <button type="submit">Update</button>
                 </form>
             )}
 
