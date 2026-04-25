@@ -1,9 +1,24 @@
 import { useEffect, useState } from "react";
 import type { Income, SortChoice } from "./types";
-
 import styles from './income.module.css';
 
 const apiUrl = `${import.meta.env.VITE_API_URL}/income`;
+
+
+export function getAuth() {
+    const authRaw = localStorage.getItem("auth");
+
+    if (!authRaw) return null;
+    const result = JSON.parse(authRaw);
+
+    console.log(result);
+    console.log(result.user.id);
+
+    return result.user.id;
+}
+
+getAuth();
+
 
 export function Income() {
     const [income, setIncome] = useState<Income[] | null>(null);
@@ -47,13 +62,27 @@ export function Income() {
             }
             return;
         }
+        const userId = getAuth();
+
+        if (!userId) {
+            console.log("User not logged in");
+            return;
+        }
+
+
 
         const newIncome = await fetch(apiUrl, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ date, amount, category, deleted: false }),
+            body: JSON.stringify({
+                date,
+                amount,
+                category,
+                deleted: false,
+                userId: userId
+            }),
         }).then((response) => response.json());
 
         setIncome([...(income ?? []), newIncome]);

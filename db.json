@@ -28,13 +28,6 @@
   },
   "payments": [
     {
-      "date": "2026-04-13",
-      "amount": 2300,
-      "category": "rata",
-      "deleted": false,
-      "id": 8
-    },
-    {
       "date": "2026-04-07",
       "amount": 500,
       "category": "Kaufland",
@@ -64,7 +57,13 @@
     }
   ],
   "users": [
-   
+    {
+      "email": "qvidiu123456@gmail.com",
+      "password": "$2a$10$tQdDjqYUMk5BmeXLe5yr/eGCn2yFruJjxO8uAH94Rnwxv/hmvNbLm",
+      "firstName": "Natalia",
+      "lastName": "Maria",
+      "id": 1
+    }
   ],
   "expenses": [],
   "login": [],
@@ -122,7 +121,7 @@
       "date": "2026-04-05",
       "amount": "500",
       "category": "deplasare",
-      "deleted": false,
+      "deleted": true,
       "id": 8
     },
     {
@@ -147,10 +146,11 @@
       "id": 13
     },
     {
-      "date": "2026-04-21",
-      "amount": "300",
-      "category": "comision",
+      "date": "2026-04-25",
+      "amount": "1000",
+      "category": "bonus",
       "deleted": false,
+      "userId": 1,
       "id": 14
     }
   ],
