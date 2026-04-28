@@ -108,15 +108,13 @@ export function EditUser() {
 
     return (
         <>
-            <div>
-                <h2>Edit your data</h2>
+            <div className={styles.text}>
+                <h3>Edit your data</h3>
                 <h4>Important:</h4>
                 <p>To change your data, without changing your password,</p>
                 <p> you need to confirm your changes with your current password,</p>
                 <p> else you can set your new password</p>
             </div>
-            <h2>Edit your data</h2>
-
             {error && <p className={styles.errorMsg}>{error}</p>}
 
             {user && (
@@ -172,10 +170,10 @@ export function EditUser() {
                     <button type="submit">Update</button>
                 </form>
             )}
-
             <Link to="/" onClick={FirstPage}>
-                <strong>Cancel</strong>
+                <button>Cancel</button>
             </Link>
+
         </>
     );
 }
