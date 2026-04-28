@@ -4,17 +4,18 @@ import styles from './income.module.css';
 
 const apiUrl = `${import.meta.env.VITE_API_URL}/income`;
 
-
 export function getAuth() {
-    const authRaw = localStorage.getItem("auth");
+    try {
+        const authRaw = localStorage.getItem("auth");
+        if (!authRaw) return null;
 
-    if (!authRaw) return null;
-    const result = JSON.parse(authRaw);
+        const result = JSON.parse(authRaw);
 
-    console.log(result);
-    console.log(result.user.id);
-
-    return result.user.id;
+        return result?.user?.id ?? null;
+    } catch (error) {
+        console.error("Invalid auth in localStorage:", error);
+        return null;
+    }
 }
 
 getAuth();
@@ -36,6 +37,7 @@ export function Income() {
     const buttonAddIncome = () => {
         setAddIncome(!addIncome);
     };
+
     //get Income from DB
     useEffect(() => {
         fetch(apiUrl)
@@ -66,6 +68,7 @@ export function Income() {
 
         if (!userId) {
             console.log("User not logged in");
+            alert(`User not logged in`)
             return;
         }
 
