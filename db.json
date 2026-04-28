@@ -65,10 +65,10 @@
       "id": 1
     },
     {
+      "firstName": "dadi",
+      "lastName": "dase",
       "email": "a@gmail.com",
-      "password": "$2a$10$z2Ivg24wbAN0yTq/4MOVWuQyWbWhugt2SL6GvpdcD0KKus2oBXrQC",
-      "firstName": "test",
-      "lastName": "testt",
+      "password": "$2a$10$euAX58SB8dcV8thegBHZveSuxrK4PCwkpaf4ns5fnQLcXGIzAxvde",
       "id": 2
     }
   ],

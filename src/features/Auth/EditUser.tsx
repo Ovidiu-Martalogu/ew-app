@@ -161,11 +161,11 @@ export function EditUser() {
                     </div>
 
                     <div className={styles.formGroup}>
-                        <label htmlFor="retypePassword">Retype Password</label>
+                        <label htmlFor="retypepassword">Retype Password</label>
                         <input
                             type="password"
-                            id="retypePassword"
-                            name="retypePassword"
+                            id="retypepassword"
+                            name="retypepassword"
                         />
                     </div>
 
