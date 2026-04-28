@@ -63,6 +63,13 @@
       "firstName": "Natalia",
       "lastName": "Maria",
       "id": 1
+    },
+    {
+      "email": "a@gmail.com",
+      "password": "$2a$10$z2Ivg24wbAN0yTq/4MOVWuQyWbWhugt2SL6GvpdcD0KKus2oBXrQC",
+      "firstName": "test",
+      "lastName": "testt",
+      "id": 2
     }
   ],
   "expenses": [],
@@ -70,6 +77,7 @@
   "income": [
     {
       "id": 2,
+      "userId": 2,
       "date": "2026-04-08",
       "amount": 7100,
       "category": "bonus",
@@ -80,13 +88,15 @@
       "date": "2026-04-08",
       "amount": "1600",
       "category": "comision",
-      "deleted": false
+      "deleted": false,
+      "userId": 1
     },
     {
       "date": "2026-04-06",
       "amount": "600",
       "category": "imprumut",
       "deleted": false,
+      "userId": 2,
       "id": 3
     },
     {
@@ -94,6 +104,7 @@
       "amount": "320",
       "category": "dobanda",
       "deleted": false,
+      "userId": 2,
       "id": 4
     },
     {
@@ -101,6 +112,7 @@
       "amount": "23344",
       "category": "imprumut",
       "deleted": false,
+      "userId": 1,
       "id": 5
     },
     {
@@ -108,6 +120,7 @@
       "amount": "23344",
       "category": "incasari",
       "deleted": false,
+      "userId": 2,
       "id": 6
     },
     {
@@ -115,6 +128,7 @@
       "amount": "2000",
       "category": "salariu",
       "deleted": false,
+      "userId": 1,
       "id": 7
     },
     {
@@ -122,6 +136,7 @@
       "amount": "500",
       "category": "deplasare",
       "deleted": true,
+      "userId": 2,
       "id": 8
     },
     {
@@ -129,6 +144,7 @@
       "amount": "12000",
       "category": "salariu",
       "deleted": false,
+      "userId": 1,
       "id": 10
     },
     {
@@ -136,6 +152,7 @@
       "amount": "2300",
       "category": "salariu",
       "deleted": false,
+      "userId": 1,
       "id": 12
     },
     {
@@ -143,6 +160,7 @@
       "amount": "2300",
       "category": "imprumut",
       "deleted": false,
+      "userId": 2,
       "id": 13
     },
     {
@@ -152,6 +170,22 @@
       "deleted": false,
       "userId": 1,
       "id": 14
+    },
+    {
+      "date": "2026-04-28",
+      "amount": "3500",
+      "category": "salariu",
+      "deleted": false,
+      "userId": 1,
+      "id": 15
+    },
+    {
+      "date": "2026-04-27",
+      "amount": "3501",
+      "category": "salariu",
+      "deleted": false,
+      "userId": 2,
+      "id": 16
     }
   ],
   "firstpage": [
