@@ -67,7 +67,7 @@ export function Nav() {
 
         {user && (
           <>
-            <li className={styles.wellcomeMsg}>
+            <li title="Edit your profile" className={styles.wellcomeMsg}>
               <Link to="/user" onClick={EditUser}>
                 Welcome, <strong className={styles.app}>{user.firstName}!</strong>
               </Link>
