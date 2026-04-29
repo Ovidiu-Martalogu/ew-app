@@ -81,6 +81,7 @@
       "date": "2026-04-08",
       "amount": 7100,
       "deleted": false,
+      "status": "active",
       "category": "bonus"
     },
     {
@@ -89,6 +90,7 @@
       "date": "2026-04-08",
       "amount": 1500,
       "deleted": false,
+      "status": "passive",
       "passiveIncome": [
         {
           "source": "rent",
