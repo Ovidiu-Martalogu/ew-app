@@ -23,4 +23,3 @@ export type Income =
       category: never;
     };
 
-export type SortChoice = "ascending" | "descending";

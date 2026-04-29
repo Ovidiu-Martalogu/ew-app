@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import type { Income, SortChoice } from "./types";
+import type { Income } from "./types";
 import styles from "./income.module.css";
+import { NavLink, } from "react-router";
+
 
 const apiUrl = `${import.meta.env.VITE_API_URL}/income`;
 
@@ -21,8 +23,6 @@ export function getAuth() {
 export function Income() {
     const [income, setIncome] = useState<Income[] | null>(null);
     const [addIncome, setAddIncome] = useState(false);
-    const [sortField, setSortField] = useState<"date" | "amount" | null>(null);
-    const [sortChoice, setSortChoice] = useState<SortChoice>("ascending");
 
     const [editingId, setEditingId] = useState<number | null>(null);
     const [editForm, setEditForm] = useState({
@@ -31,7 +31,7 @@ export function Income() {
         category: "",
     });
 
-    // NEW
+    
     const [type, setType] = useState<"active" | "passive">("active");
     const [passiveIncome, setPassiveIncome] = useState<
         { source: string; amount: number }[]
@@ -114,7 +114,7 @@ export function Income() {
     }
 
     async function deleteIncome(id: number) {
-        const ok = window.confirm("Sigur vrei să ștergi?");
+        const ok = window.confirm("Are you sure?");
         if (!ok) return;
 
         await fetch(`${apiUrl}/${id}`, {
@@ -126,24 +126,8 @@ export function Income() {
         );
     }
 
-    const sortedIncome = [...(income ?? [])].sort((a, b) => {
-        if (!sortField) return 0;
-
-        let result = 0;
-
-        if (sortField === "amount") {
-            result = Number(a.amount) - Number(b.amount);
-        }
-
-        if (sortField === "date") {
-            result =
-                new Date(a.date).getTime() - new Date(b.date).getTime();
-        }
-
-        return sortChoice === "descending" ? -result : result;
-    });
-
-    const total = sortedIncome.reduce((sum, p) => {
+    
+    const total = income?.reduce((sum, p) => {
         return sum + Number(p.amount);
     }, 0);
 
@@ -162,18 +146,8 @@ export function Income() {
         <div className={styles.content}>
             <h1>income money</h1>
 
-            <div className={styles.sortBar}>
-                <button onClick={() => setSortField("date")}>
-                    Sort by Date
-                </button>
-
-                <button onClick={() => setSortField("amount")}>
-                    Sort by Amount
-                </button>
-            </div>
-
             <div className={styles.cardContainer}>
-                {sortedIncome?.map((key) => (
+                {income?.map((key) => (
                     <div
                         key={key.id}
                         className={styles.card}
@@ -235,29 +209,10 @@ export function Income() {
                         )}
 
                         <div className={styles.cardActions}>
-                            <button
-                                onClick={() => {
-                                    setEditingId(key.id);
-                                    setEditForm({
-                                        date: key.date,
-                                        amount: String(key.amount),
-                                        category: key.category,
-                                    });
-                                }}
-                            >
-                                Edit
-                            </button>
 
-                            {editingId === key.id && (
-                                <>
-                                    <button onClick={() => saveEdit(key.id)}>
-                                        Save
-                                    </button>
-                                    <button onClick={() => setEditingId(null)}>
-                                        Cancel
-                                    </button>
-                                </>
-                            )}
+                            <NavLink to="/editIncome" >
+                                <button>Edit</button>
+                            </NavLink>
 
                             <button onClick={() => deleteIncome(key.id)}>
                                 Delete
@@ -267,7 +222,7 @@ export function Income() {
                 ))}
             </div>
 
-            <h2>Total: {total.toFixed(2)}</h2>
+            <h2>Total: {total?.toFixed(2)}</h2>
             <div className={styles.addIncome}>
 
 

@@ -13,6 +13,7 @@ import { AuthContextProvider } from "../src/features/Auth/context/AuthContextPro
 import "./App.css";
 
 import { EditFirstPage } from "./features/First-page/EditFirstPage";
+import { EditOneIncome } from "./features/Income/EditOneIncome";
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/income" element={<Income />} />
+            <Route path="/editIncome" element={<EditOneIncome />} />
             <Route path="/user" element={<EditUser />} />
             <Route path="/editPage" element={<EditFirstPage />} />
             <Route path="*" element={<NotFound />} />
