@@ -1,9 +1,9 @@
 
 import { useEffect, useState } from "react";
-import styles from "./firstpage.module.css";
 import { Link } from "react-router";
 import { EditFirstPage } from "./EditFirstPage";
 
+import styles from "./firstpage.module.css";
 
 const apiUrl = `${import.meta.env.VITE_API_URL}/firstpage`;
 
