@@ -268,7 +268,7 @@ export function Income() {
             </div>
 
             <h2>Total: {total.toFixed(2)}</h2>
-            <div className={styles.form}>
+            <div className={styles.addIncome}>
 
 
                 {addIncome && (
