@@ -76,92 +76,29 @@
   "login": [],
   "income": [
     {
-      "id": 2,
+      "id": 3,
       "userId": 2,
       "date": "2026-04-08",
       "amount": 7100,
-      "category": "bonus",
-      "deleted": false
+      "deleted": false,
+      "category": "bonus"
     },
     {
-      "id": 1,
+      "id": 4,
+      "userId": 2,
       "date": "2026-04-08",
-      "amount": "1600",
-      "category": "comision",
+      "amount": 1500,
       "deleted": false,
-      "userId": 1
-    },
-    {
-      "date": "2026-04-06",
-      "amount": "600",
-      "category": "imprumut",
-      "deleted": false,
-      "userId": 2,
-      "id": 3
-    },
-    {
-      "date": "2026-04-05",
-      "amount": "23344",
-      "category": "imprumut",
-      "deleted": false,
-      "userId": 1,
-      "id": 5
-    },
-    {
-      "date": "2026-04-14",
-      "amount": "23344",
-      "category": "incasari",
-      "deleted": false,
-      "userId": 2,
-      "id": 6
-    },
-    {
-      "date": "2026-04-13",
-      "amount": "2000",
-      "category": "salariu",
-      "deleted": false,
-      "userId": 1,
-      "id": 7
-    },
-    {
-      "date": "2026-04-05",
-      "amount": "500",
-      "category": "deplasare",
-      "deleted": true,
-      "userId": 2,
-      "id": 8
-    },
-    {
-      "date": "2026-04-07",
-      "amount": "12000",
-      "category": "salariu",
-      "deleted": false,
-      "userId": 1,
-      "id": 10
-    },
-    {
-      "date": "2026-04-17",
-      "amount": "2300",
-      "category": "salariu",
-      "deleted": false,
-      "userId": 1,
-      "id": 12
-    },
-    {
-      "date": "2026-04-15",
-      "amount": "2300",
-      "category": "imprumut",
-      "deleted": false,
-      "userId": 2,
-      "id": 13
-    },
-    {
-      "date": "2026-04-25",
-      "amount": "1000",
-      "category": "bonus",
-      "deleted": false,
-      "userId": 1,
-      "id": 14
+      "passiveIncome": [
+        {
+          "source": "rent",
+          "amount": 1200
+        },
+        {
+          "source": "dividends",
+          "amount": 300
+        }
+      ]
     }
   ],
   "firstpage": [

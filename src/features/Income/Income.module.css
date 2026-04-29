@@ -69,3 +69,14 @@
   color: white;
   background-color: rgba(27, 27, 28, 0.54);
 }
+
+
+.labelBgn{
+color:  white;
+margin-left: 0.5rem;
+
+}
+
+.addIncome, .form{
+  background-color: blueviolet;
+}
