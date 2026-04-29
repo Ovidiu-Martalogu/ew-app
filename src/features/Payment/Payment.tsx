@@ -90,47 +90,17 @@ export function Payment() {
 
         setEditingId(null);
     }
-
-    async function checkForDeletePayment(payment: Payment) {
-
-        const checkDeletePayment = {
-            ...payment,
-            deleted: !payment.deleted,
-        };
-        await fetch(`${apiUrl}/${payment.id}`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ deleted: checkDeletePayment.deleted }),
-        }).then((response) => response.json());
-
-
-        // update local state
-        setpayment((prev) =>
-            prev
-                ? prev.map((key) =>
-                    key.id === payment.id ? checkDeletePayment : key
-                )
-                : prev
-        );
-    }
     async function deletePayment(id: number) {
-        const item = payment?.find(key => key.id === id);
+        const ok = window.confirm("Sigur vrei să ștergi această înregistrare?");
+        if (!ok) return;
 
-        if (item?.deleted !== true) {
-            alert("If you want to delete, please mark the registration!");
-            return;
-        }
         await fetch(`${apiUrl}/${id}`, {
             method: "DELETE",
         });
 
-        // update local state
         setpayment((prev) =>
-            prev ? prev.filter((key) => key.id !== id) : prev
+            prev ? prev.filter((item) => item.id !== id) : prev
         );
-
     }
     //sort payments
     const sortedPayments = [...(payment ?? [])].sort((a, b) => {
@@ -214,7 +184,6 @@ export function Payment() {
                                 <th>Amount</th>
                                 <th>Category</th>
                                 <th>Edit</th>
-                                <th>Select to delete</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -293,15 +262,7 @@ export function Payment() {
 
                                     </td>
                                     <td>
-                                        <input
-                                            type="checkbox"
-                                            checked={key.deleted}
-                                            onChange={() => checkForDeletePayment(key)}
-                                        />
-                                    </td>
-
-                                    <td>
-                                        <button
+                                        <button title="Are you sure?"
                                             className={styles.deleteButton}
                                             onClick={() => deletePayment(key.id)}
                                         >

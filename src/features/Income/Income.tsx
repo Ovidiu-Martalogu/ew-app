@@ -117,46 +117,17 @@ export function Income() {
 
         setEditingId(null);
     }
-    async function checkForDelete(income: Income) {
-        const checkDelete = {
-            ...income,
-            deleted: !income.deleted,
-        };
-
-        await fetch(`${apiUrl}/${income.id}`, {
-
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ deleted: checkDelete.deleted }),
-        }).then((response) => response.json());
-
-        // update local state
-        setIncome((prev) =>
-            prev
-                ? prev.map((key) =>
-                    key.id === income.id ? checkDelete : key
-                )
-                : prev
-        );
-    }
     async function deleteIncome(id: number) {
-        const item = income?.find(key => key.id === id);
+        const ok = window.confirm("Sigur vrei să ștergi această înregistrare?");
+        if (!ok) return;
 
-        if (item?.deleted !== true) {
-            alert("If you want to delete, please mark the registration!");
-            return;
-        }
         await fetch(`${apiUrl}/${id}`, {
             method: "DELETE",
         });
 
-        // update local state
         setIncome((prev) =>
-            prev ? prev.filter((key) => key.id !== id) : prev
+            prev ? prev.filter((item) => item.id !== id) : prev
         );
-
     }
 
     const sortedIncome = [...(income ?? [])].sort((a, b) => {
@@ -294,13 +265,13 @@ export function Income() {
                                         </button>
                                     </>
                                 )}
-                                <button onClick={() => checkForDelete(key)}>Check</button>
+                                {/* <button onClick={() => checkForDelete(key)}>Check</button>
                                 <input
                                     type="checkbox"
                                     checked={key.deleted}
                                     onChange={() => checkForDelete(key)}
-                                />
-                                <button onClick={() => deleteIncome(key.id)}>Delete</button>
+                                /> */}
+                                <button title="Are you sure?" onClick={() => deleteIncome(key.id)}>Delete</button>
                             </div>
                         </div>
                     ))}
