@@ -63,7 +63,7 @@ export function EditOneIncome() {
             });
     }, [id]);
 
-    // 🔹 Change simplu
+
     function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
         const { name, value } = e.target;
 
@@ -88,7 +88,7 @@ export function EditOneIncome() {
         setForm(prev => ({ ...prev, [name]: value }));
     }
 
-    // 🔹 Update
+
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
         if (!id) return;
@@ -135,7 +135,7 @@ export function EditOneIncome() {
                     />
                 </div>
 
-                {/* AMOUNT */}
+
                 <div>
                     <label>Amount</label>
                     <input
@@ -146,7 +146,6 @@ export function EditOneIncome() {
                     />
                 </div>
 
-                {/* 🔥 STATUS DROPDOWN */}
                 <div>
                     <label>Status</label>
                     <select
@@ -159,7 +158,7 @@ export function EditOneIncome() {
                     </select>
                 </div>
 
-                {/* 🔹 ACTIVE */}
+
                 {form.status === "active" && (
                     <div>
                         <label>Category</label>
@@ -172,7 +171,7 @@ export function EditOneIncome() {
                     </div>
                 )}
 
-                {/* 🔹 PASSIVE */}
+
                 {form.status === "passive" && (
                     <div>
                         <label>Passive Income</label>
