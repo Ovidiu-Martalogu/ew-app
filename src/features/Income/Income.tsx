@@ -24,14 +24,8 @@ export function Income() {
     const [income, setIncome] = useState<Income[] | null>(null);
     const [addIncome, setAddIncome] = useState(false);
 
-    const [editingId, setEditingId] = useState<number | null>(null);
-    const [editForm, setEditForm] = useState({
-        date: "",
-        amount: "",
-        category: "",
-    });
 
-    
+
     const [type, setType] = useState<"active" | "passive">("active");
     const [passiveIncome, setPassiveIncome] = useState<
         { source: string; amount: number }[]
@@ -56,8 +50,8 @@ export function Income() {
         const amount = form.get("amount");
         const category = form.get("category");
 
-        if (!amount) {
-            alert("Please enter amount");
+        if (!amount || !category || !date) {
+            alert("Please feel all ");
             return;
         }
 
@@ -90,28 +84,6 @@ export function Income() {
         setType("active");
     }
 
-    async function saveEdit(id: number) {
-        const updated = {
-            ...editForm,
-            amount: Number(editForm.amount),
-        };
-
-        const res = await fetch(`${apiUrl}/${id}`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(updated),
-        });
-
-        const data = await res.json();
-
-        setIncome((prev) =>
-            prev ? prev.map((item) => (item.id === id ? data : item)) : prev
-        );
-
-        setEditingId(null);
-    }
 
     async function deleteIncome(id: number) {
         const ok = window.confirm("Are you sure?");
@@ -126,7 +98,7 @@ export function Income() {
         );
     }
 
-    
+
     const total = income?.reduce((sum, p) => {
         return sum + Number(p.amount);
     }, 0);
@@ -147,81 +119,47 @@ export function Income() {
             <h1>income money</h1>
 
             <div className={styles.cardContainer}>
-                {income?.map((key) => (
+                {income?.map((item) => (
                     <div
-                        key={key.id}
+                        key={item.id}
                         className={styles.card}
                         style={{
-                            borderLeft: `6px solid ${getCategoryColor(
-                                key.category
-                            )}`,
+                            borderLeft: `6px solid ${getCategoryColor(item.category)}`,
                         }}
                     >
-                        {editingId === key.id ? (
-                            <>
-                                <input
-                                    type="date"
-                                    value={editForm.date}
-                                    onChange={(e) =>
-                                        setEditForm({
-                                            ...editForm,
-                                            date: e.target.value,
-                                        })
-                                    }
-                                />
+                        <p>
+                            <strong>Date:</strong> {item.date}
+                        </p>
 
-                                <input
-                                    value={editForm.amount}
-                                    onChange={(e) =>
-                                        setEditForm({
-                                            ...editForm,
-                                            amount: e.target.value,
-                                        })
-                                    }
-                                />
-
-                                <input
-                                    value={editForm.category}
-                                    onChange={(e) =>
-                                        setEditForm({
-                                            ...editForm,
-                                            category: e.target.value,
-                                        })
-                                    }
-                                />
-                            </>
-                        ) : (
-                            <>
-                                <h3>
-                                    {key.type === "passive"
-                                        ? "Passive Income"
-                                        : key.category}
-                                </h3>
-
+                        <p>
+                            <strong>Amount:</strong> {item.amount}
+                        </p>
+                        <p>
+                            <strong>category:</strong> {item.category}
+                        </p>
+                        {item.passiveIncome?.map((p, index) => (
+                            <div key={index}>
                                 <p>
-                                    <strong>Date:</strong> {key.date}
+                                    <strong>Source:</strong> {p.source}
                                 </p>
-
                                 <p>
-                                    <strong>Amount:</strong> {key.amount}
+                                    <strong>Amount:</strong> {p.amount}
                                 </p>
-                            </>
-                        )}
+                            </div>
+                        ))}
 
                         <div className={styles.cardActions}>
-
-                            <NavLink to="/editIncome" >
-                                <button>Edit</button>
+                            <NavLink to={`/income/edit/${item.id}`}>
+                                Edit
                             </NavLink>
 
-                            <button onClick={() => deleteIncome(key.id)}>
+                            <button onClick={() => deleteIncome(item.id)}>
                                 Delete
                             </button>
                         </div>
                     </div>
                 ))}
             </div>
-
             <h2>Total: {total?.toFixed(2)}</h2>
             <div className={styles.addIncome}>
 

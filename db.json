@@ -85,12 +85,10 @@
       "category": "bonus"
     },
     {
-      "id": 4,
-      "userId": 2,
       "date": "2026-04-08",
-      "amount": 1500,
-      "deleted": false,
+      "amount": 1570,
       "status": "passive",
+      "deleted": false,
       "passiveIncome": [
         {
           "source": "rent",
@@ -99,8 +97,58 @@
         {
           "source": "dividends",
           "amount": 300
+        },
+        {
+          "source": "another rent",
+          "amount": 70
+        }
+      ],
+      "id": 4
+    },
+    {
+      "id": 5,
+      "userId": 2,
+      "date": "2026-04-05",
+      "amount": 1200,
+      "deleted": false,
+      "status": "active",
+      "category": "prima"
+    },
+    {
+      "id": 6,
+      "userId": 1,
+      "date": "2026-04-12",
+      "amount": 6200,
+      "deleted": false,
+      "status": "passive",
+      "passiveIncome": [
+        {
+          "source": "rent",
+          "amount": 200
+        },
+        {
+          "source": "dividends",
+          "amount": 6000
         }
       ]
+    },
+    {
+      "date": "2026-04-29",
+      "amount": "800",
+      "category": "imprumut",
+      "type": "active",
+      "deleted": false,
+      "userId": 1,
+      "id": 7
+    },
+    {
+      "date": "2026-04-29",
+      "amount": "3500",
+      "category": "salariu",
+      "type": "active",
+      "deleted": false,
+      "userId": 1,
+      "id": 8
     }
   ],
   "firstpage": [

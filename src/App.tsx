@@ -30,7 +30,7 @@ export default function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/income" element={<Income />} />
-            <Route path="/editIncome" element={<EditOneIncome />} />
+            <Route path="/income/edit/:id" element={<EditOneIncome />} />
             <Route path="/user" element={<EditUser />} />
             <Route path="/editPage" element={<EditFirstPage />} />
             <Route path="*" element={<NotFound />} />
