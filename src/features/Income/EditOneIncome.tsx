@@ -33,7 +33,7 @@ export function EditOneIncome() {
 
     const [loading, setLoading] = useState(true);
 
-    // 🔹 Fetch
+
     useEffect(() => {
         if (!id) return;
 
@@ -67,8 +67,7 @@ export function EditOneIncome() {
     function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
         const { name, value } = e.target;
 
-        // 🔥 reset logic când schimbi status
-        if (name === "status") {
+         if (name === "status") {
             if (value === "active") {
                 setForm(prev => ({
                     ...prev,
