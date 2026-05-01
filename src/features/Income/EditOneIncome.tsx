@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router";
+import styles from "../Income/EditOneIncome.module.css";
+
 
 const apiUrl = `${import.meta.env.VITE_API_URL}/income`;
 
@@ -30,6 +32,8 @@ export function EditOneIncome() {
         status: "active",
         passiveIncome: [] as Passive[],
     });
+
+    const [errors, setErrors] = useState<Record<string, string>>({});
 
     const [loading, setLoading] = useState(true);
 
@@ -63,11 +67,33 @@ export function EditOneIncome() {
             });
     }, [id]);
 
+    //my validateField
+
+    function validateField(name: string, value: string) {
+        if (!value || value.trim() === "") {
+            return ` Please complete the ${name} sfield`;
+        }
+
+        if (name === "amount") {
+            if (isNaN(Number(value))) {
+                return "Amount must be a number";
+            }
+            if (Number(value) <= 0) {
+                return "The sum must be positive";
+            }
+        }
+
+        return "";
+    }
+
+
+
+
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
         const { name, value } = e.target;
 
-         if (name === "status") {
+        if (name === "status") {
             if (value === "active") {
                 setForm(prev => ({
                     ...prev,
@@ -85,6 +111,13 @@ export function EditOneIncome() {
         }
 
         setForm(prev => ({ ...prev, [name]: value }));
+
+        const errorMessage = validateField(name, value);
+
+        setErrors((prev) => ({
+            ...prev,
+            [name]: errorMessage,
+        }));
     }
 
 
@@ -120,9 +153,11 @@ export function EditOneIncome() {
 
     return (
         <>
+
+        <div className={styles.content}>
             <h1>Edit Income</h1>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className={styles.card}>
                 {/* DATE */}
                 <div>
                     <label>Date</label>
@@ -132,6 +167,7 @@ export function EditOneIncome() {
                         value={form.date}
                         onChange={handleChange}
                     />
+                    {errors.date && <p style={{ color: "red" }}>{errors.date}</p>}
                 </div>
 
 
@@ -143,6 +179,7 @@ export function EditOneIncome() {
                         value={form.amount}
                         onChange={handleChange}
                     />
+                    {errors.amount && <p style={{ color: "red" }}>{errors.amount}</p>}
                 </div>
 
                 <div>
@@ -167,6 +204,7 @@ export function EditOneIncome() {
                             value={form.category}
                             onChange={handleChange}
                         />
+                        {errors.category && <p style={{ color: "red" }}>{errors.category}</p>}
                     </div>
                 )}
 
@@ -190,7 +228,7 @@ export function EditOneIncome() {
                                         }));
                                     }}
                                 />
-
+                                {errors.source && <p style={{ color: "red" }}>{errors.source}</p>}
                                 <input
                                     type="number"
                                     placeholder="amount"
@@ -204,6 +242,7 @@ export function EditOneIncome() {
                                         }));
                                     }}
                                 />
+                                {errors.amount && <p style={{ color: "red" }}>{errors.amount}</p>}
                             </div>
                         ))}
 
@@ -228,6 +267,7 @@ export function EditOneIncome() {
             </form>
 
             <NavLink to="/income">Back</NavLink>
+            </div>
         </>
     );
 }

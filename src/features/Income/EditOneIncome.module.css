@@ -1,0 +1,32 @@
+.content {
+    min-height: 100vh;
+    background-image: url("/public/backgound-3.jpeg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    flex: 1;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.card {
+
+    margin: 0 auto;
+    background: rgba(177, 181, 248, 0.3);
+    padding: 1rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(6px);
+    border: 1px solid black;
+
+}
+
+ h1 {
+    margin: 0 auto;
+}

@@ -50,10 +50,14 @@ export function Income() {
         const amount = form.get("amount");
         const category = form.get("category");
 
-        if (!amount || !category || !date) {
-            alert("Please feel all ");
-            return;
-        }
+        // if (!amount || !category || !date) {
+        //     alert("Please feel all ");
+        //     return;
+        // }
+
+        if (!date) return (console.log(`not date`))
+        if (!amount) return (console.log(`not`))
+        if (!category) return (console.log(`not cat`))
 
         const userId = getAuth();
 
