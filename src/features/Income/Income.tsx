@@ -131,10 +131,13 @@ export function Income() {
                             borderLeft: `6px solid ${getCategoryColor(item.category)}`,
                         }}
                     >
+                        <p>This is 
+                            <strong> {item.status} </strong>
+                            income
+                        </p>
                         <p>
                             <strong>Date:</strong> {item.date}
                         </p>
-
                         <p>
                             <strong>Amount:</strong> {item.amount}
                         </p>
