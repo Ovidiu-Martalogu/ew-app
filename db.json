@@ -32,6 +32,7 @@
       "amount": 500,
       "category": "Kaufland",
       "deleted": false,
+      "userId": 2,
       "id": 12
     },
     {
@@ -39,6 +40,7 @@
       "amount": 1500,
       "category": "rata",
       "deleted": false,
+      "userId": 1,
       "id": 13
     },
     {
@@ -46,6 +48,7 @@
       "amount": 350,
       "category": "cumparaturi",
       "deleted": false,
+      "userId": 1,
       "id": 14
     },
     {
@@ -53,16 +56,17 @@
       "amount": 200,
       "category": "Lidl",
       "deleted": false,
+      "userId": 2,
       "id": 15
     }
   ],
   "users": [
     {
-      "email": "qvidiu123456@gmail.com",
-      "password": "$2a$10$tQdDjqYUMk5BmeXLe5yr/eGCn2yFruJjxO8uAH94Rnwxv/hmvNbLm",
+      "id": 1,
       "firstName": "Natalia",
       "lastName": "Maria",
-      "id": 1
+      "email": "qvidiu123456@gmail.com",
+      "password": "$2a$10$y/1zmq.8hwbRNmqueBk/felccj5gmRB1br9h6VIpUs/4PAHWpQwoy"
     },
     {
       "firstName": "dadi",

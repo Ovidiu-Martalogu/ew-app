@@ -279,27 +279,29 @@ export function Payment() {
                     <h2>Total: {total.toFixed(2)}</h2>
                 </div>
 
+                <div>
 
-                {addPayment && (
-                    <form onSubmit={addPaymentsToDB} className={styles.form}>
-                        <label id="date">Select the date:
-                            <input type="date" id="date" name="date" className={styles.input} />
-                        </label>
-                        <label id="amount"> Insert the amount:
-                            <input type="text" name="amount" className={styles.input} />
-                        </label>
-                        <label id="category"> Insert the category:
-                            <input name="category" className={styles.input} />
-                        </label>
-                        <button type="submit" className={styles.button}>
-                            Add Payment
-                        </button>
-                    </form>
-                )}
+                    {addPayment && (
+                        <form onSubmit={addPaymentsToDB} className={styles.form}>
+                            <label id="date">Select the date:
+                                <input type="date" id="date" name="date" className={styles.input} />
+                            </label>
+                            <label id="amount"> Insert the amount:
+                                <input type="text" name="amount" className={styles.input} />
+                            </label>
+                            <label id="category"> Insert the category:
+                                <input name="category" className={styles.input} />
+                            </label>
+                            <button type="submit" className={styles.button}>
+                                Add Payment
+                            </button>
+                        </form>
+                    )}
 
-                <button onClick={buttonAddPayment} className={styles.addPaymentButton}>
-                    {addPayment ? "Back" : "Add new Payment"}
-                </button>
+                    <button onClick={buttonAddPayment} className={styles.addPaymentButton}>
+                        {addPayment ? "Back" : "Add new Payment"}
+                    </button>
+                </div>
             </div>
         </>
     );

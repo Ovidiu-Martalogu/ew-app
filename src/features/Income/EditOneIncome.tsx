@@ -62,16 +62,14 @@ export function EditOneIncome() {
             .catch(err => {
                 console.error(err);
             })
-            .finally(() => {
-                setLoading(false);
-            });
+          
     }, [id]);
 
     //my validateField
 
     function validateField(name: string, value: string) {
         if (!value || value.trim() === "") {
-            return ` Please complete the ${name} sfield`;
+            return ` Please complete the ${name} field`;
         }
 
         if (name === "amount") {
@@ -85,10 +83,6 @@ export function EditOneIncome() {
 
         return "";
     }
-
-
-
-
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
         const { name, value } = e.target;

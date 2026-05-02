@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
-import { FirstPage } from "../First-page/FirstPage";
+import { useNavigate } from "react-router";
+
 
 import styles from "../../features/Auth/EditUser.module.css";
+
+
 
 const apiUrl = `${import.meta.env.VITE_API_URL}/users`;
 
@@ -12,6 +14,10 @@ type User = {
     lastName: string;
     email: string;
     password?: string;
+};
+
+type Errors = {
+    [key: string]: string;
 };
 
 
@@ -34,11 +40,20 @@ function getAuthHeaders(): HeadersInit {
 
 export function EditUser() {
     const [user, setUser] = useState<User | null>(null);
-    const [error, setError] = useState<string | null>(null);
+    const [errors, setErrors] = useState<Errors>({});
+    const navigate = useNavigate();
+    const [form, setForm] = useState({
+        id: "",
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        retypepassword: ""
+    });
 
     useEffect(() => {
         const auth = getAuth();
-        if (!auth?.user?.id) return;
+        // if (!auth?.user?.id) return;
 
         fetch(`${apiUrl}/${auth.user.id}`, {
             headers: getAuthHeaders(),
@@ -49,84 +64,114 @@ export function EditUser() {
                 }
                 return res.json();
             })
-            .then((data) => setUser(data))
+            .then((data) => {
+                setUser(data);
+                setForm({
+                    id: data.id,
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                    email: data.email,
+                    password: "",
+                    retypepassword: "",
+                });
+            })
             .catch((err) => {
                 console.error(err);
-                setError(err.message);
+                setErrors({ general: err.message });
             });
     }, []);
 
-    async function updateUser(e: React.FormEvent<HTMLFormElement>) {
+
+    //my validateField 
+
+    function validateField(name: string, value: string) {
+        if (!value || value.trim() === "") {
+            return `Please complete the ${name} field`
+        }
+        if (name === "password" && value.length < 6) {
+            return "Your password must be at least 6 characters";
+        }
+        return "";
+    }
+
+
+    function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
+
+        const { name, value } = e.target;
+
+        setForm(prev => ({ ...prev, [name]: value }));
+
+        const errorMessage = validateField(name, value);
+
+        setErrors((prev) => ({
+            ...prev,
+            [name]: errorMessage,
+        }));
+
+    }
+
+    async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
 
-        const auth = getAuth();
-        if (!auth?.user?.id) return;
+        const newErrors: any = {};
 
-        const form = new FormData(e.currentTarget);
 
-        const firstName = form.get("firstName") as string;
-        const lastName = form.get("lastName") as string;
-        const email = form.get("email") as string;
-        const password = form.get("password") as string;
-        const retypePassword = form.get("retypepassword") as string;
+        if (form.password && form.password !== form.retypepassword) {
+            newErrors.retypepassword = "Passwords do not match";
+        }
 
-        if (password && password !== retypePassword) {
-            alert("Passwords do not match");
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
             return;
         }
 
-        const body: Record<string, string> = {
-            firstName,
-            lastName,
-            email,
-        };
 
-        if (password) {
-            body.password = password;
+        const res = await fetch(`${apiUrl}/${form.id}`, {
+            method: "PUT",
+            headers: getAuthHeaders(),
+            body: JSON.stringify({
+                id: form.id,
+                firstName: form.firstName,
+                lastName: form.lastName,
+                email: form.email,
+                password: form.password || undefined,
+            }),
+        });
+
+        if (!res.ok) {
+            const err = await res.text();
+            setErrors({ general: err });
+            return;
         }
 
-        try {
-            const res = await fetch(`${apiUrl}/${auth.user.id}`, {
-                method: "PUT",
-                headers: getAuthHeaders(),
-                body: JSON.stringify(body),
-            });
 
-            if (!res.ok) {
-                throw new Error("Failed to update user");
-            }
-
-            alert("User updated successfully");
-
-            localStorage.removeItem("auth");
-            window.location.href = "/login";
-        } catch (err: any) {
-            console.error(err);
-            alert(err.message);
-        }
+        localStorage.removeItem("auth");
+        navigate("/login");
     }
+
 
     return (
         <>
-            <div className={styles.text}>
-                <h3>Edit your data</h3>
-                <h4>Important:</h4>
-                <p>To change your data, without changing your password,</p>
-                <p> you need to confirm your changes with your current password,</p>
-                <p> else you can set your new password</p>
-            </div>
-            {error && <p className={styles.errorMsg}>{error}</p>}
-
             {user && (
-                <form onSubmit={updateUser} className={styles.brandForm}>
+                <form onSubmit={handleSubmit} className={styles.brandForm}>
+                    <div>
+                        <h3>Edit your data</h3>
+                        <h4>Important:</h4>
+                        <p>To change your data, without changing your password,</p>
+                        <p> you need to confirm your changes with your current password,</p>
+                        <p> else you can set your new password</p>
+                    </div>
+
                     <div className={styles.formGroup}>
                         <label htmlFor="firstName">First Name</label>
                         <input
                             type="text"
                             id="firstName"
                             name="firstName"
-                            defaultValue={user.firstName}
+                           
+                            onChange={handleChange}
                         />
+                        {errors.firstName && <p style={{ color: "red" }}>{errors.firstName}</p>}
                     </div>
 
                     <div className={styles.formGroup}>
@@ -135,8 +180,11 @@ export function EditUser() {
                             type="text"
                             id="lastName"
                             name="lastName"
-                            defaultValue={user.lastName}
+                           
+                            onChange={handleChange}
                         />
+                        {errors.lastName && <p style={{ color: "red" }}>{errors.lastName}</p>}
+
                     </div>
 
                     <div className={styles.formGroup}>
@@ -145,8 +193,11 @@ export function EditUser() {
                             type="text"
                             id="email"
                             name="email"
-                            defaultValue={user.email}
+                        
+                            onChange={handleChange}
                         />
+                        {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
+
                     </div>
 
                     <div className={styles.formGroup}>
@@ -155,7 +206,10 @@ export function EditUser() {
                             type="password"
                             id="password"
                             name="password"
+                            onChange={handleChange}
                         />
+                        {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
+
                     </div>
 
                     <div className={styles.formGroup}>
@@ -164,15 +218,25 @@ export function EditUser() {
                             type="password"
                             id="retypepassword"
                             name="retypepassword"
+                            onChange={handleChange}
                         />
                     </div>
 
-                    <button type="submit">Update</button>
+                    <div className={styles.formButtons}>
+                        <button type="submit" className={styles.edituserButton}>Update</button>
+                    </div>
+
                 </form>
             )}
-            <Link to="/" onClick={FirstPage}>
-                <button>Cancel</button>
-            </Link>
+            <div className={styles.formButtons}>
+                <button
+                    type="button"
+                    className={styles.edituserButton}
+                    onClick={() => navigate("/")}
+                >
+                    Cancel
+                </button>
+            </div>
 
         </>
     );
