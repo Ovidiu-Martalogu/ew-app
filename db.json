@@ -61,20 +61,7 @@
     }
   ],
   "users": [
-    {
-      "id": 1,
-      "firstName": "maria",
-      "lastName": "natalia",
-      "email": "12@gmail.com",
-      "password": "$2a$10$dziNG963kS2XAj1vej0GQ.MUaGdBb4ZU5SchKpn3HXcSixSnpwMp6"
-    },
-    {
-      "firstName": "dadi",
-      "lastName": "dase",
-      "email": "a@gmail.com",
-      "password": "$2a$10$euAX58SB8dcV8thegBHZveSuxrK4PCwkpaf4ns5fnQLcXGIzAxvde",
-      "id": 2
-    }
+   
   ],
   "expenses": [],
   "login": [],
@@ -85,56 +72,26 @@
       "date": "2026-04-08",
       "amount": 7100,
       "deleted": false,
-      "status": "active",
-      "category": "bonus"
+      "category": "active",
+      "details": "bonus"
     },
     {
+      "id": 4,
+      "userId": 1,
       "date": "2026-04-08",
       "amount": 1570,
-      "status": "passive",
       "deleted": false,
-      "passiveIncome": [
-        {
-          "source": "rent",
-          "amount": 1200
-        },
-        {
-          "source": "dividends",
-          "amount": 300
-        },
-        {
-          "source": "another rent",
-          "amount": 70
-        }
-      ],
-      "id": 4
+      "category": "passive",
+      "details": "bonus"
     },
     {
-      "id": 5,
-      "userId": 2,
-      "date": "2026-04-05",
-      "amount": 1200,
-      "deleted": false,
-      "status": "active",
-      "category": "prima"
-    },
-    {
-      "id": 6,
+      "id": 3,
       "userId": 1,
-      "date": "2026-04-12",
-      "amount": 6200,
+      "date": "2026-04-08",
+      "amount": 1570,
       "deleted": false,
-      "status": "passive",
-      "passiveIncome": [
-        {
-          "source": "rent",
-          "amount": 200
-        },
-        {
-          "source": "dividends",
-          "amount": 6000
-        }
-      ]
+      "category": "passive",
+      "details": "income from salary"
     }
   ],
   "firstpage": [

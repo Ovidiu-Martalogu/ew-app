@@ -143,6 +143,29 @@ export function Payment() {
 
 
                 <h1 className={styles.title}>Payment</h1>
+                <div>
+
+                    {addPayment && (
+                        <form onSubmit={addPaymentsToDB} className={styles.form}>
+                            <label id="date">Select the date:
+                                <input type="date" id="date" name="date" className={styles.input} />
+                            </label>
+                            <label id="amount"> Insert the amount:
+                                <input type="text" name="amount" className={styles.input} />
+                            </label>
+                            <label id="category"> Insert the category:
+                                <input name="category" className={styles.input} />
+                            </label>
+                            <button type="submit" className={styles.button}>
+                                Add Payment
+                            </button>
+                        </form>
+                    )}
+
+                    <button onClick={buttonAddPayment} className={styles.addPaymentButton}>
+                        {addPayment ? "Back" : "Add new Payment"}
+                    </button>
+                </div>
 
                 <div className={styles.sortBar}>
                     <button onClick={() => setSortField("date")}>
@@ -183,8 +206,7 @@ export function Payment() {
                                 <th>Date</th>
                                 <th>Amount</th>
                                 <th>Category</th>
-                                <th>Edit</th>
-                                <th>Actions</th>
+                                <th className={styles.twoLines}>Actions</th>
                             </tr>
                         </thead>
 
@@ -233,8 +255,7 @@ export function Payment() {
                                         )}
                                     </td>
 
-                                    <td>
-
+                                    <td className={styles.twoLines}>
 
                                         <button
                                             onClick={() => {
@@ -259,9 +280,7 @@ export function Payment() {
                                                 </button>
                                             </>
                                         )}
-
-                                    </td>
-                                    <td>
+                                   
                                         <button title="Are you sure?"
                                             className={styles.deleteButton}
                                             onClick={() => deletePayment(key.id)}
@@ -279,29 +298,7 @@ export function Payment() {
                     <h2>Total: {total.toFixed(2)}</h2>
                 </div>
 
-                <div>
-
-                    {addPayment && (
-                        <form onSubmit={addPaymentsToDB} className={styles.form}>
-                            <label id="date">Select the date:
-                                <input type="date" id="date" name="date" className={styles.input} />
-                            </label>
-                            <label id="amount"> Insert the amount:
-                                <input type="text" name="amount" className={styles.input} />
-                            </label>
-                            <label id="category"> Insert the category:
-                                <input name="category" className={styles.input} />
-                            </label>
-                            <button type="submit" className={styles.button}>
-                                Add Payment
-                            </button>
-                        </form>
-                    )}
-
-                    <button onClick={buttonAddPayment} className={styles.addPaymentButton}>
-                        {addPayment ? "Back" : "Add new Payment"}
-                    </button>
-                </div>
+                
             </div>
         </>
     );
