@@ -49,11 +49,8 @@ export function Income() {
         const date = form.get("date");
         const amount = form.get("amount");
         const category = form.get("category");
-
-        // if (!amount || !category || !date) {
-        //     alert("Please feel all ");
-        //     return;
-        // }
+        const type = form.get("type");
+        const details = form.get("details")
 
         if (!date) return (console.log(`not date`))
         if (!amount) return (console.log(`not`))
@@ -74,11 +71,11 @@ export function Income() {
             body: JSON.stringify({
                 date,
                 amount,
-                category: type === "active" ? category : undefined,
-                passiveIncome: type === "passive" ? passiveIncome : undefined,
-                type,
+                category,
+                type:type === "active" ? type : "active",
                 deleted: false,
                 userId,
+                details
             }),
         }).then((res) => res.json());
 
@@ -109,10 +106,8 @@ export function Income() {
 
     const getCategoryColor = (category?: string) => {
         const colors = {
-            salariu: "#4CAF50",
-            bonus: "#2196F3",
-            comision: "#9C27B0",
-            imprumut: "#FF9800",
+            active: "#9C27B0",
+            passive: "#FF9800",
         };
 
         return colors[category?.toLowerCase() as keyof typeof colors] || "#607D8B";
@@ -122,58 +117,11 @@ export function Income() {
         <div className={styles.content}>
             <h1>income money</h1>
 
-            <div className={styles.cardContainer}>
-                {income?.map((item) => (
-                    <div
-                        key={item.id}
-                        className={styles.card}
-                        style={{
-                            borderLeft: `6px solid ${getCategoryColor(item.category)}`,
-                        }}
-                    >
-                        <p>This is 
-                            <strong> {item.status} </strong>
-                            income
-                        </p>
-                        <p>
-                            <strong>Date:</strong> {item.date}
-                        </p>
-                        <p>
-                            <strong>Amount:</strong> {item.amount}
-                        </p>
-                        <p>
-                            <strong>category:</strong> {item.category}
-                        </p>
-                        {item.passiveIncome?.map((p, index) => (
-                            <div key={index}>
-                                <p>
-                                    <strong>Source:</strong> {p.source}
-                                </p>
-                                <p>
-                                    <strong>Amount:</strong> {p.amount}
-                                </p>
-                            </div>
-                        ))}
-
-                        <div className={styles.cardActions}>
-                            <NavLink to={`/income/edit/${item.id}`}>
-                                Edit
-                            </NavLink>
-
-                            <button onClick={() => deleteIncome(item.id)}>
-                                Delete
-                            </button>
-                        </div>
-                    </div>
-                ))}
-            </div>
-            <h2>Total: {total?.toFixed(2)}</h2>
-            <div className={styles.addIncome}>
-
+            <div >
 
                 {addIncome && (
                     <form onSubmit={addIncomeToDB} className={styles.form}>
-                        <label className={styles.labelBgn}>
+                        <label>
                             Type:
                             <select
                                 value={type}
@@ -195,13 +143,15 @@ export function Income() {
                             Amount:
                             <input type="text" name="amount" />
                         </label>
-
-                        {type === "active" && (
-                            <label className={styles.labelBgn}>
+                         <label className={styles.labelBgn}>
                                 Category:
                                 <input name="category" />
                             </label>
-                        )}
+                        <label className={styles.labelBgn}>
+                            Details:
+                            <input type="text" name="details" />
+                        </label>
+
 
                         {type === "passive" && (
                             <div>
@@ -248,13 +198,54 @@ export function Income() {
                             </div>
                         )}
 
-                        <button type="submit">Add Income</button>
+                        <button type="submit" className={styles.button}>Add Income</button>
                     </form>
                 )}
             </div>
-            <button onClick={buttonAddIncome}>
+            <button onClick={buttonAddIncome} className={styles.addIncomeButton}>
                 {addIncome ? "Back" : "Add new Income"}
             </button>
+
+
+            <div className={styles.cardContainer}>
+                {income?.map((item) => (
+                    <div
+                        key={item.id}
+                        className={styles.card}
+                        style={{
+                            borderTop: `6px solid ${getCategoryColor(item.type)}`,
+                        }}
+                    >
+                        <p>This is
+                            <strong> {item.type} </strong>
+                            income
+                        </p>
+                        <p>
+                            <strong>Date:</strong> {item.date}
+                        </p>
+                        <p>
+                            <strong>Amount:</strong> {item.amount}
+                        </p>
+                        <p>
+                            <strong>category:</strong> {item.category}
+                        </p>
+                        <p>
+                            <strong>details:</strong> {item.details}
+                        </p>
+
+                        <div className={styles.cardActions}>
+                            <NavLink to={`/income/edit/${item.id}`} className={styles.editLink}>
+                                Edit
+                            </NavLink>
+
+                            <button onClick={() => deleteIncome(item.id)}>
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                ))}
+            </div>
+            <h2>Total: {total?.toFixed(2)}</h2>
         </div>
     );
 }

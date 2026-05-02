@@ -6,8 +6,14 @@ import styles from "../Income/EditOneIncome.module.css";
 const apiUrl = `${import.meta.env.VITE_API_URL}/income`;
 
 type Passive = {
-    source: string;
+    id: number;
+    userId: number;
+    date: string;
     amount: number;
+    deleted: boolean;
+    type: string;
+    category?: string;
+    details:string
 };
 
 type Income = {
@@ -16,9 +22,10 @@ type Income = {
     date: string;
     amount: number;
     deleted: boolean;
-    status: string;
+    type: string;
     category?: string;
-    passiveIncome?: Passive[];
+    details:string
+  
 };
 
 export function EditOneIncome() {
@@ -28,10 +35,12 @@ export function EditOneIncome() {
     const [form, setForm] = useState({
         date: "",
         amount: "",
+        type: "",
         category: "",
-        status: "active",
-        passiveIncome: [] as Passive[],
+        details:""
     });
+
+              
 
     const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -54,10 +63,9 @@ export function EditOneIncome() {
                 setForm({
                     date: data.date,
                     amount: String(data.amount),
-                    category: data.category || "",
-                    status: data.status,
-                    passiveIncome: data.passiveIncome || [],
-                });
+                    category: data.category,
+                    type: data.type,
+                                 });
             })
             .catch(err => {
                 console.error(err);
@@ -127,16 +135,14 @@ export function EditOneIncome() {
             body: JSON.stringify({
                 date: form.date,
                 amount: Number(form.amount),
-                status: form.status,
+                type: form.type,
                 deleted: false,
 
-                ...(form.status === "active" && {
+                ...(form.type === "active" && {
                     category: form.category,
                 }),
 
-                ...(form.status === "passive" && {
-                    passiveIncome: form.passiveIncome,
-                }),
+            
             }),
         });
 
@@ -177,10 +183,10 @@ export function EditOneIncome() {
                 </div>
 
                 <div>
-                    <label>Status</label>
+                    <label>type</label>
                     <select
-                        name="status"
-                        value={form.status}
+                        name="type"
+                        value={form.type}
                         onChange={handleChange}
                     >
                         <option value="active">Active</option>
@@ -189,7 +195,7 @@ export function EditOneIncome() {
                 </div>
 
 
-                {form.status === "active" && (
+                {form.type === "active" && (
                     <div>
                         <label>Category</label>
                         <input
@@ -203,7 +209,7 @@ export function EditOneIncome() {
                 )}
 
 
-                {form.status === "passive" && (
+                {form.type === "passive" && (
                     <div>
                         <label>Passive Income</label>
 

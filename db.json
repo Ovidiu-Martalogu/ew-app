@@ -29,14 +29,6 @@
   "payments": [
     {
       "date": "2026-04-07",
-      "amount": 500,
-      "category": "Kaufland",
-      "deleted": false,
-      "userId": 2,
-      "id": 12
-    },
-    {
-      "date": "2026-04-07",
       "amount": 1500,
       "category": "rata",
       "deleted": false,
@@ -50,48 +42,59 @@
       "deleted": false,
       "userId": 1,
       "id": 14
-    },
-    {
-      "date": "2026-04-07",
-      "amount": 200,
-      "category": "Lidl",
-      "deleted": false,
-      "userId": 2,
-      "id": 15
     }
   ],
   "users": [
-   
+    {
+      "email": "qvidiu123456@gmail.com",
+      "password": "$2a$10$WXUowzXlkZaG2o/hBNdO8uj7p98MraPGSWf4hprGbjf23SbdUEVDW",
+      "firstName": "Natalia",
+      "lastName": "Maria",
+      "id": 1
+    }
   ],
   "expenses": [],
   "login": [],
   "income": [
-    {
-      "id": 3,
-      "userId": 2,
-      "date": "2026-04-08",
-      "amount": 7100,
-      "deleted": false,
-      "category": "active",
-      "details": "bonus"
-    },
     {
       "id": 4,
       "userId": 1,
       "date": "2026-04-08",
       "amount": 1570,
       "deleted": false,
-      "category": "passive",
-      "details": "bonus"
+      "type": "active",
+      "category": "salary",
+      "details": "form march"
     },
     {
-      "id": 3,
+      "id": 5,
       "userId": 1,
       "date": "2026-04-08",
       "amount": 1570,
       "deleted": false,
-      "category": "passive",
+      "type": "passive",
+      "category": "rent",
       "details": "income from salary"
+    },
+    {
+      "id": 6,
+      "userId": 1,
+      "date": "2026-04-08",
+      "amount": 1230,
+      "deleted": false,
+      "type": "passive",
+      "category": "dividends",
+      "details": "income from salary"
+    },
+    {
+      "date": "2026-05-04",
+      "amount": "800",
+      "category": "prima",
+      "type": "active",
+      "deleted": false,
+      "userId": 1,
+      "details": "sasasa",
+      "id": 9
     }
   ],
   "firstpage": [

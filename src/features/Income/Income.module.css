@@ -10,16 +10,23 @@
   margin: 0 auto;
   padding: 0.5rem;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
-
   background-image: url("/public/graph-3.jpeg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  position: relative;
+
+  padding: 2rem 1rem;
 }
-.content h1, h2{
+
+.content h1,
+h2 {
   color: white;
 }
+
 .cardContainer {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -44,21 +51,7 @@
   margin-top: 10px;
 }
 
-.sortBar {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-}
 
-.sortBar button {
-  padding: 6px 10px;
-  border: none;
-  border-radius: 1rem;
-  cursor: pointer;
-  background: #111827;
-  color: white;
-  background-color: rgba(27, 27, 28, 0.54);
-}
 
 .selectAmount {
   padding: 3px 5px;
@@ -71,12 +64,38 @@
 }
 
 
-.labelBgn{
-color:  white;
-margin-left: 0.5rem;
+.form {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 600px;
+
+  margin: 2rem auto;
+  padding: 1.5rem;
+
+  gap: 0.75rem;
+
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 16px;
+}
+
+.addIncomeButton {
+  display: block;
+  margin: 1rem auto;
+
+  background: #2563eb;
+  padding: 10px 14px;
+  color: white;
+
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
 
 }
 
-.addIncome, .form{
-  background-color: blueviolet;
+.editLink {
+  text-decoration: none;
+
 }

@@ -4,24 +4,9 @@ export type Income =
     userId: number;
     date: string;
     amount: number;
-    status: string;
     deleted: boolean;
-    type: "active";
+    type: string;
     category: string;
-    passiveIncome?: never;
+    details:string
   }
-  | {
-    id: number;
-    userId: number;
-    date: string;
-    amount: number;
-    status: string;
-    deleted: boolean;
-    type: "passive";
-    passiveIncome: {
-      source: string;
-      amount: number;
-    }[];
-    category: never;
-  };
 
