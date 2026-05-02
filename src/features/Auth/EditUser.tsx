@@ -144,9 +144,11 @@ export function EditUser() {
             return;
         }
 
+        alert("User updated successfully");
 
         localStorage.removeItem("auth");
-        navigate("/login");
+        window.location.href = "/login";
+
     }
 
 
@@ -168,7 +170,7 @@ export function EditUser() {
                             type="text"
                             id="firstName"
                             name="firstName"
-                           
+
                             onChange={handleChange}
                         />
                         {errors.firstName && <p style={{ color: "red" }}>{errors.firstName}</p>}
@@ -180,7 +182,7 @@ export function EditUser() {
                             type="text"
                             id="lastName"
                             name="lastName"
-                           
+
                             onChange={handleChange}
                         />
                         {errors.lastName && <p style={{ color: "red" }}>{errors.lastName}</p>}
@@ -193,7 +195,7 @@ export function EditUser() {
                             type="text"
                             id="email"
                             name="email"
-                        
+
                             onChange={handleChange}
                         />
                         {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}

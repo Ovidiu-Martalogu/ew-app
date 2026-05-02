@@ -63,10 +63,10 @@
   "users": [
     {
       "id": 1,
-      "firstName": "Natalia",
-      "lastName": "Maria",
-      "email": "qvidiu123456@gmail.com",
-      "password": "$2a$10$y/1zmq.8hwbRNmqueBk/felccj5gmRB1br9h6VIpUs/4PAHWpQwoy"
+      "firstName": "maria",
+      "lastName": "natalia",
+      "email": "12@gmail.com",
+      "password": "$2a$10$dziNG963kS2XAj1vej0GQ.MUaGdBb4ZU5SchKpn3HXcSixSnpwMp6"
     },
     {
       "firstName": "dadi",

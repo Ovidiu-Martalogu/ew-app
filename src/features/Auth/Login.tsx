@@ -32,7 +32,18 @@ export function Login() {
 
     if (!isValid(formValues)) return;
 
-    void loginApi.create<Auth>(formValues).then(login);
+     loginApi.create<Auth>(formValues)
+    .then((user) => {
+      if (!user) {
+        alert("Emailul nu a fost găsit");
+        return;
+      }
+
+      login(user);
+    })
+    .catch(() => {
+      alert("Eroare la autentificare");
+    });
   }
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -40,9 +51,12 @@ export function Login() {
 
     if (errors) {
       isValid(newValues);
+  
     }
 
     setFormValues(newValues);
+ 
+
   }
 
   return (
