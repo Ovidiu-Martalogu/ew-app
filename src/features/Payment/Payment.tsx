@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import type { Payment, SortChoice } from "./types";
 
 import styles from './Payment.module.css';
+import { getAuth } from "../../hooks/getUserFromLocalStorage";
 
 const apiUrl = `${import.meta.env.VITE_API_URL}/payments`;
-
 
 
 export function Payment() {
@@ -33,6 +33,7 @@ export function Payment() {
 
     }, []);
 
+
     async function addPaymentsToDB(e: React.SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
         if (!addPayment) return;
@@ -51,13 +52,29 @@ export function Payment() {
 
             }
             return;
+
         }
+
+        const userId = getAuth();
+
+        if (!userId) {
+            alert("User not logged in");
+            return;
+        }
+
+
         const newPayment = await fetch(apiUrl, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ date, amount: Number(amount), category, deleted: false }),
+            body: JSON.stringify({
+                date,
+                amount: Number(amount),
+                category,
+                deleted: false,
+                userId
+            }),
         }).then((response) => response.json());
 
         setpayment([...(payment ?? []), newPayment]);
@@ -119,46 +136,108 @@ export function Payment() {
 
         return sortChoice === "descending" ? -result : result;
     });
+    
     const total = sortedPayments.reduce((sum, p) => {
         return sum + Number(p.amount);
     }, 0);
-    if (!payment) {
+
+
+    if (!payment || payment.length === 0) {
         return (
             <>
-                <strong>Wait....Loading payment...</strong>;
-                {addPayment && (
-                    <form onSubmit={addPaymentsToDB} className={styles.form}>
-                        <input type="date" name="date" placeholder="date" />
-                        <input type="number" name="amount" placeholder="amount" />
-                        <input name="category" placeholder="category" />
-                        <button type="submit" className={styles.addPaymentButton}>Add Payment</button>
-                    </form>)}
-            </>
-        )
-    }
-
-    return (
-        <>
-            <div className={styles.content}>
-
-
-                <h1 className={styles.title}>Payment</h1>
+                <h2 className={styles.notPaymentMsg}>
+                    <strong>You don't have any payments. Please add payments.</strong>
+                </h2>
                 <div>
 
                     {addPayment && (
-                        <form onSubmit={addPaymentsToDB} className={styles.form}>
-                            <label id="date">Select the date:
-                                <input type="date" id="date" name="date" className={styles.input} />
-                            </label>
-                            <label id="amount"> Insert the amount:
-                                <input type="text" name="amount" className={styles.input} />
-                            </label>
-                            <label id="category"> Insert the category:
-                                <input name="category" className={styles.input} />
-                            </label>
-                            <button type="submit" className={styles.button}>
-                                Add Payment
-                            </button>
+                        <form onSubmit={addPaymentsToDB} className={styles.formAddPayment}>
+
+                            <div className={styles.formGroup}>
+                                <label htmlFor="date">Select the date:</label>
+                                <input
+                                    id="date"
+                                    type="date"
+                                    name="date"
+                                    className={styles.input} />
+                            </div>
+                            <div className={styles.formGroup}>
+                                <label htmlFor="amount" > Insert the amount: </label>
+                                <input
+                                    id="amount"
+                                    type="number"
+                                    name="amount"
+                                    className={styles.input} />
+                            </div>
+
+                            <div className={styles.formGroup}>
+
+                                <label htmlFor="category" > Insert the category:</label>
+                                <input
+                                    id="category"
+                                    name="category"
+                                    className={styles.input} />
+                            </div>
+                            <div className={styles.formGroup}>
+
+
+                                <button type="submit" className={styles.addPaymentButton}>
+                                    Add Payment
+                                </button>
+                            </div>
+                        </form>
+                    )}
+
+                    <button onClick={buttonAddPayment} className={styles.addPaymentButton}>
+                        {addPayment ? "Back" : "Add new Payment"}
+                    </button>
+                </div>
+            </>
+        )
+    }
+    return (
+        <>
+            <div className={styles.content}>
+                <h1 className={styles.title}>Payment</h1>
+
+
+                <div>
+
+                    {addPayment && (
+                        <form onSubmit={addPaymentsToDB} className={styles.formAddPayment}>
+
+                            <div className={styles.formGroup}>
+                                <label htmlFor="date">Select the date:</label>
+                                <input
+                                    id="date"
+                                    type="date"
+                                    name="date"
+                                    className={styles.input} />
+                            </div>
+                            <div className={styles.formGroup}>
+                                <label htmlFor="amount" > Insert the amount: </label>
+                                <input
+                                    id="amount"
+                                    type="number"
+                                    name="amount"
+                                    className={styles.input} />
+                            </div>
+
+                            <div className={styles.formGroup}>
+
+                                <label htmlFor="category" > Insert the category:</label>
+                                <input
+                                    id="category"
+                                    name="category"
+                                    className={styles.input} />
+                            </div>
+                            <div className={styles.formGroup}>
+
+
+                                <button type="submit" className={styles.addPaymentButton}>
+                                    Add Payment
+                                </button>
+                            </div>
                         </form>
                     )}
 
@@ -168,7 +247,7 @@ export function Payment() {
                 </div>
 
                 <div className={styles.sortBar}>
-                    <button onClick={() => setSortField("date")}>
+                    <button onClick={() => setSortField("date")} className={styles.addPaymentButton}>
                         <label htmlFor="sort">
                             Sort by Date{" "}
                             <select
@@ -183,7 +262,7 @@ export function Payment() {
                         </label>
                     </button>
 
-                    <button onClick={() => setSortField("amount")}>
+                    <button onClick={() => setSortField("amount")} className={styles.addPaymentButton}>
                         <label htmlFor="sortAmount">
                             Sort by Amount{" "}
                             <select
@@ -257,7 +336,7 @@ export function Payment() {
 
                                     <td className={styles.twoLines}>
 
-                                        <button
+                                        <button className={styles.editButton}
                                             onClick={() => {
                                                 setEditingId(key.id);
                                                 setEditForm({
@@ -272,15 +351,15 @@ export function Payment() {
                                         {editingId === key.id && (
                                             <>
 
-                                                <button onClick={() => saveEdit(key.id)}>
+                                                <button onClick={() => saveEdit(key.id)} className={styles.saveEditButton}>
                                                     Save
                                                 </button>
-                                                <button onClick={() => setEditingId(null)}>
+                                                <button onClick={() => setEditingId(null)} className={styles.cancelEditButton}>
                                                     Cancel
                                                 </button>
                                             </>
                                         )}
-                                   
+
                                         <button title="Are you sure?"
                                             className={styles.deleteButton}
                                             onClick={() => deletePayment(key.id)}
@@ -295,10 +374,10 @@ export function Payment() {
                 </div>
                 <div>
 
-                    <h2>Total: {total.toFixed(2)}</h2>
+                    <h2 className={styles.showTotal}>Total: {total.toFixed(2)}</h2>
                 </div>
 
-                
+
             </div>
         </>
     );

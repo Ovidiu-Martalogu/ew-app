@@ -26,24 +26,7 @@
   "profile": {
     "name": "typicode"
   },
-  "payments": [
-    {
-      "date": "2026-04-07",
-      "amount": 1500,
-      "category": "rata",
-      "deleted": false,
-      "userId": 1,
-      "id": 13
-    },
-    {
-      "date": "2026-04-07",
-      "amount": 350,
-      "category": "cumparaturi",
-      "deleted": false,
-      "userId": 1,
-      "id": 14
-    }
-  ],
+  "payments": [],
   "users": [
     {
       "id": 1,
@@ -55,7 +38,30 @@
   ],
   "expenses": [],
   "login": [],
-  "income": [
+  "income": [],
+  "firstpage": [
+    {
+      "title": "Monitor your expenses easily and efficiently",
+      "subtitle": "Keep your finances under control, create budgets, and see where your money goes, all in one modern app.",
+      "sectionTitle": "Features",
+      "footerTitle": "Take control of your money",
+      "footerSubtitle": "Start today and see the difference.",
+      "card1": {
+        "cardTitle": "Real-time monitoring",
+        "cardSubtitle": "Add expenses and track them instantly."
+      },
+      "card2": {
+        "cardTitle": "Customized budgets",
+        "cardSubtitle": "Set limits for each spending category."
+      },
+      "card3": {
+        "cardTitle": "Detailed reports",
+        "cardSubtitle": "Analyze your financial habits with clear graphs."
+      }
+    }
+  ],
+  "test": [],
+  "incomes": [
     {
       "id": 4,
       "userId": 1,
@@ -94,27 +100,6 @@
       "userId": 1,
       "details": "sasasa",
       "id": 9
-    }
-  ],
-  "firstpage": [
-    {
-      "title": "Monitor your expenses easily and efficiently",
-      "subtitle": "Keep your finances under control, create budgets, and see where your money goes, all in one modern app.",
-      "sectionTitle": "Features",
-      "footerTitle": "Take control of your money",
-      "footerSubtitle": "Start today and see the difference.",
-      "card1": {
-        "cardTitle": "Real-time monitoring",
-        "cardSubtitle": "Add expenses and track them instantly."
-      },
-      "card2": {
-        "cardTitle": "Customized budgets",
-        "cardSubtitle": "Set limits for each spending category."
-      },
-      "card3": {
-        "cardTitle": "Detailed reports",
-        "cardSubtitle": "Analyze your financial habits with clear graphs."
-      }
     }
   ],
   "firstPage": [

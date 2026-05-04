@@ -2,34 +2,15 @@ import { useEffect, useState } from "react";
 import type { Income } from "./types";
 import styles from "./income.module.css";
 import { NavLink, } from "react-router";
-
+import { getAuth } from "../../hooks/getUserFromLocalStorage";
 
 const apiUrl = `${import.meta.env.VITE_API_URL}/income`;
 
-export function getAuth() {
-    try {
-        const authRaw = localStorage.getItem("auth");
-        if (!authRaw) return null;
-
-        const result = JSON.parse(authRaw);
-
-        return result?.user?.id ?? null;
-    } catch (error) {
-        console.error("Invalid auth in localStorage:", error);
-        return null;
-    }
-}
 
 export function Income() {
     const [income, setIncome] = useState<Income[] | null>(null);
     const [addIncome, setAddIncome] = useState(false);
-
-
-
     const [type, setType] = useState<"active" | "passive">("active");
-    const [passiveIncome, setPassiveIncome] = useState<
-        { source: string; amount: number }[]
-    >([]);
 
     const buttonAddIncome = () => {
         setAddIncome(!addIncome);
@@ -72,7 +53,7 @@ export function Income() {
                 date,
                 amount,
                 category,
-                type:type === "active" ? type : "active",
+                type: type === "active" ? type : "active",
                 deleted: false,
                 userId,
                 details
@@ -81,7 +62,7 @@ export function Income() {
 
         setIncome([...(income ?? []), newIncome]);
         setAddIncome(false);
-        setPassiveIncome([]);
+
         setType("active");
     }
 
@@ -113,6 +94,86 @@ export function Income() {
         return colors[category?.toLowerCase() as keyof typeof colors] || "#607D8B";
     };
 
+
+
+    if (!income || income.length === 0) {
+
+        return (
+            <>
+                <h1 className={styles.notIncomeMsg}>
+                    <strong>You don't have any incomes. Please add .</strong>
+                </h1>
+
+                <div >
+
+                    {addIncome && (
+                        <form onSubmit={addIncomeToDB} className={styles.formAddIncome}>
+                            <div className={styles.formGroup}>
+                                <label htmlFor="type"> Type:</label>
+                                <select
+                                    id="type"
+                                    value={type}
+                                    onChange={(e) =>
+                                        setType(e.target.value as "active" | "passive")
+                                    }
+                                >
+                                    <option value="active">Active</option>
+                                    <option value="passive">Passive</option>
+                                </select>
+
+                            </div>
+                            <div className={styles.formGroup}>
+
+                                <label htmlFor="date">  Date: </label>
+                                <input
+                                    id="date"
+                                    type="date"
+                                    name="date"
+                                    className={styles.input} />
+                            </div>
+
+                            <div className={styles.formGroup}>
+
+                                <label htmlFor="amount">Amount:</label>
+                                <input
+                                    id="amount"
+                                    type="number"
+                                    name="amount"
+                                    className={styles.input} />
+                            </div>
+                            <div className={styles.formGroup}>
+
+                                <label htmlFor="category">Category:</label>
+                                <input
+                                    id="category"
+                                    type="text"
+                                    name="category"
+                                    className={styles.input} />
+                            </div>
+
+                            <div className={styles.formGroup}>
+                                <label htmlFor="details">Details:</label>
+                                <input
+                                    id="details"
+                                    type="text"
+                                    name="details"
+                                    className={styles.input} />
+                            </div>
+
+
+                            <button type="submit" className={styles.addIncomeButton}>Add Income</button>
+                        </form>
+                    )}
+                    <button onClick={buttonAddIncome} className={styles.addIncomeButton}>
+                        {addIncome ? "Back" : "Add new Income"}
+                    </button>
+                </div>
+            </>
+        )
+    }
+
+
+
     return (
         <div className={styles.content}>
             <h1>income money</h1>
@@ -120,10 +181,11 @@ export function Income() {
             <div >
 
                 {addIncome && (
-                    <form onSubmit={addIncomeToDB} className={styles.form}>
-                        <label>
-                            Type:
+                    <form onSubmit={addIncomeToDB} className={styles.formAddIncome}>
+                        <div className={styles.formGroup}>
+                            <label htmlFor="type"> Type:</label>
                             <select
+                                id="type"
                                 value={type}
                                 onChange={(e) =>
                                     setType(e.target.value as "active" | "passive")
@@ -132,81 +194,54 @@ export function Income() {
                                 <option value="active">Active</option>
                                 <option value="passive">Passive</option>
                             </select>
-                        </label>
 
-                        <label className={styles.labelBgn}>
-                            Date:
-                            <input type="date" name="date" />
-                        </label>
+                        </div>
+                        <div className={styles.formGroup}>
 
-                        <label className={styles.labelBgn}>
-                            Amount:
-                            <input type="text" name="amount" />
-                        </label>
-                         <label className={styles.labelBgn}>
-                                Category:
-                                <input name="category" />
-                            </label>
-                        <label className={styles.labelBgn}>
-                            Details:
-                            <input type="text" name="details" />
-                        </label>
+                            <label htmlFor="date">  Date: </label>
+                            <input
+                                id="date"
+                                type="date"
+                                name="date"
+                                className={styles.input} />
+                        </div>
+
+                        <div className={styles.formGroup}>
+
+                            <label htmlFor="amount">Amount:</label>
+                            <input
+                                id="amount"
+                                type="number"
+                                name="amount"
+                                className={styles.input} />
+                        </div>
+                        <div className={styles.formGroup}>
+
+                            <label htmlFor="category">Category:</label>
+                            <input
+                                id="category"
+                                type="text"
+                                name="category"
+                                className={styles.input} />
+                        </div>
+
+                        <div className={styles.formGroup}>
+                            <label htmlFor="details">Details:</label>
+                            <input
+                                id="details"
+                                type="text"
+                                name="details"
+                                className={styles.input} />
+                        </div>
 
 
-                        {type === "passive" && (
-                            <div>
-                                <h4 className={styles.labelBgn}>Passive Income</h4>
-
-                                {passiveIncome.map((item, index) => (
-                                    <div key={index}>
-                                        <input
-                                            placeholder="source"
-                                            value={item.source}
-                                            onChange={(e) => {
-                                                const copy = [...passiveIncome];
-                                                copy[index].source =
-                                                    e.target.value;
-                                                setPassiveIncome(copy);
-                                            }}
-                                        />
-
-                                        <input
-                                            placeholder="amount"
-                                            value={item.amount}
-                                            onChange={(e) => {
-                                                const copy = [...passiveIncome];
-                                                copy[index].amount = Number(
-                                                    e.target.value
-                                                );
-                                                setPassiveIncome(copy);
-                                            }}
-                                        />
-                                    </div>
-                                ))}
-
-                                <button
-                                    type="button"
-                                    onClick={() =>
-                                        setPassiveIncome([
-                                            ...passiveIncome,
-                                            { source: "", amount: 0 },
-                                        ])
-                                    }
-                                >
-                                    + Add source
-                                </button>
-                            </div>
-                        )}
-
-                        <button type="submit" className={styles.button}>Add Income</button>
+                        <button type="submit" className={styles.addIncomeButton}>Add Income</button>
                     </form>
                 )}
+                <button onClick={buttonAddIncome} className={styles.addIncomeButton}>
+                    {addIncome ? "Back" : "Add new Income"}
+                </button>
             </div>
-            <button onClick={buttonAddIncome} className={styles.addIncomeButton}>
-                {addIncome ? "Back" : "Add new Income"}
-            </button>
-
-
             <div className={styles.cardContainer}>
                 {income?.map((item) => (
                     <div
@@ -245,7 +280,7 @@ export function Income() {
                     </div>
                 ))}
             </div>
-            <h2>Total: {total?.toFixed(2)}</h2>
+            <h2 className={styles.showTotal}>Total: {total?.toFixed(2)}</h2>
         </div>
     );
 }
