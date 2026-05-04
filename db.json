@@ -50,6 +50,14 @@
       "deleted": false,
       "userId": 1,
       "id": 4
+    },
+    {
+      "date": "2026-05-03",
+      "amount": 700,
+      "category": "prima",
+      "deleted": false,
+      "userId": 1,
+      "id": 6
     }
   ],
   "users": [
@@ -76,18 +84,17 @@
     },
     {
       "date": "2026-05-05",
-      "amount": "12000",
-      "category": "rent",
+      "amount": 600,
       "type": "active",
       "deleted": false,
-      "userId": 1,
-      "details": "test",
+      "details": "sasasa",
+      "category": "prima",
       "id": 2
     },
     {
       "date": "2026-05-05",
       "amount": 23344,
-      "type": "passive",
+      "type": "active",
       "deleted": false,
       "details": "income from salary",
       "category": "imprumut",
@@ -115,12 +122,11 @@
     },
     {
       "date": "2026-05-01",
-      "amount": "800",
-      "category": "prima",
+      "amount": 0,
       "type": "passive",
       "deleted": false,
-      "userId": 1,
       "details": "sasasa",
+      "category": "prima",
       "id": 7
     },
     {
@@ -132,6 +138,16 @@
       "userId": 1,
       "details": "sasasa",
       "id": 8
+    },
+    {
+      "date": "2026-05-01",
+      "amount": "700",
+      "category": "prima",
+      "type": "active",
+      "deleted": false,
+      "userId": 1,
+      "details": "sasasa",
+      "id": 9
     }
   ],
   "firstpage": [

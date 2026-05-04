@@ -136,7 +136,7 @@ export function Payment() {
 
         return sortChoice === "descending" ? -result : result;
     });
-    
+
     const total = sortedPayments.reduce((sum, p) => {
         return sum + Number(p.amount);
     }, 0);
@@ -175,6 +175,7 @@ export function Payment() {
                                 <label htmlFor="category" > Insert the category:</label>
                                 <input
                                     id="category"
+                                    type="text"
                                     name="category"
                                     className={styles.input} />
                             </div>
@@ -228,6 +229,7 @@ export function Payment() {
                                 <label htmlFor="category" > Insert the category:</label>
                                 <input
                                     id="category"
+                                    type="text"
                                     name="category"
                                     className={styles.input} />
                             </div>
@@ -249,32 +251,32 @@ export function Payment() {
                 <div className={styles.sortBar}>
                     <button onClick={() => setSortField("date")} className={styles.addPaymentButton}>
                         <label htmlFor="sort">
-                            Sort by Date{" "}
-                            <select
-                                name="sort"
-                                id="sort"
-                                className={styles.selectAmount}
-                                onChange={(e) => setSortChoice(e.target.value as SortChoice)}
-                            >
-                                <option value="ascending">Ascending</option>
-                                <option value="descending">Descending</option>
-                            </select>
-                        </label>
+                            Sort by Date{" "}</label>
+                        <select
+                            id="sort"
+                            name="sort"
+                            className={styles.selectAmount}
+                            onChange={(e) => setSortChoice(e.target.value as SortChoice)}
+                        >
+                            <option value="ascending">Ascending</option>
+                            <option value="descending">Descending</option>
+                        </select>
+
                     </button>
 
                     <button onClick={() => setSortField("amount")} className={styles.addPaymentButton}>
                         <label htmlFor="sortAmount">
-                            Sort by Amount{" "}
-                            <select
-                                name="sortAmount"
-                                id="sortAmount"
-                                className={styles.selectAmount}
-                                onChange={(e) => setSortChoice(e.target.value as SortChoice)}
-                            >
-                                <option value="ascending">Ascending</option>
-                                <option value="descending">Descending</option>
-                            </select>
-                        </label>
+                            Sort by Amount{" "} </label>
+                        <select
+                            id="sortAmount"
+                            name="sortAmount"
+                            className={styles.selectAmount}
+                            onChange={(e) => setSortChoice(e.target.value as SortChoice)}
+                        >
+                            <option value="ascending">Ascending</option>
+                            <option value="descending">Descending</option>
+                        </select>
+
                     </button>
                 </div>
 
@@ -295,13 +297,17 @@ export function Payment() {
 
                                     <td>
                                         {editingId === key.id ? (
-                                            <input
-                                                type="date"
-                                                value={editForm.date}
-                                                onChange={(e) =>
-                                                    setEditForm({ ...editForm, date: e.target.value })
-                                                }
-                                            />
+                                            <><label htmlFor="date">Date</label>
+                                                <input
+                                                    id="date"
+                                                    name="date"
+                                                    type="date"
+                                                    value={editForm.date}
+                                                    onChange={(e) =>
+                                                        setEditForm({ ...editForm, date: e.target.value })
+                                                    }
+                                                />
+                                            </>
                                         ) : (
                                             key.date
                                         )}
@@ -309,13 +315,17 @@ export function Payment() {
 
                                     <td>
                                         {editingId === key.id ? (
-                                            <input
-                                                type="text"
-                                                value={editForm.amount}
-                                                onChange={(e) =>
-                                                    setEditForm({ ...editForm, amount: e.target.value })
-                                                }
-                                            />
+                                            <><label htmlFor="amount">Amount</label>
+                                                <input
+                                                    id="amount"
+                                                    type="number"
+                                                    name="amount"
+                                                    value={editForm.amount}
+                                                    onChange={(e) =>
+                                                        setEditForm({ ...editForm, amount: e.target.value })
+                                                    }
+                                                />
+                                            </>
                                         ) : (
                                             key.amount
                                         )}
@@ -323,12 +333,18 @@ export function Payment() {
 
                                     <td>
                                         {editingId === key.id ? (
-                                            <input
-                                                value={editForm.category}
-                                                onChange={(e) =>
-                                                    setEditForm({ ...editForm, category: e.target.value })
-                                                }
-                                            />
+                                            <>
+                                                <label htmlFor="category">Category</label>
+                                                <input
+                                                    id="category"
+                                                    type="text"
+                                                    name="category"
+                                                    value={editForm.category}
+                                                    onChange={(e) =>
+                                                        setEditForm({ ...editForm, category: e.target.value })
+                                                    }
+                                                />
+                                            </>
                                         ) : (
                                             key.category
                                         )}

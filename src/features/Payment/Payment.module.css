@@ -172,6 +172,7 @@
   cursor: pointer;
   transition: 0.2s;
   font-size: 13px;
+  margin: 0.2rem;
 }
 
 .saveEditButton {
@@ -183,6 +184,7 @@
   cursor: pointer;
   transition: 0.2s;
   font-size: 13px;
+  margin: 0.2rem;
 }
 
 .cancelEditButton {
@@ -194,6 +196,7 @@
   cursor: pointer;
   transition: 0.2s;
   font-size: 13px;
+  margin: 0.2rem;
 }
 
 .editButton {
