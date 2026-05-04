@@ -26,7 +26,24 @@
   "profile": {
     "name": "typicode"
   },
-  "payments": [],
+  "payments": [
+    {
+      "date": "2026-05-06",
+      "amount": 122,
+      "category": "rent",
+      "deleted": false,
+      "userId": 1,
+      "id": 2
+    },
+    {
+      "date": "2026-05-04",
+      "amount": 700,
+      "category": "Kaufland",
+      "deleted": false,
+      "userId": 1,
+      "id": 3
+    }
+  ],
   "users": [
     {
       "id": 1,
@@ -38,7 +55,37 @@
   ],
   "expenses": [],
   "login": [],
-  "income": [],
+  "income": [
+    {
+      "date": "2026-05-04",
+      "amount": "3500",
+      "category": "salariu",
+      "type": "active",
+      "deleted": false,
+      "userId": 1,
+      "details": "salariu restant",
+      "id": 1
+    },
+    {
+      "date": "2026-05-05",
+      "amount": "12000",
+      "category": "rent",
+      "type": "active",
+      "deleted": false,
+      "userId": 1,
+      "details": "test",
+      "id": 2
+    },
+    {
+      "date": "2026-05-05",
+      "amount": 23344,
+      "type": "passive",
+      "deleted": false,
+      "details": "income from salary",
+      "category": "imprumut",
+      "id": 3
+    }
+  ],
   "firstpage": [
     {
       "title": "Monitor your expenses easily and efficiently",
