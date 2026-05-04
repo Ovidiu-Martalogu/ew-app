@@ -53,7 +53,7 @@ export function Income() {
                 date,
                 amount,
                 category,
-                type: type === "active" ? type : "active",
+                type: type === "active" ? type : "passive",
                 deleted: false,
                 userId,
                 details
@@ -112,6 +112,7 @@ export function Income() {
                                 <label htmlFor="type"> Type:</label>
                                 <select
                                     id="type"
+                                    name="type"
                                     value={type}
                                     onChange={(e) =>
                                         setType(e.target.value as "active" | "passive")
@@ -186,6 +187,7 @@ export function Income() {
                             <label htmlFor="type"> Type:</label>
                             <select
                                 id="type"
+                                name="type"
                                 value={type}
                                 onChange={(e) =>
                                     setType(e.target.value as "active" | "passive")
