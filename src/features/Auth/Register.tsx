@@ -51,8 +51,8 @@ export function Register() {
   return (
     <>
 
+      <h1>Register</h1>
       <form className={styles.brandForm} onSubmit={handleSubmit}>
-        <h1>Register</h1>
         <label htmlFor="firstName">First Name</label>
         <input
           type="text"
@@ -103,14 +103,9 @@ export function Register() {
         {errors?.retypePassword && (
           <p className="errorMessage">{errors.retypePassword}</p>
         )}
-
-
-
         <button type="submit">Register</button>
       </form>
-      <div>
-        <img src="../public/graphs_1.jpeg" alt="picture" />
-      </div>
+
     </>
   );
 }
