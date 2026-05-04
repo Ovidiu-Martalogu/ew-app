@@ -5,17 +5,6 @@ import styles from "../Income/EditOneIncome.module.css";
 
 const apiUrl = `${import.meta.env.VITE_API_URL}/income`;
 
-type Passive = {
-    id: number;
-    userId: number;
-    date: string;
-    amount: number;
-    deleted: boolean;
-    type: string;
-    category?: string;
-    details:string
-};
-
 type Income = {
     id: number;
     userId: number;
@@ -23,9 +12,9 @@ type Income = {
     amount: number;
     deleted: boolean;
     type: string;
-    category?: string;
-    details:string
-  
+    category: string;
+    details: string
+
 };
 
 export function EditOneIncome() {
@@ -37,20 +26,13 @@ export function EditOneIncome() {
         amount: "",
         type: "",
         category: "",
-        details:""
+        details: ""
     });
-
-              
 
     const [errors, setErrors] = useState<Record<string, string>>({});
 
-    const [loading, setLoading] = useState(true);
-
-
     useEffect(() => {
         if (!id) return;
-
-        setLoading(true);
 
         fetch(`${apiUrl}/${id}`)
             .then(res => {
@@ -65,12 +47,13 @@ export function EditOneIncome() {
                     amount: String(data.amount),
                     category: data.category,
                     type: data.type,
-                                 });
+                    details: data.details
+                });
             })
             .catch(err => {
                 console.error(err);
             })
-          
+
     }, [id]);
 
     //my validateField
@@ -95,22 +78,6 @@ export function EditOneIncome() {
     function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
         const { name, value } = e.target;
 
-        if (name === "status") {
-            if (value === "active") {
-                setForm(prev => ({
-                    ...prev,
-                    status: value,
-                    passiveIncome: [],
-                }));
-            } else {
-                setForm(prev => ({
-                    ...prev,
-                    status: value,
-                    category: "",
-                }));
-            }
-            return;
-        }
 
         setForm(prev => ({ ...prev, [name]: value }));
 
@@ -121,7 +88,6 @@ export function EditOneIncome() {
             [name]: errorMessage,
         }));
     }
-
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
@@ -137,54 +103,48 @@ export function EditOneIncome() {
                 amount: Number(form.amount),
                 type: form.type,
                 deleted: false,
-
-                ...(form.type === "active" && {
-                    category: form.category,
-                }),
-
-            
+                details: form.details,
+                category: form.category,
             }),
         });
 
         navigate("/income");
     }
 
-    if (loading) return <p>Loading...</p>;
-
     return (
-        <>
-
         <div className={styles.content}>
             <h1>Edit Income</h1>
 
-            <form onSubmit={handleSubmit} className={styles.card}>
-                {/* DATE */}
-                <div>
-                    <label>Date</label>
+            <form onSubmit={handleSubmit} className={`${styles.card} ${styles.form}`}>
+
+                <div className={styles.formGroup}>
+                    <label htmlFor="date">Date</label>
                     <input
+                        id="date"
                         type="date"
                         name="date"
                         value={form.date}
                         onChange={handleChange}
                     />
-                    {errors.date && <p style={{ color: "red" }}>{errors.date}</p>}
+                    {errors.date && <p className={styles.error}>{errors.date}</p>}
                 </div>
 
-
-                <div>
-                    <label>Amount</label>
+                <div className={styles.formGroup}>
+                    <label htmlFor="amount">Amount</label>
                     <input
+                        id="amount"
                         type="number"
                         name="amount"
                         value={form.amount}
                         onChange={handleChange}
                     />
-                    {errors.amount && <p style={{ color: "red" }}>{errors.amount}</p>}
+                    {errors.amount && <p className={styles.error}>{errors.amount}</p>}
                 </div>
 
-                <div>
-                    <label>type</label>
+                <div className={styles.formGroup}>
+                    <label htmlFor="type">Type</label>
                     <select
+                        id="type"
                         name="type"
                         value={form.type}
                         onChange={handleChange}
@@ -194,80 +154,34 @@ export function EditOneIncome() {
                     </select>
                 </div>
 
+                <div className={styles.formGroup}>
+                    <label htmlFor="category">Category</label>
+                    <input
+                        id="category"
+                        type="text"
+                        name="category"
+                        value={form.category}
+                        onChange={handleChange}
+                    />
+                    {errors.category && <p className={styles.error}>{errors.category}</p>}
+                </div>
 
-                {form.type === "active" && (
-                    <div>
-                        <label>Category</label>
-                        <input
-                            type="text"
-                            name="category"
-                            value={form.category}
-                            onChange={handleChange}
-                        />
-                        {errors.category && <p style={{ color: "red" }}>{errors.category}</p>}
-                    </div>
-                )}
+                <div className={styles.formGroup}>
+                    <label htmlFor="details">Details</label>
+                    <input
+                        id="details"
+                        type="text"
+                        name="details"
+                        value={form.details}
+                        onChange={handleChange}
+                    />
+                    {errors.details && <p className={styles.error}>{errors.details}</p>}
+                </div>
 
-
-                {form.type === "passive" && (
-                    <div>
-                        <label>Passive Income</label>
-
-                        {form.passiveIncome.map((p, index) => (
-                            <div key={index}>
-                                <input
-                                    type="text"
-                                    placeholder="source"
-                                    value={p.source}
-                                    onChange={(e) => {
-                                        const updated = [...form.passiveIncome];
-                                        updated[index].source = e.target.value;
-                                        setForm(prev => ({
-                                            ...prev,
-                                            passiveIncome: updated,
-                                        }));
-                                    }}
-                                />
-                                {errors.source && <p style={{ color: "red" }}>{errors.source}</p>}
-                                <input
-                                    type="number"
-                                    placeholder="amount"
-                                    value={p.amount}
-                                    onChange={(e) => {
-                                        const updated = [...form.passiveIncome];
-                                        updated[index].amount = Number(e.target.value);
-                                        setForm(prev => ({
-                                            ...prev,
-                                            passiveIncome: updated,
-                                        }));
-                                    }}
-                                />
-                                {errors.amount && <p style={{ color: "red" }}>{errors.amount}</p>}
-                            </div>
-                        ))}
-
-                        <button
-                            type="button"
-                            onClick={() =>
-                                setForm(prev => ({
-                                    ...prev,
-                                    passiveIncome: [
-                                        ...prev.passiveIncome,
-                                        { source: "", amount: 0 },
-                                    ],
-                                }))
-                            }
-                        >
-                            + Add source
-                        </button>
-                    </div>
-                )}
-
-                <button type="submit">Update</button>
+                <button type="submit" className={styles.buttonEditIncome}>Update</button>
             </form>
 
-            <NavLink to="/income">Back</NavLink>
-            </div>
-        </>
+            <NavLink to="/income" className={styles.buttonBack}>Back</NavLink>
+        </div>
     );
 }

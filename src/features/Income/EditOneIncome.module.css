@@ -1,32 +1,89 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.formGroup label {
+  font-weight: 500;
+}
+
+.formGroup input,
+.formGroup select {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  margin: 0;
+}
+
+.buttonEditIncome {
+  margin-top: 1.5rem;
+  padding: 0.5rem;
+  border-radius: 10px;
+  border: none;
+  background: #6c63ff;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.buttonEditIncome:hover,
+.buttonBack:hover {
+  background: #574fd6;
+}
+
+.buttonBack {
+  width: 4rem;
+  margin-top: 2rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  border: none;
+  background: #6c63ff;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+}
+
 .content {
-    min-height: 100vh;
-    background-image: url("/public/backgound-3.jpeg");
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-
-    flex: 1;
-    padding: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-
-    font-family: "Segoe UI", Arial, sans-serif;
+  min-height: 100vh;
+  background-image: url("/public/backgound-3.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  flex: 1;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-family: "Segoe UI", Arial, sans-serif;
 }
 
 .card {
-
-    margin: 0 auto;
-    background: rgba(177, 181, 248, 0.3);
-    padding: 1rem;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    backdrop-filter: blur(6px);
-    border: 1px solid black;
-
+  margin: 0 auto;
+  background: rgba(177, 181, 248, 0.3);
+  padding: 1rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(6px);
+  border: 1px solid black;
 }
 
- h1 {
-    margin: 0 auto;
+h1 {
+  margin: 0 auto;
 }

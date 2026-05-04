@@ -46,11 +46,11 @@
   ],
   "users": [
     {
-      "email": "qvidiu123456@gmail.com",
-      "password": "$2a$10$WXUowzXlkZaG2o/hBNdO8uj7p98MraPGSWf4hprGbjf23SbdUEVDW",
-      "firstName": "Natalia",
+      "id": 1,
+      "firstName": "Maria",
       "lastName": "Maria",
-      "id": 1
+      "email": "qvidiu123456@gmail.com",
+      "password": "$2a$10$cN0XZvAStUGYZgdKcorsIOi4ABs.jgdDmiJjmHtV.uXmZ6tJ.pTNW"
     }
   ],
   "expenses": [],
@@ -77,14 +77,13 @@
       "details": "income from salary"
     },
     {
-      "id": 6,
-      "userId": 1,
       "date": "2026-04-08",
-      "amount": 1230,
+      "amount": 12300,
+      "type": "active",
       "deleted": false,
-      "type": "passive",
-      "category": "dividends",
-      "details": "income from salary"
+      "details": "dadadada",
+      "category": "imprumut",
+      "id": 6
     },
     {
       "date": "2026-05-04",
