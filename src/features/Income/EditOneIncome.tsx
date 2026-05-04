@@ -73,11 +73,11 @@ export function EditOneIncome() {
         }
 
         return "";
+
     }
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
         const { name, value } = e.target;
-
 
         setForm(prev => ({ ...prev, [name]: value }));
 
@@ -87,28 +87,43 @@ export function EditOneIncome() {
             ...prev,
             [name]: errorMessage,
         }));
+
+        if(!errorMessage){
+             setErrors((prev) => ({
+            ...prev,
+            [name]: errorMessage,
+        }));
+        }
+
     }
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
         if (!id) return;
 
-        await fetch(`${apiUrl}/${id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                date: form.date,
-                amount: Number(form.amount),
-                type: form.type,
-                deleted: false,
-                details: form.details,
-                category: form.category,
-            }),
-        });
-
+        try {
+            await fetch(`${apiUrl}/${id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    date: form.date,
+                    amount: Number(form.amount),
+                    type: form.type,
+                    deleted: false,
+                    details: form.details,
+                    category: form.category,
+                }),
+            });
+        } catch (error) {
+            return window.alert(`${error}`)
+        }
+        
+        window.alert(`Update with succes`)
         navigate("/income");
+      
+
     }
 
     return (

@@ -44,14 +44,6 @@
       "id": 3
     },
     {
-      "date": "2026-05-05",
-      "amount": 23344,
-      "category": "prima",
-      "deleted": false,
-      "userId": 1,
-      "id": 4
-    },
-    {
       "date": "2026-05-03",
       "amount": 700,
       "category": "prima",
@@ -74,12 +66,11 @@
   "income": [
     {
       "date": "2026-05-04",
-      "amount": "3500",
-      "category": "salariu",
+      "amount": 0,
       "type": "active",
       "deleted": false,
-      "userId": 1,
       "details": "salariu restant",
+      "category": "salariu",
       "id": 1
     },
     {
@@ -92,12 +83,12 @@
       "id": 2
     },
     {
-      "date": "2026-05-05",
-      "amount": 23344,
+      "date": "2026-05-01",
+      "amount": 700,
       "type": "active",
       "deleted": false,
-      "details": "income from salary",
-      "category": "imprumut",
+      "details": "sasasa",
+      "category": "prima",
       "id": 3
     },
     {
@@ -138,16 +129,6 @@
       "userId": 1,
       "details": "sasasa",
       "id": 8
-    },
-    {
-      "date": "2026-05-01",
-      "amount": "700",
-      "category": "prima",
-      "type": "active",
-      "deleted": false,
-      "userId": 1,
-      "details": "sasasa",
-      "id": 9
     }
   ],
   "firstpage": [
