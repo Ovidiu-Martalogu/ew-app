@@ -42,13 +42,14 @@
 
 .formGroup {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  align-items: center;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: flex-start;
 }
 
 .errorMsg {
   color: red;
+  min-height: 1rem;
 }
 
 .edituserButton {
@@ -61,6 +62,10 @@
   font-size: 1rem;
   cursor: pointer;
   transition: 0.2s ease;
+}
+
+.cancelButtonDiv {
+  padding: 0.5rem;
 }
 
 .formButtons {

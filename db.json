@@ -55,10 +55,10 @@
   "users": [
     {
       "id": 1,
-      "firstName": "Maria",
+      "firstName": "Natalia",
       "lastName": "Maria",
       "email": "qvidiu123456@gmail.com",
-      "password": "$2a$10$cN0XZvAStUGYZgdKcorsIOi4ABs.jgdDmiJjmHtV.uXmZ6tJ.pTNW"
+      "password": "$2a$10$SheXnLw0jZmU/V7sAelQrum.km3Wc7qcU5PPCRCk0d0x7aXn9.f4m"
     }
   ],
   "expenses": [],

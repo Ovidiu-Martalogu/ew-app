@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-
+import { getAuth } from "../../hooks/getUserFromLocalStorage";
 
 import styles from "../../features/Auth/EditUser.module.css";
-
-
 
 const apiUrl = `${import.meta.env.VITE_API_URL}/users`;
 
@@ -20,13 +18,6 @@ type Errors = {
     [key: string]: string;
 };
 
-
-function getAuth() {
-    const authRaw = localStorage.getItem("auth");
-    if (!authRaw) return null;
-    return JSON.parse(authRaw);
-}
-
 function getAuthHeaders(): HeadersInit {
     const auth = getAuth();
 
@@ -41,8 +32,10 @@ function getAuthHeaders(): HeadersInit {
 export function EditUser() {
     const [user, setUser] = useState<User | null>(null);
     const [errors, setErrors] = useState<Errors>({});
+    const [submitError, setSubmitError] = useState("");
     const navigate = useNavigate();
-    const [form, setForm] = useState({
+
+    const [formData, setFormData] = useState({
         id: "",
         firstName: "",
         lastName: "",
@@ -51,9 +44,38 @@ export function EditUser() {
         retypepassword: ""
     });
 
+
+    const validate = (data = formData) => {
+        let newErrors: Errors = {};
+
+        if (!data.firstName.trim()) {
+            newErrors.firstName = "First name is required";
+        }
+
+        if (!data.lastName.trim()) {
+            newErrors.lastName = "Last name is required";
+        }
+
+        if (!data.email.trim()) {
+            newErrors.email = "Email is required";
+        }
+
+        if (data.password) {
+            if (data.password.length < 6) {
+                newErrors.password = "Password must be at least 6 characters";
+            }
+
+            if (data.password !== data.retypepassword) {
+                newErrors.retypepassword = "Passwords do not match";
+            }
+        }
+
+        return newErrors;
+    };
+
     useEffect(() => {
         const auth = getAuth();
-        // if (!auth?.user?.id) return;
+        if (!auth?.user?.id) return;
 
         fetch(`${apiUrl}/${auth.user.id}`, {
             headers: getAuthHeaders(),
@@ -66,7 +88,7 @@ export function EditUser() {
             })
             .then((data) => {
                 setUser(data);
-                setForm({
+                setFormData({
                     id: data.id,
                     firstName: data.firstName,
                     lastName: data.lastName,
@@ -76,79 +98,65 @@ export function EditUser() {
                 });
             })
             .catch((err) => {
-                console.error(err);
                 setErrors({ general: err.message });
             });
     }, []);
-
-
-    //my validateField 
-
-    function validateField(name: string, value: string) {
-        if (!value || value.trim() === "") {
-            return `Please complete the ${name} field`
-        }
-        if (name === "password" && value.length < 6) {
-            return "Your password must be at least 6 characters";
-        }
-        return "";
-    }
 
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
 
         const { name, value } = e.target;
 
-        setForm(prev => ({ ...prev, [name]: value }));
+        const updatedForm = {
+            ...formData,
+            [name]: value
+        };
 
-        const errorMessage = validateField(name, value);
+        setFormData(updatedForm);
 
-        setErrors((prev) => ({
+        const fieldErrors = validate(updatedForm);
+
+        setErrors(prev => ({
             ...prev,
-            [name]: errorMessage,
+            [name]: fieldErrors[name] || ""
         }));
 
     }
-
-    async function handleSubmit(e: React.FormEvent) {
+    async function handleSubmit(e: React.SubmitEvent) {
         e.preventDefault();
 
-        const newErrors: any = {};
+        const validationErrors = validate();
 
 
-        if (form.password && form.password !== form.retypepassword) {
-            newErrors.retypepassword = "Passwords do not match";
-        }
-
-        if (Object.keys(newErrors).length > 0) {
-            setErrors(newErrors);
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
             return;
         }
 
+        try {
+            const res = await fetch(`${apiUrl}/${formData.id}`, {
+                method: "PUT",
+                headers: getAuthHeaders(),
+                body: JSON.stringify({
+                    id: formData.id,
+                    firstName: formData.firstName,
+                    lastName: formData.lastName,
+                    email: formData.email,
+                    password: formData.password || undefined,
+                }),
+            });
 
-        const res = await fetch(`${apiUrl}/${form.id}`, {
-            method: "PUT",
-            headers: getAuthHeaders(),
-            body: JSON.stringify({
-                id: form.id,
-                firstName: form.firstName,
-                lastName: form.lastName,
-                email: form.email,
-                password: form.password || undefined,
-            }),
-        });
+            if (!res.ok) {
+                throw new Error("Update failed.There are fields left blank!");
+            }
 
-        if (!res.ok) {
-            const err = await res.text();
-            setErrors({ general: err });
-            return;
+            alert("User updated successfully");
+
+            localStorage.removeItem("auth");
+            window.location.href = "/login";
+        } catch (err: any) {
+            setSubmitError(err.message);
         }
-
-        alert("User updated successfully");
-
-        localStorage.removeItem("auth");
-        window.location.href = "/login";
-
     }
 
 
@@ -160,8 +168,8 @@ export function EditUser() {
                         <h3>Edit your data</h3>
                         <h4>Important:</h4>
                         <p>To change your data, without changing your password,</p>
-                        <p> you need to confirm your changes with your current password,</p>
-                        <p> else you can set your new password</p>
+                        <p> you need to confirm your changes with your current password.</p>
+
                     </div>
 
                     <div className={styles.formGroup}>
@@ -170,10 +178,11 @@ export function EditUser() {
                             type="text"
                             id="firstName"
                             name="firstName"
-
+                            value={formData.firstName}
+                            placeholder="First name"
                             onChange={handleChange}
                         />
-                        {errors.firstName && <p style={{ color: "red" }}>{errors.firstName}</p>}
+                        {errors.firstName && <p className={styles.errorMsg}>{errors.firstName || ""}</p>}
                     </div>
 
                     <div className={styles.formGroup}>
@@ -182,10 +191,11 @@ export function EditUser() {
                             type="text"
                             id="lastName"
                             name="lastName"
-
+                            value={formData.lastName}
+                            placeholder="Last name"
                             onChange={handleChange}
                         />
-                        {errors.lastName && <p style={{ color: "red" }}>{errors.lastName}</p>}
+                        {errors.lastName && <p className={styles.errorMsg}>{errors.lastName || ""}</p>}
 
                     </div>
 
@@ -195,10 +205,11 @@ export function EditUser() {
                             type="text"
                             id="email"
                             name="email"
-
+                            value={formData.email}
+                            placeholder="Email"
                             onChange={handleChange}
                         />
-                        {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
+                        {errors.email && <p className={styles.errorMsg}>{errors.email || ""}</p>}
 
                     </div>
 
@@ -208,9 +219,11 @@ export function EditUser() {
                             type="password"
                             id="password"
                             name="password"
+                            value={formData.password}
+                            placeholder="New password"
                             onChange={handleChange}
                         />
-                        {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
+                        {errors.password && <p className={styles.errorMsg}>{errors.password || ""}</p>}
 
                     </div>
 
@@ -220,25 +233,28 @@ export function EditUser() {
                             type="password"
                             id="retypepassword"
                             name="retypepassword"
+                            value={formData.retypepassword}
+                            placeholder="Retype password"
                             onChange={handleChange}
                         />
+                        {errors.retypepassword && <p className={styles.errorMsg}>{errors.retypepassword || ""}</p>}
+
                     </div>
 
                     <div className={styles.formButtons}>
                         <button type="submit" className={styles.edituserButton}>Update</button>
                     </div>
-
+                    {submitError && <p className={styles.errorMsg}>{submitError}</p>}
+                    <div className={styles.cancelButtonDiv}>
+                        <button
+                            type="button"
+                            onClick={() => navigate("/")}
+                        >
+                            Cancel
+                        </button>
+                    </div>
                 </form>
             )}
-            <div className={styles.formButtons}>
-                <button
-                    type="button"
-                    className={styles.edituserButton}
-                    onClick={() => navigate("/")}
-                >
-                    Cancel
-                </button>
-            </div>
 
         </>
     );
