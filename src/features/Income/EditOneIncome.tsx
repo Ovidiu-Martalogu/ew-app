@@ -17,11 +17,19 @@ type Income = {
 
 };
 
+type Errors = {
+    [key: string]: string;
+};
+
 export function EditOneIncome() {
     const { id } = useParams();
+
+    const [errors, setErrors] = useState<Errors>({});
+    const [submitError, setSubmitError] = useState("");
+
     const navigate = useNavigate();
 
-    const [form, setForm] = useState({
+    const [formData, setFormData] = useState({
         date: "",
         amount: "",
         type: "",
@@ -29,20 +37,48 @@ export function EditOneIncome() {
         details: ""
     });
 
-    const [errors, setErrors] = useState<Record<string, string>>({});
+
+    const validate = (data = formData) => {
+        let newErrors: Errors = {};
+
+        if (!data.date.trim()) {
+            newErrors.date = "Date is required";
+        }
+
+        const amountNumber = Number(data.amount);
+
+        if (!data.amount.trim() || isNaN(amountNumber) || amountNumber < 0) {
+            newErrors.amount = "Amount must be a positive number";
+        }
+
+        if (!data.type.trim()) {
+            newErrors.type = "Type is required";
+        }
+
+        if (!data.category.trim()) {
+            newErrors.category = "Category is required";
+        }
+        if (!data.details.trim()) {
+            newErrors.details = "Details is required";
+        }
+
+        return newErrors;
+    };
+
+
 
     useEffect(() => {
         if (!id) return;
 
         fetch(`${apiUrl}/${id}`)
-            .then(res => {
+            .then(async (res) => {
                 if (!res.ok) {
                     throw new Error("Failed to fetch income");
                 }
                 return res.json();
             })
             .then((data: Income) => {
-                setForm({
+                setFormData({
                     date: data.date,
                     amount: String(data.amount),
                     category: data.category,
@@ -50,56 +86,44 @@ export function EditOneIncome() {
                     details: data.details
                 });
             })
-            .catch(err => {
-                console.error(err);
+            .catch((err) => {
+                setErrors({ general: err.message });
             })
 
     }, [id]);
 
-    //my validateField
-
-    function validateField(name: string, value: string) {
-        if (!value || value.trim() === "") {
-            return ` Please complete the ${name} field`;
-        }
-
-        if (name === "amount") {
-            if (isNaN(Number(value))) {
-                return "Amount must be a number";
-            }
-            if (Number(value) <= 0) {
-                return "The sum must be positive";
-            }
-        }
-
-        return "";
-
-    }
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
         const { name, value } = e.target;
 
-        setForm(prev => ({ ...prev, [name]: value }));
+        const updatedForm = {
+            ...formData,
+            [name]: value
+        };
 
-        const errorMessage = validateField(name, value);
+        setFormData(updatedForm);
 
-        setErrors((prev) => ({
+        const fieldErrors = validate(updatedForm);
+
+        setErrors(prev => ({
             ...prev,
-            [name]: errorMessage,
+            [name]: fieldErrors[name] || ""
         }));
-
-        if(!errorMessage){
-             setErrors((prev) => ({
-            ...prev,
-            [name]: errorMessage,
-        }));
-        }
 
     }
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
         if (!id) return;
+
+        const validationErrors = validate();
+
+
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
+            setSubmitError("Please fix the errors before submitting");
+            return;
+        }
 
         try {
             await fetch(`${apiUrl}/${id}`, {
@@ -108,21 +132,23 @@ export function EditOneIncome() {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    date: form.date,
-                    amount: Number(form.amount),
-                    type: form.type,
+                    date: formData.date,
+                    amount: Number(formData.amount),
+                    type: formData.type,
                     deleted: false,
-                    details: form.details,
-                    category: form.category,
+                    details: formData.details,
+                    category: formData.category,
                 }),
             });
-        } catch (error) {
-            return window.alert(`${error}`)
+
+
+            window.alert(`Update with succes`)
+            navigate("/income");
+
+        } catch (err: any) {
+            setSubmitError(err.message);
         }
-        
-        window.alert(`Update with succes`)
-        navigate("/income");
-      
+
 
     }
 
@@ -138,10 +164,10 @@ export function EditOneIncome() {
                         id="date"
                         type="date"
                         name="date"
-                        value={form.date}
+                        value={formData.date}
                         onChange={handleChange}
                     />
-                    {errors.date && <p className={styles.error}>{errors.date}</p>}
+                    {errors.date && <p className={styles.error}>{errors.date || ""}</p>}
                 </div>
 
                 <div className={styles.formGroup}>
@@ -150,10 +176,10 @@ export function EditOneIncome() {
                         id="amount"
                         type="number"
                         name="amount"
-                        value={form.amount}
+                        value={formData.amount}
                         onChange={handleChange}
                     />
-                    {errors.amount && <p className={styles.error}>{errors.amount}</p>}
+                    {errors.amount && <p className={styles.error}>{errors.amount || ""}</p>}
                 </div>
 
                 <div className={styles.formGroup}>
@@ -161,7 +187,7 @@ export function EditOneIncome() {
                     <select
                         id="type"
                         name="type"
-                        value={form.type}
+                        value={formData.type}
                         onChange={handleChange}
                     >
                         <option value="active">Active</option>
@@ -175,10 +201,10 @@ export function EditOneIncome() {
                         id="category"
                         type="text"
                         name="category"
-                        value={form.category}
+                        value={formData.category}
                         onChange={handleChange}
                     />
-                    {errors.category && <p className={styles.error}>{errors.category}</p>}
+                    {errors.category && <p className={styles.error}>{errors.category || ""}</p>}
                 </div>
 
                 <div className={styles.formGroup}>
@@ -187,14 +213,15 @@ export function EditOneIncome() {
                         id="details"
                         type="text"
                         name="details"
-                        value={form.details}
+                        value={formData.details}
                         onChange={handleChange}
                     />
-                    {errors.details && <p className={styles.error}>{errors.details}</p>}
+                    {errors.details && <p className={styles.error}>{errors.details || ""}</p>}
                 </div>
 
                 <button type="submit" className={styles.buttonEditIncome}>Update</button>
-            </form>
+                {submitError && <p className={styles.error}>{submitError}</p>}
+               </form>
 
             <NavLink to="/income" className={styles.buttonBack}>Back</NavLink>
         </div>

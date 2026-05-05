@@ -66,10 +66,10 @@
   "income": [
     {
       "date": "2026-05-04",
-      "amount": 0,
+      "amount": 800,
       "type": "active",
       "deleted": false,
-      "details": "salariu restant",
+      "details": "sasasa",
       "category": "salariu",
       "id": 1
     },
