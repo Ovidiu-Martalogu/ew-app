@@ -5,21 +5,70 @@ import { NavLink, } from "react-router";
 import { getAuth } from "../../hooks/getUserFromLocalStorage";
 
 const apiUrl = `${import.meta.env.VITE_API_URL}/income`;
-
+type Errors = {
+    [key: string]: string;
+};
 
 export function Income() {
     const [income, setIncome] = useState<Income[] | null>(null);
     const [addIncome, setAddIncome] = useState(false);
     const [type, setType] = useState<"active" | "passive">("active");
 
+    const [errors, setErrors] = useState<Errors>({});
+    const [submitError, setSubmitError] = useState("");
+
+
+
     const buttonAddIncome = () => {
         setAddIncome(!addIncome);
     };
 
+    const validate = (data: {
+        date: string;
+        amount: string;
+        type: string;
+        category: string;
+        details: string;
+    }) => {
+        let newErrors: Errors = {};
+
+        if (!data.date.trim()) {
+            newErrors.date = "Date is required";
+        }
+
+        const amountNumber = Number(data.amount);
+
+        if (!data.amount.trim() || isNaN(amountNumber) || amountNumber < 0) {
+            newErrors.amount = "Amount must be a positive number";
+        }
+
+        if (!data.type.trim()) {
+            newErrors.type = "Type is required";
+        }
+
+        if (!data.category.trim()) {
+            newErrors.category = "Category is required";
+        }
+
+        if (!data.details.trim()) {
+            newErrors.details = "Details is required";
+        }
+
+        return newErrors;
+    };
+
     useEffect(() => {
         fetch(apiUrl)
-            .then((response) => response.json())
-            .then((data) => setIncome(data));
+            .then(async (res) => {
+                if (!res.ok) {
+                    throw new Error("Failed to fetch.");
+                }
+                return res.json();
+            })
+            .then((data) => setIncome(data))
+            .catch((err) => {
+                setErrors({ general: err.message });
+            });
     }, []);
 
     async function addIncomeToDB(e: React.FormEvent<HTMLFormElement>) {
@@ -27,15 +76,21 @@ export function Income() {
         if (!addIncome) return;
 
         const form = new FormData(e.currentTarget);
-        const date = form.get("date");
-        const amount = form.get("amount");
-        const category = form.get("category");
-        const type = form.get("type");
-        const details = form.get("details")
 
-        if (!date) return (console.log(`not date`))
-        if (!amount) return (console.log(`not`))
-        if (!category) return (console.log(`not cat`))
+        const data = {
+            date: String(form.get("date") || ""),
+            amount: String(form.get("amount") || ""),
+            type: String(form.get("type") || ""),
+            category: String(form.get("category") || ""),
+            details: String(form.get("details") || "")
+        };
+
+        const validationErrors = validate(data);
+
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
+            return;
+        }
 
         const userId = getAuth();
 
@@ -44,28 +99,35 @@ export function Income() {
             return;
         }
 
-        const newIncome = await fetch(apiUrl, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                date,
-                amount,
-                category,
-                type: type === "active" ? type : "passive",
-                deleted: false,
-                userId,
-                details
-            }),
-        }).then((res) => res.json());
+        try {
+            const res = await fetch(apiUrl, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    ...data,
+                    amount: Number(data.amount),
+                    type: data.type === "active" ? "active" : "passive",
+                    deleted: false,
+                    userId
+                }),
+            });
 
-        setIncome([...(income ?? []), newIncome]);
-        setAddIncome(false);
+            if (!res.ok) {
+                throw new Error("Failed to add income");
+            }
 
-        setType("active");
+            const newIncome = await res.json();
+
+            setIncome(prev => [...(prev ?? []), newIncome]);
+            setAddIncome(false);
+            setType("active");
+            setErrors({});
+        } catch (err: any) {
+            setSubmitError(err.message);
+        }
     }
-
 
     async function deleteIncome(id: number) {
         const ok = window.confirm("Are you sure?");
@@ -80,7 +142,6 @@ export function Income() {
         );
     }
 
-
     const total = income?.reduce((sum, p) => {
         return sum + Number(p.amount);
     }, 0);
@@ -94,152 +155,104 @@ export function Income() {
         return colors[category?.toLowerCase() as keyof typeof colors] || "#607D8B";
     };
 
+    const renderForm = (
+        <form onSubmit={addIncomeToDB} className={styles.formAddIncome}>
+            <div className={styles.formGroup}>
+                <label htmlFor="type"> Type:</label>
+                <select
+                    id="type"
+                    name="type"
+                    value={type}
+                    onChange={(e) =>
+                        setType(e.target.value as "active" | "passive")
+                    }
+                >
+                    <option value="active">Active</option>
+                    <option value="passive">Passive</option>
+                </select>
+                {errors.type && <p>{errors.type}</p>}
+            </div>
 
+            <div className={styles.formGroup}>
+                <label htmlFor="date"> Date: </label>
+                <input
+                    id="date"
+                    type="date"
+                    name="date"
+                    className={styles.input}
+                />
+                {errors.date && <p className={styles.error}>{errors.date || ""}</p>}
+
+            </div>
+
+            <div className={styles.formGroup}>
+                <label htmlFor="amount">Amount:</label>
+                <input
+                    id="amount"
+                    type="number"
+                    name="amount"
+                    className={styles.input}
+                />
+                {errors.amount && <p className={styles.error}>{errors.amount || ""}</p>}
+
+            </div>
+
+            <div className={styles.formGroup}>
+                <label htmlFor="category">Category:</label>
+                <input
+                    id="category"
+                    type="text"
+                    name="category"
+                    className={styles.input}
+                />
+                {errors.category && <p className={styles.error}>{errors.category || ""}</p>}
+
+            </div>
+
+            <div className={styles.formGroup}>
+                <label htmlFor="details">Details:</label>
+                <input
+                    id="details"
+                    type="text"
+                    name="details"
+                    className={styles.input}
+                />
+                {errors.details && <p className={styles.error}>{errors.details || ""}</p>}
+            </div>
+
+            <button type="submit" className={styles.addIncomeButton}>
+                Add Income
+            </button>
+
+            {submitError && <p className={styles.error}>{submitError}</p>}
+        </form>
+    );
 
     if (!income || income.length === 0) {
-
         return (
             <>
                 <h1 className={styles.notIncomeMsg}>
-                    <strong>You don't have any incomes. Please add .</strong>
+                    <strong>You don't have any incomes. Please add.</strong>
                 </h1>
 
-                <div >
+                <div>
+                    {addIncome && renderForm}
 
-                    {addIncome && (
-                        <form onSubmit={addIncomeToDB} className={styles.formAddIncome}>
-                            <div className={styles.formGroup}>
-                                <label htmlFor="type"> Type:</label>
-                                <select
-                                    id="type"
-                                    name="type"
-                                    value={type}
-                                    onChange={(e) =>
-                                        setType(e.target.value as "active" | "passive")
-                                    }
-                                >
-                                    <option value="active">Active</option>
-                                    <option value="passive">Passive</option>
-                                </select>
-
-                            </div>
-                            <div className={styles.formGroup}>
-
-                                <label htmlFor="date">  Date: </label>
-                                <input
-                                    id="date"
-                                    type="date"
-                                    name="date"
-                                    className={styles.input} />
-                            </div>
-
-                            <div className={styles.formGroup}>
-
-                                <label htmlFor="amount">Amount:</label>
-                                <input
-                                    id="amount"
-                                    type="number"
-                                    name="amount"
-                                    className={styles.input} />
-                            </div>
-                            <div className={styles.formGroup}>
-
-                                <label htmlFor="category">Category:</label>
-                                <input
-                                    id="category"
-                                    type="text"
-                                    name="category"
-                                    className={styles.input} />
-                            </div>
-
-                            <div className={styles.formGroup}>
-                                <label htmlFor="details">Details:</label>
-                                <input
-                                    id="details"
-                                    type="text"
-                                    name="details"
-                                    className={styles.input} />
-                            </div>
-
-
-                            <button type="submit" className={styles.addIncomeButton}>Add Income</button>
-                        </form>
-                    )}
                     <button onClick={buttonAddIncome} className={styles.addIncomeButton}>
                         {addIncome ? "Back" : "Add new Income"}
                     </button>
                 </div>
             </>
-        )
+        );
     }
-
-
 
     return (
         <div className={styles.content}>
             <h1>income money</h1>
 
-            <div >
+            <div>
+                {addIncome && renderForm}
 
-                {addIncome && (
-                    <form onSubmit={addIncomeToDB} className={styles.formAddIncome}>
-                        <div className={styles.formGroup}>
-                            <label htmlFor="type"> Type:</label>
-                            <select
-                                id="type"
-                                name="type"
-                                value={type}
-                                onChange={(e) =>
-                                    setType(e.target.value as "active" | "passive")
-                                }
-                            >
-                                <option value="active">Active</option>
-                                <option value="passive">Passive</option>
-                            </select>
-
-                        </div>
-                        <div className={styles.formGroup}>
-
-                            <label htmlFor="date">  Date: </label>
-                            <input
-                                id="date"
-                                type="date"
-                                name="date"
-                                className={styles.input} />
-                        </div>
-
-                        <div className={styles.formGroup}>
-
-                            <label htmlFor="amount">Amount:</label>
-                            <input
-                                id="amount"
-                                type="number"
-                                name="amount"
-                                className={styles.input} />
-                        </div>
-                        <div className={styles.formGroup}>
-
-                            <label htmlFor="category">Category:</label>
-                            <input
-                                id="category"
-                                type="text"
-                                name="category"
-                                className={styles.input} />
-                        </div>
-
-                        <div className={styles.formGroup}>
-                            <label htmlFor="details">Details:</label>
-                            <input
-                                id="details"
-                                type="text"
-                                name="details"
-                                className={styles.input} />
-                        </div>
-
-
-                        <button type="submit" className={styles.addIncomeButton}>Add Income</button>
-                    </form>
-                )}
                 <button onClick={buttonAddIncome} className={styles.addIncomeButton}>
                     {addIncome ? "Back" : "Add new Income"}
                 </button>
@@ -271,7 +284,8 @@ export function Income() {
                         </p>
 
                         <div className={styles.cardActions}>
-                            <NavLink to={`/income/edit/${item.id}`} className={styles.editLink}>
+                            <NavLink to={`/income/edit/${item.id}`}
+                                className={styles.editLink}>
                                 Edit
                             </NavLink>
 

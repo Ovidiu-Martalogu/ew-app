@@ -70,7 +70,7 @@
       "type": "active",
       "deleted": false,
       "details": "sasasa",
-      "category": "salariu",
+      "category": "prima",
       "id": 1
     },
     {
@@ -129,6 +129,35 @@
       "userId": 1,
       "details": "sasasa",
       "id": 8
+    },
+    {
+      "date": "2026-05-06",
+      "amount": 2300,
+      "type": "passive",
+      "deleted": false,
+      "details": "sasasa",
+      "category": "prima",
+      "id": 9
+    },
+    {
+      "date": "2026-05-06",
+      "amount": 700,
+      "type": "active",
+      "category": "bonus",
+      "details": "sasasa",
+      "deleted": false,
+      "userId": 1,
+      "id": 10
+    },
+    {
+      "date": "2026-05-05",
+      "amount": 3659,
+      "type": "active",
+      "category": "prima",
+      "details": "sasasa",
+      "deleted": false,
+      "userId": 1,
+      "id": 11
     }
   ],
   "firstpage": [
