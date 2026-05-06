@@ -18,6 +18,7 @@ type Errors = {
     [key: string]: string;
 };
 
+
 function getAuthHeaders(): HeadersInit {
     const auth = getAuth();
 
@@ -76,6 +77,8 @@ export function EditUser() {
     useEffect(() => {
         const auth = getAuth();
         if (!auth?.user?.id) return;
+        ;
+
 
         fetch(`${apiUrl}/${auth.user.id}`, {
             headers: getAuthHeaders(),

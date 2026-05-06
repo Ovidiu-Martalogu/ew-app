@@ -54,11 +54,11 @@
   ],
   "users": [
     {
-      "id": 1,
+      "email": "qvidiu123456@gmail.com",
+      "password": "$2a$10$4512vJBlqOubPa8x6A7LZuYiHmq6JhTDYtScoU1f2pJYs8UcT6T7e",
       "firstName": "Natalia",
       "lastName": "Maria",
-      "email": "qvidiu123456@gmail.com",
-      "password": "$2a$10$SheXnLw0jZmU/V7sAelQrum.km3Wc7qcU5PPCRCk0d0x7aXn9.f4m"
+      "id": 1
     }
   ],
   "expenses": [],
@@ -74,24 +74,6 @@
       "id": 1
     },
     {
-      "date": "2026-05-05",
-      "amount": 600,
-      "type": "active",
-      "deleted": false,
-      "details": "sasasa",
-      "category": "prima",
-      "id": 2
-    },
-    {
-      "date": "2026-05-01",
-      "amount": 700,
-      "type": "active",
-      "deleted": false,
-      "details": "sasasa",
-      "category": "prima",
-      "id": 3
-    },
-    {
       "date": "2026-05-01",
       "amount": "600",
       "category": "prima",
@@ -100,16 +82,6 @@
       "userId": 1,
       "details": "sasasa",
       "id": 5
-    },
-    {
-      "date": "2026-05-04",
-      "amount": "700",
-      "category": "prima",
-      "type": "active",
-      "deleted": false,
-      "userId": 1,
-      "details": "sasasa",
-      "id": 6
     },
     {
       "date": "2026-05-01",
@@ -129,35 +101,6 @@
       "userId": 1,
       "details": "sasasa",
       "id": 8
-    },
-    {
-      "date": "2026-05-06",
-      "amount": 2300,
-      "type": "passive",
-      "deleted": false,
-      "details": "sasasa",
-      "category": "prima",
-      "id": 9
-    },
-    {
-      "date": "2026-05-06",
-      "amount": 700,
-      "type": "active",
-      "category": "bonus",
-      "details": "sasasa",
-      "deleted": false,
-      "userId": 1,
-      "id": 10
-    },
-    {
-      "date": "2026-05-05",
-      "amount": 3659,
-      "type": "active",
-      "category": "prima",
-      "details": "sasasa",
-      "deleted": false,
-      "userId": 1,
-      "id": 11
     }
   ],
   "firstpage": [

@@ -17,8 +17,6 @@ export function Income() {
     const [errors, setErrors] = useState<Errors>({});
     const [submitError, setSubmitError] = useState("");
 
-
-
     const buttonAddIncome = () => {
         setAddIncome(!addIncome);
     };
@@ -248,7 +246,7 @@ export function Income() {
 
     return (
         <div className={styles.content}>
-            <h1>income money</h1>
+            <h1>Income</h1>
 
             <div>
                 {addIncome && renderForm}
