@@ -9,6 +9,17 @@ type Errors = {
     [key: string]: string;
 };
 
+function getAuthHeaders(): HeadersInit {
+    const auth = getAuth();
+
+    return {
+        "Content-Type": "application/json",
+        ...(auth?.accessToken
+            ? { Authorization: `Bearer ${auth.accessToken}` }
+            : {}),
+    };
+}
+
 export function Income() {
     const [income, setIncome] = useState<Income[] | null>(null);
     const [addIncome, setAddIncome] = useState(false);
@@ -56,7 +67,16 @@ export function Income() {
     };
 
     useEffect(() => {
-        fetch(apiUrl)
+        const auth = getAuth();
+        if (!auth?.user?.id) return;
+        ;
+        console.log(auth.user.id);
+
+        if (!auth.user.id) return;
+
+        fetch(`${apiUrl}?userId=${auth.user.id}`, {
+            headers: getAuthHeaders(),
+        })
             .then(async (res) => {
                 if (!res.ok) {
                     throw new Error("Failed to fetch.");
@@ -90,7 +110,8 @@ export function Income() {
             return;
         }
 
-        const userId = getAuth();
+        const auth = getAuth();
+        const userId = auth.user.id;
 
         if (!userId) {
             alert("User not logged in");
@@ -98,6 +119,7 @@ export function Income() {
         }
 
         try {
+
             const res = await fetch(apiUrl, {
                 method: "POST",
                 headers: {
@@ -108,7 +130,7 @@ export function Income() {
                     amount: Number(data.amount),
                     type: data.type === "active" ? "active" : "passive",
                     deleted: false,
-                    userId
+                    userId: userId
                 }),
             });
 

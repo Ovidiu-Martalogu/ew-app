@@ -59,6 +59,13 @@
       "firstName": "Natalia",
       "lastName": "Maria",
       "id": 1
+    },
+    {
+      "email": "a@gmail.com",
+      "password": "$2a$10$17zKOUWjtLvcfIGCsqcryezyhyUup8BrHjOjDln07TCAKo4o/3rL2",
+      "firstName": "dodo",
+      "lastName": "didi",
+      "id": 2
     }
   ],
   "expenses": [],
@@ -69,6 +76,7 @@
       "amount": 800,
       "type": "active",
       "deleted": false,
+      "userId": 1,
       "details": "sasasa",
       "category": "prima",
       "id": 1
@@ -88,6 +96,7 @@
       "amount": 0,
       "type": "passive",
       "deleted": false,
+      "userId": 1,
       "details": "sasasa",
       "category": "prima",
       "id": 7
@@ -101,6 +110,26 @@
       "userId": 1,
       "details": "sasasa",
       "id": 8
+    },
+    {
+      "date": "2026-05-06",
+      "amount": 600,
+      "type": "active",
+      "deleted": false,
+      "details": "sasasa",
+      "category": "prima",
+      "userId": 2,
+      "id": 9
+    },
+    {
+      "date": "2026-05-06",
+      "amount": 2300,
+      "type": "passive",
+      "deleted": false,
+      "details": "salariu restant",
+      "category": "prima",
+      "userId": 2,
+      "id": 11
     }
   ],
   "firstpage": [

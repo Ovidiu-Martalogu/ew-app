@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router";
 import styles from "../Income/EditOneIncome.module.css";
+import { getAuth } from "../../hooks/getUserFromLocalStorage";
 
 
 const apiUrl = `${import.meta.env.VITE_API_URL}/income`;
@@ -34,7 +35,8 @@ export function EditOneIncome() {
         amount: "",
         type: "",
         category: "",
-        details: ""
+        details: "",
+
     });
 
 
@@ -124,7 +126,8 @@ export function EditOneIncome() {
             setSubmitError("Please fix the errors before submitting");
             return;
         }
-
+        const auth = getAuth();
+        const userId = auth.user.id;
         try {
             await fetch(`${apiUrl}/${id}`, {
                 method: "PUT",
@@ -138,6 +141,8 @@ export function EditOneIncome() {
                     deleted: false,
                     details: formData.details,
                     category: formData.category,
+                    userId: userId
+
                 }),
             });
 
@@ -221,7 +226,7 @@ export function EditOneIncome() {
 
                 <button type="submit" className={styles.buttonEditIncome}>Update</button>
                 {submitError && <p className={styles.error}>{submitError}</p>}
-               </form>
+            </form>
 
             <NavLink to="/income" className={styles.buttonBack}>Back</NavLink>
         </div>

@@ -72,7 +72,7 @@ h2 {
 }
 
 .formGroup {
-
+  color: rgb(119, 83, 16);
   display: flex;
   flex-direction: column;
   gap: 6px;
