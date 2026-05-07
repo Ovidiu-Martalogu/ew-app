@@ -1,17 +1,34 @@
 import { useEffect, useState } from "react";
 import type { Payment, SortChoice } from "./types";
+import { getAuth } from "../../hooks/getUserFromLocalStorage";
 
 import styles from './Payment.module.css';
-import { getAuth } from "../../hooks/getUserFromLocalStorage";
 
 const apiUrl = `${import.meta.env.VITE_API_URL}/payments`;
 
+type Errors = {
+    [key: string]: string;
+};
+
+function getAuthHeaders(): HeadersInit {
+    const auth = getAuth();
+
+    return {
+        "Content-Type": "application/json",
+        ...(auth?.accessToken
+            ? { Authorization: `Bearer ${auth.accessToken}` }
+            : {}),
+    };
+}
 
 export function Payment() {
     const [payment, setpayment] = useState<Payment[] | null>(null);
     const [addPayment, setAddPayment] = useState(false);
     const [sortField, setSortField] = useState<"date" | "amount" | null>(null);
     const [sortChoice, setSortChoice] = useState<SortChoice>("ascending");
+
+    const [errors, setErrors] = useState<Errors>({});
+    const [submitError, setSubmitError] = useState("");
 
     const [editingId, setEditingId] = useState<number | null>(null);
     const [editForm, setEditForm] = useState({
@@ -23,13 +40,55 @@ export function Payment() {
     const buttonAddPayment = () => {
         setAddPayment(!addPayment);
     };
+
+
+    const validate = (data: {
+        date: string;
+        amount: string;
+        category: string;
+
+    }) => {
+        let newErrors: Errors = {};
+
+        if (!data.date.trim()) {
+            newErrors.date = "Date is required";
+        }
+
+        const amountNumber = Number(data.amount);
+
+        if (!data.amount.trim() || isNaN(amountNumber) || amountNumber < 0) {
+            newErrors.amount = "Amount must be a positive number";
+        }
+
+        if (!data.category.trim()) {
+            newErrors.category = "Category is required";
+        }
+
+        return newErrors;
+    };
+
     //get Payment from DB
     useEffect(() => {
-        fetch(apiUrl)
-            .then((response) => response.json())
+        const auth = getAuth();
+        if (!auth?.user?.id) return;
+        ;
+        console.log(auth.user.id);
 
-            .then((data) => setpayment(data));
+        if (!auth.user.id) return;
+        fetch(`${apiUrl}?userId=${auth.user.id}`, {
+            headers: getAuthHeaders(),
+        })
+            .then(async (res) => {
+                if (!res.ok) {
+                    throw new Error("Failed to fetch.");
+                }
+                return res.json();
+            })
 
+            .then((data) => setpayment(data))
+            .catch((err) => {
+                setErrors({ general: err.message });
+            });
 
     }, []);
 
@@ -38,49 +97,56 @@ export function Payment() {
         e.preventDefault();
         if (!addPayment) return;
 
-        const form = e.currentTarget;
-        const data = new FormData(form);
-        const date = data.get("date");
-        const amount = Number(data.get("amount"));
-        const category = data.get("category");
+        const form = new FormData(e.currentTarget);
 
+        const data = {
+            date: String(form.get("date") || ""),
+            amount: String(form.get("amount") || ""),
+            category: String(form.get("category") || "")
+        };
 
-        if (!amount) {
-            alert("Please enter only values for amount");
-            if (!date || !amount || !category) {
-                alert("Please fill all the fields");
+        const validationErrors = validate(data);
 
-            }
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
             return;
-
         }
 
-        const userId = getAuth();
+
+        const auth = getAuth();
+        const userId = auth.user.id;
 
         if (!userId) {
             alert("User not logged in");
             return;
         }
 
+        try {
+            const response = await fetch(apiUrl, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    ...data,
+                    amount: Number(data.amount),
+                    userId: userId
+                }),
+            });
 
-        const newPayment = await fetch(apiUrl, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                date,
-                amount: Number(amount),
-                category,
-                deleted: false,
-                userId
-            }),
-        }).then((response) => response.json());
+            if (!response.ok) {
+                throw new Error("Failed to add payment");
+            }
 
-        setpayment([...(payment ?? []), newPayment]);
-        setAddPayment(false);
+            const newPayment = await response.json();
+
+            setpayment([...(payment ?? []), newPayment]);
+            setAddPayment(false);
+        } catch (err: any) {
+            setSubmitError(err.message);
+
+        }
     }
-
     async function saveEdit(id: number) {
         const updated = {
             ...editForm,
@@ -118,7 +184,7 @@ export function Payment() {
         setpayment((prev) =>
             prev ? prev.filter((item) => item.id !== id) : prev
         );
-    }
+    };
     //sort payments
     const sortedPayments = [...(payment ?? [])].sort((a, b) => {
         if (!sortField) return 0;
@@ -141,6 +207,53 @@ export function Payment() {
         return sum + Number(p.amount);
     }, 0);
 
+    const renderForm = (
+        <form onSubmit={addPaymentsToDB} className={styles.formAddPayment}>
+
+            <div className={styles.formGroup}>
+                <label htmlFor="date">Select the date:</label>
+                <input
+                    id="date"
+                    type="date"
+                    name="date"
+                    className={styles.input}
+                />
+                {errors.date && <p className={styles.error}>{errors.date || ""}</p>}
+
+            </div>
+            <div className={styles.formGroup}>
+                <label htmlFor="amount" > Insert the amount: </label>
+                <input
+                    id="amount"
+                    type="number"
+                    name="amount"
+                    className={styles.input}
+                />
+                {errors.amount && <p className={styles.error}>{errors.amount || ""}</p>}
+
+            </div>
+
+            <div className={styles.formGroup}>
+
+                <label htmlFor="category" > Insert the category:</label>
+                <input
+                    id="category"
+                    type="text"
+                    name="category"
+                    className={styles.input}
+                />
+                {errors.category && <p className={styles.error}>{errors.category || ""}</p>}
+
+            </div>
+            <div className={styles.formGroup}>
+                <button type="submit" className={styles.addPaymentButton}>
+                    Add Payment
+                </button>
+                {submitError && <p className={styles.error}>{submitError}</p>}
+
+            </div>
+        </form>
+    )
 
     if (!payment || payment.length === 0) {
         return (
@@ -150,44 +263,7 @@ export function Payment() {
                 </h2>
                 <div>
 
-                    {addPayment && (
-                        <form onSubmit={addPaymentsToDB} className={styles.formAddPayment}>
-
-                            <div className={styles.formGroup}>
-                                <label htmlFor="date">Select the date:</label>
-                                <input
-                                    id="date"
-                                    type="date"
-                                    name="date"
-                                    className={styles.input} />
-                            </div>
-                            <div className={styles.formGroup}>
-                                <label htmlFor="amount" > Insert the amount: </label>
-                                <input
-                                    id="amount"
-                                    type="number"
-                                    name="amount"
-                                    className={styles.input} />
-                            </div>
-
-                            <div className={styles.formGroup}>
-
-                                <label htmlFor="category" > Insert the category:</label>
-                                <input
-                                    id="category"
-                                    type="text"
-                                    name="category"
-                                    className={styles.input} />
-                            </div>
-                            <div className={styles.formGroup}>
-
-
-                                <button type="submit" className={styles.addPaymentButton}>
-                                    Add Payment
-                                </button>
-                            </div>
-                        </form>
-                    )}
+                    {addPayment && renderForm}
 
                     <button onClick={buttonAddPayment} className={styles.addPaymentButton}>
                         {addPayment ? "Back" : "Add new Payment"}
@@ -204,44 +280,7 @@ export function Payment() {
 
                 <div>
 
-                    {addPayment && (
-                        <form onSubmit={addPaymentsToDB} className={styles.formAddPayment}>
-
-                            <div className={styles.formGroup}>
-                                <label htmlFor="date">Select the date:</label>
-                                <input
-                                    id="date"
-                                    type="date"
-                                    name="date"
-                                    className={styles.input} />
-                            </div>
-                            <div className={styles.formGroup}>
-                                <label htmlFor="amount" > Insert the amount: </label>
-                                <input
-                                    id="amount"
-                                    type="number"
-                                    name="amount"
-                                    className={styles.input} />
-                            </div>
-
-                            <div className={styles.formGroup}>
-
-                                <label htmlFor="category" > Insert the category:</label>
-                                <input
-                                    id="category"
-                                    type="text"
-                                    name="category"
-                                    className={styles.input} />
-                            </div>
-                            <div className={styles.formGroup}>
-
-
-                                <button type="submit" className={styles.addPaymentButton}>
-                                    Add Payment
-                                </button>
-                            </div>
-                        </form>
-                    )}
+                    {addPayment && renderForm}
 
                     <button onClick={buttonAddPayment} className={styles.addPaymentButton}>
                         {addPayment ? "Back" : "Add new Payment"}

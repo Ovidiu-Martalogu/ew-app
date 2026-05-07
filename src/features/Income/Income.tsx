@@ -89,7 +89,7 @@ export function Income() {
             });
     }, []);
 
-    async function addIncomeToDB(e: React.FormEvent<HTMLFormElement>) {
+    async function addIncomeToDB(e: React.SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
         if (!addIncome) return;
 

@@ -48,8 +48,22 @@
       "amount": 700,
       "category": "prima",
       "deleted": false,
-      "userId": 1,
+      "userId": 2,
       "id": 6
+    },
+    {
+      "date": "2026-05-06",
+      "amount": 2000,
+      "category": "impozit",
+      "userId": 1,
+      "id": 7
+    },
+    {
+      "date": "2026-05-06",
+      "amount": 2300,
+      "category": "rent",
+      "userId": 1,
+      "id": 8
     }
   ],
   "users": [
@@ -74,21 +88,21 @@
     {
       "date": "2026-05-04",
       "amount": 800,
-      "type": "active",
+      "type": "passive",
       "deleted": false,
-      "userId": 1,
-      "details": "sasasa",
+      "details": "user1",
       "category": "prima",
+      "userId": 1,
       "id": 1
     },
     {
       "date": "2026-05-01",
-      "amount": "600",
-      "category": "prima",
+      "amount": 600,
       "type": "active",
       "deleted": false,
+      "details": "user1",
+      "category": "prima",
       "userId": 1,
-      "details": "sasasa",
       "id": 5
     },
     {
@@ -96,19 +110,19 @@
       "amount": 0,
       "type": "passive",
       "deleted": false,
-      "userId": 1,
-      "details": "sasasa",
+      "details": "user1",
       "category": "prima",
+      "userId": 1,
       "id": 7
     },
     {
       "date": "2026-05-01",
-      "amount": "700",
-      "category": "prima",
+      "amount": 700,
       "type": "active",
       "deleted": false,
+      "details": "user1",
+      "category": "prima",
       "userId": 1,
-      "details": "sasasa",
       "id": 8
     },
     {
@@ -116,7 +130,7 @@
       "amount": 600,
       "type": "active",
       "deleted": false,
-      "details": "sasasa",
+      "details": "user2",
       "category": "prima",
       "userId": 2,
       "id": 9
@@ -126,7 +140,7 @@
       "amount": 2300,
       "type": "passive",
       "deleted": false,
-      "details": "salariu restant",
+      "details": "user2",
       "category": "prima",
       "userId": 2,
       "id": 11
