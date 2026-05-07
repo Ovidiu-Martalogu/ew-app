@@ -1,0 +1,240 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "title": "a title",
+      "views": 100
+    },
+    {
+      "id": "2",
+      "title": "another title",
+      "views": 200
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "text": "a comment about post 1",
+      "postId": "1"
+    },
+    {
+      "id": "2",
+      "text": "another comment about post 1",
+      "postId": "1"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "payments": [
+    {
+      "date": "2026-05-06",
+      "amount": 122,
+      "category": "rent",
+      "deleted": false,
+      "userId": 1,
+      "id": 2
+    },
+    {
+      "date": "2026-05-04",
+      "amount": 700,
+      "category": "Kaufland",
+      "deleted": false,
+      "userId": 1,
+      "id": 3
+    },
+    {
+      "date": "2026-05-03",
+      "amount": 700,
+      "category": "prima",
+      "deleted": false,
+      "userId": 2,
+      "id": 6
+    },
+    {
+      "date": "2026-05-06",
+      "amount": 2000,
+      "category": "impozit",
+      "userId": 1,
+      "id": 7
+    },
+    {
+      "date": "2026-05-06",
+      "amount": 2300,
+      "category": "rent",
+      "userId": 1,
+      "id": 8
+    },
+    {
+      "date": "2026-05-06",
+      "amount": 2000,
+      "category": "impozit",
+      "userId": 2,
+      "id": 9
+    }
+  ],
+  "users": [
+    {
+      "email": "qvidiu123456@gmail.com",
+      "password": "$2a$10$4512vJBlqOubPa8x6A7LZuYiHmq6JhTDYtScoU1f2pJYs8UcT6T7e",
+      "firstName": "Natalia",
+      "lastName": "Maria",
+      "id": 1
+    },
+    {
+      "email": "a@gmail.com",
+      "password": "$2a$10$17zKOUWjtLvcfIGCsqcryezyhyUup8BrHjOjDln07TCAKo4o/3rL2",
+      "firstName": "dodo",
+      "lastName": "didi",
+      "id": 2
+    }
+  ],
+  "expenses": [],
+  "login": [],
+  "income": [
+    {
+      "date": "2026-05-04",
+      "amount": 800,
+      "type": "passive",
+      "deleted": false,
+      "details": "user1",
+      "category": "prima",
+      "userId": 1,
+      "id": 1
+    },
+    {
+      "date": "2026-05-01",
+      "amount": 600,
+      "type": "active",
+      "deleted": false,
+      "details": "user1",
+      "category": "prima",
+      "userId": 1,
+      "id": 5
+    },
+    {
+      "date": "2026-05-01",
+      "amount": 0,
+      "type": "passive",
+      "deleted": false,
+      "details": "user1",
+      "category": "prima",
+      "userId": 1,
+      "id": 7
+    },
+    {
+      "date": "2026-05-01",
+      "amount": 700,
+      "type": "active",
+      "deleted": false,
+      "details": "user1",
+      "category": "prima",
+      "userId": 1,
+      "id": 8
+    },
+    {
+      "date": "2026-05-06",
+      "amount": 600,
+      "type": "active",
+      "deleted": false,
+      "details": "user2",
+      "category": "prima",
+      "userId": 2,
+      "id": 9
+    },
+    {
+      "date": "2026-05-06",
+      "amount": 2300,
+      "type": "passive",
+      "deleted": false,
+      "details": "user2",
+      "category": "prima",
+      "userId": 2,
+      "id": 11
+    }
+  ],
+  "firstpage": [
+    {
+      "title": "Monitor your expenses easily and efficiently",
+      "subtitle": "Keep your finances under control, create budgets, and see where your money goes, all in one modern app.",
+      "sectionTitle": "Features",
+      "footerTitle": "Take control of your money",
+      "footerSubtitle": "Start today and see the difference.",
+      "card1": {
+        "cardTitle": "Real-time monitoring",
+        "cardSubtitle": "Add expenses and track them instantly."
+      },
+      "card2": {
+        "cardTitle": "Customized budgets",
+        "cardSubtitle": "Set limits for each spending category."
+      },
+      "card3": {
+        "cardTitle": "Detailed reports",
+        "cardSubtitle": "Analyze your financial habits with clear graphs."
+      }
+    }
+  ],
+  "test": [],
+  "incomes": [
+    {
+      "id": 4,
+      "userId": 1,
+      "date": "2026-04-08",
+      "amount": 1570,
+      "deleted": false,
+      "type": "active",
+      "category": "salary",
+      "details": "form march"
+    },
+    {
+      "id": 5,
+      "userId": 1,
+      "date": "2026-04-08",
+      "amount": 1570,
+      "deleted": false,
+      "type": "passive",
+      "category": "rent",
+      "details": "income from salary"
+    },
+    {
+      "date": "2026-04-08",
+      "amount": 12300,
+      "type": "active",
+      "deleted": false,
+      "details": "dadadada",
+      "category": "imprumut",
+      "id": 6
+    },
+    {
+      "date": "2026-05-04",
+      "amount": "800",
+      "category": "prima",
+      "type": "active",
+      "deleted": false,
+      "userId": 1,
+      "details": "sasasa",
+      "id": 9
+    }
+  ],
+  "firstPage": [
+    {
+      "title": "Monitor your expenses easily and efficiently",
+      "subtitle": "Keep your finances under control, create budgets, and see where your money goes, all in one modern app.",
+      "sectionTitle": "Features",
+      "footerTitle": "Take control of your money",
+      "footerSubtitle": "Start today and see the difference.",
+      "card1": {
+        "cardTitle": "Real-time monitoring",
+        "cardSubtitle": "Add expenses and track them instantly."
+      },
+      "card2": {
+        "cardTitle": "Customized budgets",
+        "cardSubtitle": "Set limits for each spending category."
+      },
+      "card3": {
+        "cardTitle": "Detailed reports",
+        "cardSubtitle": "Analyze your financial habits with clear graphs."
+      }
+    }
+  ]
+}

@@ -22,7 +22,7 @@ export function Nav() {
         <span className={styles.app}>APP</span>
       </Link>
 
-     
+
       <button
         className={styles.menuToggle}
         onClick={() => setOpen(!open)}
@@ -30,7 +30,7 @@ export function Nav() {
         ☰
       </button>
 
-     
+
       <menu className={`${styles.menu} ${open ? styles.show : ""}`}>
 
         <li>
@@ -41,13 +41,13 @@ export function Nav() {
           <NavLink to="/report" onClick={() => setOpen(false)}>Report</NavLink>
         </li>
 
-        <li>
+        {/* <li>
           <NavLink to="/payments" onClick={() => setOpen(false)}>Payments</NavLink>
         </li>
 
         <li>
           <NavLink to="/income" onClick={() => setOpen(false)}>Income</NavLink>
-        </li>
+        </li> */}
 
         {!user && (
           <>
@@ -67,6 +67,13 @@ export function Nav() {
 
         {user && (
           <>
+            <li>
+              <NavLink to="/payments" onClick={() => setOpen(false)}>Payments</NavLink>
+            </li>
+
+            <li>
+              <NavLink to="/income" onClick={() => setOpen(false)}>Income</NavLink>
+            </li>
             <li title="Edit your profile" className={styles.wellcomeMsg}>
               <Link to="/user" onClick={EditUser}>
                 Welcome, <strong className={styles.app}>{user.firstName}!</strong>
@@ -85,5 +92,5 @@ export function Nav() {
 
     </nav>
   );
-  
+
 }
