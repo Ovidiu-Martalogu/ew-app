@@ -8,7 +8,6 @@ import styles from "./firstpage.module.css";
 const apiUrl = `${import.meta.env.VITE_API_URL}/firstpage`;
 
 
-
 type CardContent = {
     cardTitle: string;
     cardSubtitle: string;
@@ -27,9 +26,7 @@ type Card = {
 
 
 export function FirstPage() {
-
     const [firstPage, setFirstPage] = useState<Card[]>([]);
-
 
     useEffect(() => {
         fetch(apiUrl)
@@ -43,9 +40,7 @@ export function FirstPage() {
             .catch(error => console.error(error));
     }, []);
 
-
     if (!firstPage.length) return <p>Loading...</p>;
-
 
     return (
 
@@ -81,8 +76,6 @@ export function FirstPage() {
                 ))}
                 <div className={styles.grid}>
                     <div className={styles.card}>
-
-
                         {firstPage.map((card, i) => (
                             <div key={i}>
                                 <h4>{card.card1.cardTitle}</h4>
@@ -93,8 +86,6 @@ export function FirstPage() {
                     </div>
 
                     <div className={styles.card}>
-
-
                         {firstPage.map((card, i) => (
                             <div key={i}>
                                 <h4>{card.card2.cardTitle}</h4>
@@ -105,8 +96,6 @@ export function FirstPage() {
                     </div>
 
                     <div className={styles.card}>
-
-
                         {firstPage.map((card, i) => (
                             <div key={i}>
                                 <h4>{card.card3.cardTitle}</h4>
@@ -124,14 +113,10 @@ export function FirstPage() {
                     <div key={i}>
                         <h3>{firstF.footerTitle}</h3>
                         <p>{firstF.footerSubtitle}</p>
-
                     </div>
                 ))}
-
             </section>
-
         </div>
     );
-
 }
 

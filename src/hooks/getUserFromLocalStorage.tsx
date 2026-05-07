@@ -1,6 +1,4 @@
 
-
-
 export function getAuth() {
     try {
         const authRaw = localStorage.getItem("auth");

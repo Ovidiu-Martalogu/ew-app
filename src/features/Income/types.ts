@@ -1,5 +1,4 @@
-export type Income =
-  | {
+export type Income ={
     id: number;
     userId: number;
     date: string;

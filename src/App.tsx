@@ -10,10 +10,11 @@ import { Payment } from "./features/Payment/Payment";
 import { Footer } from "./components/Footer/Footer";
 import { Report } from "./features/Report/Report"
 import { AuthContextProvider } from "../src/features/Auth/context/AuthContextProvider";
-import "./App.css";
 
 import { EditFirstPage } from "./features/First-page/EditFirstPage";
 import { EditOneIncome } from "./features/Income/EditOneIncome";
+
+import "./App.css";
 
 export default function App() {
   return (

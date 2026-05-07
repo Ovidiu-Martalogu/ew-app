@@ -4,7 +4,6 @@ import styles from "../First-page/EditFirstPage.module.css";
 
 const apiFirstPage = `${import.meta.env.VITE_API_URL}/firstpage`;
 
-
 type CardContent = {
     cardTitle: string;
     cardSubtitle: string;
@@ -118,7 +117,6 @@ export function EditFirstPage() {
 
                         <div className={styles.card}>
 
-
                             {firstPage.map((card, i) => (
                                 <div key={i}>
                                     <div>
@@ -146,7 +144,6 @@ export function EditFirstPage() {
                         </div>
 
                         <div className={styles.card}>
-
 
                             {firstPage.map((card, i) => (
                                 <div key={i}>
@@ -185,11 +182,8 @@ export function EditFirstPage() {
 
                         </div>
                     ))}
-
                 </section>
-
             </div>
-
         </>
     )
 }

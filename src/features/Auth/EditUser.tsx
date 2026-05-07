@@ -162,7 +162,6 @@ export function EditUser() {
         }
     }
 
-
     return (
         <>
             {user && (

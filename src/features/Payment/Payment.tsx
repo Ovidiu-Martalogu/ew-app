@@ -147,6 +147,7 @@ export function Payment() {
 
         }
     }
+
     async function saveEdit(id: number) {
         const updated = {
             ...editForm,
@@ -277,9 +278,7 @@ export function Payment() {
             <div className={styles.content}>
                 <h1 className={styles.title}>Payment</h1>
 
-
                 <div>
-
                     {addPayment && renderForm}
 
                     <button onClick={buttonAddPayment} className={styles.addPaymentButton}>

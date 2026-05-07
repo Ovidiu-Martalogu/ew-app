@@ -39,7 +39,6 @@ export function EditOneIncome() {
 
     });
 
-
     const validate = (data = formData) => {
         let newErrors: Errors = {};
 
@@ -66,8 +65,6 @@ export function EditOneIncome() {
 
         return newErrors;
     };
-
-
 
     useEffect(() => {
         if (!id) return;
@@ -146,15 +143,12 @@ export function EditOneIncome() {
                 }),
             });
 
-
             window.alert(`Update with succes`)
             navigate("/income");
 
         } catch (err: any) {
             setSubmitError(err.message);
         }
-
-
     }
 
     return (
@@ -162,7 +156,6 @@ export function EditOneIncome() {
             <h1>Edit Income</h1>
 
             <form onSubmit={handleSubmit} className={`${styles.card} ${styles.form}`}>
-
                 <div className={styles.formGroup}>
                     <label htmlFor="date">Date</label>
                     <input

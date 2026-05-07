@@ -1,12 +1,10 @@
 .brandForm {
-
   display: flex;
   margin: 1rem auto;
   border-radius: 0.5rem;
   flex-direction: column;
   justify-content: flex-start;
 }
-
 .brandForm input {
   width: 100%;
   box-sizing: border-box;

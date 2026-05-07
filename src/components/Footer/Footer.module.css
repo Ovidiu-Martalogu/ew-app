@@ -67,12 +67,10 @@
     
 }
 
-
 .links a:hover {
     color: white;
     padding-left: 4px;
 }
-
 
 .bottom {
     margin-top: 0.5rem;
@@ -82,7 +80,6 @@
     font-size: 0.7rem;
     color: #6b7280;
 }
-
 
 @media (max-width: 768px) {
     .footerContent {

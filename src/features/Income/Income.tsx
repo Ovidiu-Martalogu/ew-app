@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import type { Income } from "./types";
-import styles from "./income.module.css";
 import { NavLink, } from "react-router";
 import { getAuth } from "../../hooks/getUserFromLocalStorage";
+import type { Income } from "./types";
+
+import styles from "./income.module.css";
 
 const apiUrl = `${import.meta.env.VITE_API_URL}/income`;
+
 type Errors = {
     [key: string]: string;
 };

@@ -64,6 +64,13 @@
       "category": "rent",
       "userId": 1,
       "id": 8
+    },
+    {
+      "date": "2026-05-06",
+      "amount": 598,
+      "category": "rent",
+      "userId": 3,
+      "id": 9
     }
   ],
   "users": [
@@ -80,6 +87,13 @@
       "firstName": "dodo",
       "lastName": "didi",
       "id": 2
+    },
+    {
+      "id": 3,
+      "firstName": "user3",
+      "lastName": "Maria",
+      "email": "b@gmail.com",
+      "password": "$2a$10$WzQ1C8vHXCRdxyhupQJlh.JZRT0NE2ASexWxKxnsI7eregJDezyPa"
     }
   ],
   "expenses": [],
@@ -144,6 +158,16 @@
       "category": "prima",
       "userId": 2,
       "id": 11
+    },
+    {
+      "date": "2026-05-06",
+      "amount": 700,
+      "type": "passive",
+      "deleted": false,
+      "details": "salariu restant",
+      "category": "rent",
+      "userId": 3,
+      "id": 12
     }
   ],
   "firstpage": [

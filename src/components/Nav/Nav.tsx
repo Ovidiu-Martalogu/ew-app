@@ -6,8 +6,6 @@ import logo from "./logoimg.jpg";
 import styles from "./Nav.module.css";
 
 
-
-
 export function Nav() {
   const [open, setOpen] = useState(false);
   const { user, logout } = useAuth();
@@ -22,14 +20,12 @@ export function Nav() {
         <span className={styles.app}>APP</span>
       </Link>
 
-
       <button
         className={styles.menuToggle}
         onClick={() => setOpen(!open)}
       >
         ☰
       </button>
-
 
       <menu className={`${styles.menu} ${open ? styles.show : ""}`}>
 
@@ -40,14 +36,6 @@ export function Nav() {
         <li>
           <NavLink to="/report" onClick={() => setOpen(false)}>Report</NavLink>
         </li>
-
-        {/* <li>
-          <NavLink to="/payments" onClick={() => setOpen(false)}>Payments</NavLink>
-        </li>
-
-        <li>
-          <NavLink to="/income" onClick={() => setOpen(false)}>Income</NavLink>
-        </li> */}
 
         {!user && (
           <>
