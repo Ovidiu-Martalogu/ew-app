@@ -30,6 +30,9 @@ export function Income() {
     const [errors, setErrors] = useState<Errors>({});
     const [submitError, setSubmitError] = useState("");
 
+    const [insertdetails, setInsertDetails] = useState("")
+
+
     const buttonAddIncome = () => {
         setAddIncome(!addIncome);
     };
@@ -146,6 +149,8 @@ export function Income() {
             setAddIncome(false);
             setType("active");
             setErrors({});
+            setInsertDetails("");
+
         } catch (err: any) {
             setSubmitError(err.message);
         }
@@ -233,11 +238,14 @@ export function Income() {
 
             <div className={styles.formGroup}>
                 <label htmlFor="details">Details:</label>
-                <input
+                <textarea
                     id="details"
-                    type="text"
+
                     name="details"
+                    value={insertdetails}
+                    onChange={(e) => setInsertDetails(e.target.value)}
                     className={styles.input}
+
                 />
                 {errors.details && <p className={styles.error}>{errors.details || ""}</p>}
             </div>

@@ -72,7 +72,7 @@ h2 {
 }
 
 .formGroup {
-  color: rgb(119, 83, 16);
+  color: rgb(19 169 18);
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -88,6 +88,13 @@ h2 {
   border-radius: 8px;
   border: 1px solid #ccc;
   font-size: 14px;
+}
+
+.formGroup textarea {
+  width: 399px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: antiquewhite;
 }
 
 .addIncomeButton {

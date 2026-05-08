@@ -168,6 +168,16 @@
       "category": "rent",
       "userId": 3,
       "id": 12
+    },
+    {
+      "date": "2026-05-07",
+      "amount": 2300,
+      "type": "passive",
+      "category": "salariu",
+      "details": "test te hlhlnlknk\nhhoijpjpj;k",
+      "deleted": false,
+      "userId": 1,
+      "id": 13
     }
   ],
   "firstpage": [
