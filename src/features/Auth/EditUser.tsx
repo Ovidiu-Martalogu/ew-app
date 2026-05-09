@@ -164,100 +164,103 @@ export function EditUser() {
 
     return (
         <>
-            {user && (
-                <form onSubmit={handleSubmit} className={styles.brandForm}>
-                    <div>
-                        <h3>Edit your data</h3>
-                        <h4>Important:</h4>
-                        <p>To change your data, without changing your password,</p>
-                        <p> you need to confirm your changes with your current password.</p>
+            <div className={styles.content}>
 
-                    </div>
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="firstName">First Name</label>
-                        <input
-                            type="text"
-                            id="firstName"
-                            name="firstName"
-                            value={formData.firstName}
-                            placeholder="First name"
-                            onChange={handleChange}
-                        />
-                        {errors.firstName && <p className={styles.errorMsg}>{errors.firstName || ""}</p>}
-                    </div>
+                {user && (
+                    <form onSubmit={handleSubmit} className={styles.brandForm}>
+                        <div>
+                            <h3>Edit your data</h3>
+                            <h4>Important:</h4>
+                            <p>To change your data, without changing your password,</p>
+                            <p> you need to confirm your changes with your current password.</p>
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="lastName">Last Name</label>
-                        <input
-                            type="text"
-                            id="lastName"
-                            name="lastName"
-                            value={formData.lastName}
-                            placeholder="Last name"
-                            onChange={handleChange}
-                        />
-                        {errors.lastName && <p className={styles.errorMsg}>{errors.lastName || ""}</p>}
+                        </div>
 
-                    </div>
+                        <div className={styles.formGroup}>
+                            <label htmlFor="firstName">First Name</label>
+                            <input
+                                type="text"
+                                id="firstName"
+                                name="firstName"
+                                value={formData.firstName}
+                                placeholder="First name"
+                                onChange={handleChange}
+                            />
+                            {errors.firstName && <p className={styles.errorMsg}>{errors.firstName || ""}</p>}
+                        </div>
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="email">Email</label>
-                        <input
-                            type="text"
-                            id="email"
-                            name="email"
-                            value={formData.email}
-                            placeholder="Email"
-                            onChange={handleChange}
-                        />
-                        {errors.email && <p className={styles.errorMsg}>{errors.email || ""}</p>}
+                        <div className={styles.formGroup}>
+                            <label htmlFor="lastName">Last Name</label>
+                            <input
+                                type="text"
+                                id="lastName"
+                                name="lastName"
+                                value={formData.lastName}
+                                placeholder="Last name"
+                                onChange={handleChange}
+                            />
+                            {errors.lastName && <p className={styles.errorMsg}>{errors.lastName || ""}</p>}
 
-                    </div>
+                        </div>
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="password">New Password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            value={formData.password}
-                            placeholder="New password"
-                            onChange={handleChange}
-                        />
-                        {errors.password && <p className={styles.errorMsg}>{errors.password || ""}</p>}
+                        <div className={styles.formGroup}>
+                            <label htmlFor="email">Email</label>
+                            <input
+                                type="text"
+                                id="email"
+                                name="email"
+                                value={formData.email}
+                                placeholder="Email"
+                                onChange={handleChange}
+                            />
+                            {errors.email && <p className={styles.errorMsg}>{errors.email || ""}</p>}
 
-                    </div>
+                        </div>
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="retypepassword">Retype Password</label>
-                        <input
-                            type="password"
-                            id="retypepassword"
-                            name="retypepassword"
-                            value={formData.retypepassword}
-                            placeholder="Retype password"
-                            onChange={handleChange}
-                        />
-                        {errors.retypepassword && <p className={styles.errorMsg}>{errors.retypepassword || ""}</p>}
+                        <div className={styles.formGroup}>
+                            <label htmlFor="password">New Password</label>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                value={formData.password}
+                                placeholder="New password"
+                                onChange={handleChange}
+                            />
+                            {errors.password && <p className={styles.errorMsg}>{errors.password || ""}</p>}
 
-                    </div>
+                        </div>
 
-                    <div className={styles.formButtons}>
-                        <button type="submit" className={styles.edituserButton}>Update</button>
-                    </div>
-                    {submitError && <p className={styles.errorMsg}>{submitError}</p>}
-                    <div className={styles.cancelButtonDiv}>
-                        <button
-                            type="button"
-                            onClick={() => navigate("/")}
-                        >
-                            Cancel
-                        </button>
-                    </div>
-                </form>
-            )}
+                        <div className={styles.formGroup}>
+                            <label htmlFor="retypepassword">Retype Password</label>
+                            <input
+                                type="password"
+                                id="retypepassword"
+                                name="retypepassword"
+                                value={formData.retypepassword}
+                                placeholder="Retype password"
+                                onChange={handleChange}
+                            />
+                            {errors.retypepassword && <p className={styles.errorMsg}>{errors.retypepassword || ""}</p>}
 
+                        </div>
+
+                        <div className={styles.formButtons}>
+                            <button type="submit" className={styles.edituserButton}>Update</button>
+                        </div>
+                        {submitError && <p className={styles.errorMsg}>{submitError}</p>}
+                        <div className={styles.cancelButtonDiv}>
+                            <button
+                                type="button"
+                                onClick={() => navigate("/")}
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                )}
+            </div>
         </>
     );
 }

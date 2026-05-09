@@ -1,0 +1,13 @@
+.content {
+    min-height: 100vh;
+    background-image: url("/public/backgound-3.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    flex: 1;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-family: "Segoe UI", Arial, sans-serif;
+}

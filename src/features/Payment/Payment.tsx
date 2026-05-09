@@ -259,16 +259,20 @@ export function Payment() {
     if (!payment || payment.length === 0) {
         return (
             <>
-                <h2 className={styles.notPaymentMsg}>
-                    <strong>You don't have any payments. Please add payments.</strong>
-                </h2>
-                <div>
+                <div className={styles.content}>
 
-                    {addPayment && renderForm}
 
-                    <button onClick={buttonAddPayment} className={styles.addPaymentButton}>
-                        {addPayment ? "Back" : "Add new Payment"}
-                    </button>
+                    <h2 className={styles.notPaymentMsg}>
+                        <strong>You don't have any payments. Please add payments.</strong>
+                    </h2>
+                    <div>
+
+                        {addPayment && renderForm}
+
+                        <button onClick={buttonAddPayment} className={styles.addPaymentButton}>
+                            {addPayment ? "Back" : "Add new Payment"}
+                        </button>
+                    </div>
                 </div>
             </>
         )

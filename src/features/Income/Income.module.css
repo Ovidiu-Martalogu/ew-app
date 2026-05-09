@@ -62,7 +62,6 @@ h2 {
 }
 
 .formAddIncome {
-
   color: white;
   display: flex;
   flex-direction: column;
@@ -72,7 +71,7 @@ h2 {
 }
 
 .formGroup {
-  color: rgb(19 169 18);
+  color: white;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -111,6 +110,27 @@ h2 {
 
 .editLink {
   text-decoration: none;
+  border-radius: 0.3rem;
+  border: none;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 13px;
+  margin: 0.2rem;
+  background: #1d4ed8;
+  color: white;
+}
+
+.deleteButton {
+  background: #ef4444;
+  color: white;
+  border-radius: 0.3rem;
+  border: none;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 13px;
+  margin: 0.2rem;
 }
 
 .showTotal {

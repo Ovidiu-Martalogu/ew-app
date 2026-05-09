@@ -261,16 +261,18 @@ export function Income() {
     if (!income || income.length === 0) {
         return (
             <>
-                <h1 className={styles.notIncomeMsg}>
-                    <strong>You don't have any incomes. Please add.</strong>
-                </h1>
+                <div className={styles.content}>
+                    <h1 className={styles.notIncomeMsg}>
+                        <strong>You don't have any incomes. Please add.</strong>
+                    </h1>
 
-                <div>
-                    {addIncome && renderForm}
+                    <div>
+                        {addIncome && renderForm}
 
-                    <button onClick={buttonAddIncome} className={styles.addIncomeButton}>
-                        {addIncome ? "Back" : "Add new Income"}
-                    </button>
+                        <button onClick={buttonAddIncome} className={styles.addIncomeButton}>
+                            {addIncome ? "Back" : "Add new Income"}
+                        </button>
+                    </div>
                 </div>
             </>
         );
@@ -319,7 +321,8 @@ export function Income() {
                                 Edit
                             </NavLink>
 
-                            <button onClick={() => deleteIncome(item.id)}>
+                            <button onClick={() => deleteIncome(item.id)}
+                                className={styles.deleteButton}>
                                 Delete
                             </button>
                         </div>

@@ -33,9 +33,6 @@ export function Nav() {
           <NavLink to="/" onClick={() => setOpen(false)}>Home</NavLink>
         </li>
 
-        <li>
-          <NavLink to="/report" onClick={() => setOpen(false)}>Report</NavLink>
-        </li>
 
         {!user && (
           <>
@@ -56,11 +53,13 @@ export function Nav() {
         {user && (
           <>
             <li>
+              <NavLink to="/income" onClick={() => setOpen(false)}>Income</NavLink>
+            </li>
+            <li>
               <NavLink to="/payments" onClick={() => setOpen(false)}>Payments</NavLink>
             </li>
-
             <li>
-              <NavLink to="/income" onClick={() => setOpen(false)}>Income</NavLink>
+              <NavLink to="/report" onClick={() => setOpen(false)}>Report</NavLink>
             </li>
             <li title="Edit your profile" className={styles.wellcomeMsg}>
               <Link to="/user" onClick={EditUser}>
