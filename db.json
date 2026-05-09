@@ -28,20 +28,7 @@
   },
   "payments": [],
   "users": [
-    {
-      "email": "qvidiu123456@gmail.com",
-      "password": "$2a$10$6gRcRLXShiKelXN9y8qYTuytRAItLKAHPitRA7J4zWVwCpJOJ7Uku",
-      "firstName": "Natalia",
-      "lastName": "Maria",
-      "id": 1
-    },
-    {
-      "email": "a@admin.com",
-      "password": "$2a$10$C8UZ8/LFqYFc.q56cYg.d.R6/tggBscMiUG6DwHHfHzWCeYANqIkq",
-      "firstName": "admin",
-      "lastName": "admin",
-      "id": 2
-    }
+
   ],
   "expenses": [],
   "login": [],
