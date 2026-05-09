@@ -2,9 +2,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { EditFirstPage } from "./EditFirstPage";
+import { isAdmin } from "../../hooks/IsAdmin";
+import { adminEmail } from "../../hooks/AdminEmail";
+
 
 import styles from "./firstpage.module.css";
-import { getAuth } from "../../hooks/getUserFromLocalStorage";
 
 const apiUrl = `${import.meta.env.VITE_API_URL}/firstpage`;
 
@@ -24,20 +26,7 @@ type Card = {
     footerTitle: string;
     footerSubtitle: string;
 };
-const adminEmail = "a@admin.com";
-
-export function isAdmin() {
-
-    const auth = getAuth();
-
-    if (!auth) {
-        return
-    } else {
-        return `${auth.user?.email}`
-    }
-
-
-} 
+// const adminEmail = "a@admin.com";
 
 export function FirstPage() {
     const [firstPage, setFirstPage] = useState<Card[]>([]);
