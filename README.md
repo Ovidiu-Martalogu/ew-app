@@ -9,12 +9,34 @@ The project refers to monitoring income and expenses
 
 # Register and Login from navbar
 
-#
+You cannot see/access Income
+ and payments if you are not registered/logged in.
+
+##
+
+Income is used to record your income. It can be active or passive income.
+
+##
+Payments is used to record your expenses.
+
+Payments has the option to sort records by date or amount.
+##
+After logging in,  you can add, edit, delete records.
+##
+You can also modify your personal data in the "Welcome.." section.
+
+## 
+The Report page is under development. It will display graphs for income vs expenses.
 
 
+####
+
+The first page is loaded with information from the DB. Only admin rights will be able to modify it.
+If you don't see "Edit this page", it means you don't have rights.
+ It is still in development.
 
 
-
+#### Enjoy
 
 # React + TypeScript + Vite
 
