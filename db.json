@@ -33,20 +33,38 @@
       "category": "salariu",
       "userId": 1,
       "id": 1
+    },
+    {
+      "date": "2026-05-11",
+      "amount": 600,
+      "category": "salariu",
+      "userId": 1,
+      "id": 2
     }
   ],
   "users": [
     {
-      "email": "qvidiu123456@gmail.com",
-      "password": "$2a$10$wwNH8PZa7mkZ6EEJ5Y0KEeSuxuMd44RF.YmZgWSfEQxYUHhMqMDvW",
+      "id": 1,
       "firstName": "Natalia",
       "lastName": "Maria",
-      "id": 1
+      "email": "a@admin.com",
+      "password": "$2a$10$4N593BmQK0CA97sP3FXINueA7Q2f5V2hu4XV3UVwArFk4zm1nlu3W"
     }
   ],
   "expenses": [],
   "login": [],
-  "income": [],
+  "income": [
+    {
+      "date": "2026-05-11",
+      "amount": 700,
+      "type": "active",
+      "category": "salariu",
+      "details": "test",
+      "deleted": false,
+      "userId": 1,
+      "id": 1
+    }
+  ],
   "firstpage": [
     {
       "title": "Monitor your expenses easily and efficiently",

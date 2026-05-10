@@ -111,7 +111,7 @@ export function EditOneIncome() {
 
     }
 
-    async function handleSubmit(e: React.FormEvent) {
+    async function handleSubmit(e: React.SubmitEvent) {
         e.preventDefault();
         if (!id) return;
 
