@@ -26,8 +26,24 @@
   "profile": {
     "name": "typicode"
   },
-  "payments": [],
-  "users": [],
+  "payments": [
+    {
+      "date": "2026-05-04",
+      "amount": 700,
+      "category": "salariu",
+      "userId": 1,
+      "id": 1
+    }
+  ],
+  "users": [
+    {
+      "email": "qvidiu123456@gmail.com",
+      "password": "$2a$10$wwNH8PZa7mkZ6EEJ5Y0KEeSuxuMd44RF.YmZgWSfEQxYUHhMqMDvW",
+      "firstName": "Natalia",
+      "lastName": "Maria",
+      "id": 1
+    }
+  ],
   "expenses": [],
   "login": [],
   "income": [],
