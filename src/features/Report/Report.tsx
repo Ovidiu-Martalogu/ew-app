@@ -41,64 +41,72 @@ export function Report() {
 
     useEffect(() => {
         const loadData = async () => {
-            const [incomeRes, paymentsRes] = await Promise.all([
-                fetch(apiUrlIncome),
-                fetch(apiUrl),
-            ]);
+            try {
+                const [incomeRes, paymentsRes] = await Promise.all([
+                    fetch(apiUrlIncome),
+                    fetch(apiUrl),
+                ]);
 
-            const income: IncomeItem[] = await incomeRes.json();
-            const payments: PaymentItem[] = await paymentsRes.json();
+                const incomeData = await incomeRes.json();
+                const paymentsData = await paymentsRes.json();
 
-            const merged: ChartData[] = income.map((item, index) => ({
-                date: item.date,
-                income: item.amount,
-                payments: payments[index]?.amount || 0,
-            }));
+                const income: IncomeItem[] = incomeData;
+                const payments: PaymentItem[] = paymentsData;
 
-            setData(merged);
+                const merged: ChartData[] = income.map((item, index) => ({
+                    date: item.date,
+                    income: item.amount,
+                    payments: payments[index] ? payments[index].amount : 0,
+                }));
+
+                setData(merged);
+            } catch (error) {
+                console.error("Failed to load data:", error);
+            }
+            console.log(data);
         };
 
         loadData();
+
     }, []);
+
+
 
     return (
 
         <>
             <div className={styles.content}>
-
-
                 <h1>Report page</h1>
                 <h3>Page under development.......</h3>
-         
 
-            <div className={styles.chartWrappe}>
-                <ResponsiveContainer width="100%" height={300}>
-                    <LineChart data={data}>
-                        <CartesianGrid strokeDasharray="3 3" />
+                <div className={styles.chartWrappe}>
+                    <ResponsiveContainer width="100%" height={300}>
+                        <LineChart data={data}>
+                            <CartesianGrid strokeDasharray="3 3" />
 
-                        <XAxis dataKey="month" />
+                            <XAxis dataKey="month" />
 
-                        <YAxis />
+                            <YAxis />
 
-                        <Tooltip />
+                            <Tooltip />
 
-                        <Line
-                            type="monotone"
-                            dataKey="income"
-                            stroke="#22c55e"
-                            strokeWidth={3}
-                        />
+                            <Line
+                                type="monotone"
+                                dataKey="income"
+                                stroke="#22c55e"
+                                strokeWidth={3}
+                            />
 
-                        <Line
-                            type="monotone"
-                            dataKey="payments"
-                            stroke="#ef4444"
-                            strokeWidth={3}
-                        />
-                    </LineChart>
-                </ResponsiveContainer>
+                            <Line
+                                type="monotone"
+                                dataKey="payments"
+                                stroke="#ef4444"
+                                strokeWidth={3}
+                            />
+                        </LineChart>
+                    </ResponsiveContainer>
+                </div>
             </div>
-               </div>
         </>
     );
 }
