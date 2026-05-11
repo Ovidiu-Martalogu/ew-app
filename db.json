@@ -26,45 +26,11 @@
   "profile": {
     "name": "typicode"
   },
-  "payments": [
-    {
-      "date": "2026-05-04",
-      "amount": 700,
-      "category": "salariu",
-      "userId": 1,
-      "id": 1
-    },
-    {
-      "date": "2026-05-11",
-      "amount": 600,
-      "category": "salariu",
-      "userId": 1,
-      "id": 2
-    }
-  ],
-  "users": [
-    {
-      "id": 1,
-      "firstName": "Natalia",
-      "lastName": "Maria",
-      "email": "qvidiu123456@gmail.com",
-      "password": "$2a$10$zsryDV3Sa62FH6FYjDg9WO0P2MPDgrK5kC7OpjGbnuy28xvqEVBEm"
-    }
-  ],
+  "payments": [],
+  "users": [],
   "expenses": [],
   "login": [],
-  "income": [
-    {
-      "date": "2026-05-11",
-      "amount": 700,
-      "type": "active",
-      "category": "salariu",
-      "details": "test",
-      "deleted": false,
-      "userId": 1,
-      "id": 1
-    }
-  ],
+  "income": [],
   "firstpage": [
     {
       "title": "Monitor your expenses easily and efficiently",
@@ -87,19 +53,7 @@
     }
   ],
   "test": [],
-  "incomes": [
-    {
-      "id": 1,
-      "userId": 1,
-      "date": "2026-04-08",
-      "amount": 1570,
-      "deleted": false,
-      "type": "active",
-      "category": "salary",
-      "details": "form march"
-    }
-  ],
-  "firstPage": [
+  "originalFirstPage": [
     {
       "title": "Monitor your expenses easily and efficiently",
       "subtitle": "Keep your finances under control, create budgets, and see where your money goes, all in one modern app.",
