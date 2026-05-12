@@ -20,7 +20,7 @@ export function Footer() {
                         <span className={styles.app}>APP</span>
                     </Link>
                     <p className={styles.text}>
-                        Monitorizează-ți cheltuielile ușor și rapid.
+                        Monitor your expenses easily and quickly.
                     </p>
                 </div>
 

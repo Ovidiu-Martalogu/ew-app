@@ -37,6 +37,8 @@ export function Payment() {
         category: "",
     });
 
+    const [isEditing, setIsEditing] = useState(false);
+
     const buttonAddPayment = () => {
         setAddPayment(!addPayment);
     };
@@ -57,11 +59,11 @@ export function Payment() {
         const amountNumber = Number(data.amount);
 
         if (!data.amount.trim() || isNaN(amountNumber) || amountNumber < 0) {
-            newErrors.amount = "Amount must be a positive number";
+            newErrors.amount = "Amount is required and must be a positive number";
         }
 
-        if (!data.category.trim()) {
-            newErrors.category = "Category is required";
+        if ( typeof data.category !== "string" ||!data.category.trim()) {
+            newErrors.category = "Category is required and must be a valid text";
         }
 
         return newErrors;
@@ -72,7 +74,7 @@ export function Payment() {
         const auth = getAuth();
         if (!auth?.user?.id) return;
         ;
-        console.log(auth.user.id);
+        // console.log(auth.user.id);
 
         if (!auth.user.id) return;
         fetch(`${apiUrl}?userId=${auth.user.id}`, {
@@ -173,6 +175,7 @@ export function Payment() {
         );
 
         setEditingId(null);
+        setIsEditing(false)
     }
     async function deletePayment(id: number) {
         const ok = window.confirm("Sigur vrei să ștergi această înregistrare?");
@@ -394,36 +397,49 @@ export function Payment() {
 
                                     <td className={styles.twoLines}>
 
-                                        <button className={styles.editButton}
-                                            onClick={() => {
-                                                setEditingId(key.id);
-                                                setEditForm({
-                                                    date: key.date,
-                                                    amount: String(key.amount),
-                                                    category: key.category,
-                                                });
-                                            }}
-                                        >
-                                            Edit
-                                        </button>
-                                        {editingId === key.id && (
+                                        {isEditing ? (
                                             <>
 
-                                                <button onClick={() => saveEdit(key.id)} className={styles.saveEditButton}>
-                                                    Save
+
+                                                {editingId === key.id && (
+                                                    <>
+
+                                                        <button onClick={() => saveEdit(key.id)} className={styles.saveEditButton}>
+                                                            Save
+                                                        </button>
+                                                        <button onClick={() => {
+                                                            setIsEditing(false)
+                                                            setEditingId(null)
+                                                        }} className={styles.cancelEditButton}>
+                                                            Cancel
+                                                        </button>
+                                                    </>
+                                                )}
+                                            </>
+                                        ) : (
+                                            <>
+                                                <button className={styles.editButton}
+                                                    onClick={() => {
+                                                        setEditingId(key.id);
+                                                        setIsEditing(true)
+                                                        setEditForm({
+                                                            date: key.date,
+                                                            amount: String(key.amount),
+                                                            category: key.category,
+                                                        });
+                                                    }}
+                                                >
+                                                    Edit
                                                 </button>
-                                                <button onClick={() => setEditingId(null)} className={styles.cancelEditButton}>
-                                                    Cancel
+                                                <button title="Are you sure?"
+                                                    className={styles.deleteButton}
+                                                    onClick={() => deletePayment(key.id)}
+                                                >
+                                                    Delete
                                                 </button>
                                             </>
                                         )}
 
-                                        <button title="Are you sure?"
-                                            className={styles.deleteButton}
-                                            onClick={() => deletePayment(key.id)}
-                                        >
-                                            Delete
-                                        </button>
                                     </td>
                                 </tr>
                             ))}
