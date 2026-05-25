@@ -26,13 +26,244 @@
   "profile": {
     "name": "typicode"
   },
-  "payments": [],
-  "users": [],
+  "payments": [
+    {
+      "date": "2026-05-06",
+      "amount": 600,
+      "category": "rata",
+      "userId": 1,
+      "id": 2
+    },
+    {
+      "date": "2026-05-07",
+      "amount": 600,
+      "category": "lidl",
+      "userId": 1,
+      "id": 3
+    },
+    {
+      "date": "2026-05-06",
+      "amount": 600,
+      "category": "rata",
+      "userId": 1,
+      "id": 4
+    },
+    {
+      "date": "2026-05-07",
+      "amount": 600,
+      "category": "lidl",
+      "userId": 1,
+      "id": 5
+    },
+    {
+      "date": "2026-05-06",
+      "amount": 600,
+      "category": "rata",
+      "userId": 1,
+      "id": 6
+    },
+    {
+      "date": "2026-05-07",
+      "amount": 700,
+      "category": "lidl",
+      "userId": 1,
+      "id": 7
+    },
+    {
+      "date": "2026-05-06",
+      "amount": 600,
+      "category": "rata",
+      "userId": 1,
+      "id": 8
+    },
+    {
+      "date": "2026-05-07",
+      "amount": 12600,
+      "category": "lidl",
+      "userId": 1,
+      "id": 9
+    },
+    {
+      "date": "2026-05-06",
+      "amount": 600,
+      "category": "rata",
+      "userId": 1,
+      "id": 10
+    },
+    {
+      "date": "2026-05-07",
+      "amount": 600,
+      "category": "lidl",
+      "userId": 1,
+      "id": 111
+    },
+    {
+      "date": "2026-05-06",
+      "amount": 6200,
+      "category": "rata",
+      "userId": 1,
+      "id": 12
+    },
+    {
+      "date": "2026-05-07",
+      "amount": 600,
+      "category": "lidl",
+      "userId": 1,
+      "id": 13
+    },
+    {
+      "date": "2026-05-06",
+      "amount": 600,
+      "category": "rata",
+      "userId": 1,
+      "id": 14
+    },
+    {
+      "date": "2026-05-06",
+      "amount": 600,
+      "category": "rata",
+      "userId": 1,
+      "id": 18
+    },
+    {
+      "date": "2026-05-07",
+      "amount": 12600,
+      "category": "lidl",
+      "userId": 1,
+      "id": 19
+    },
+    {
+      "date": "2026-05-06",
+      "amount": 600,
+      "category": "rata",
+      "userId": 1,
+      "id": 30
+    },
+    {
+      "date": "2026-05-07",
+      "amount": 600,
+      "category": "lidl",
+      "userId": 1,
+      "id": 31
+    },
+    {
+      "date": "2026-05-06",
+      "amount": 6200,
+      "category": "rata",
+      "userId": 1,
+      "id": 32
+    },
+    {
+      "date": "2026-05-07",
+      "amount": 600,
+      "category": "lidl",
+      "userId": 1,
+      "id": 33
+    },
+    {
+      "date": "2026-05-06",
+      "amount": 600,
+      "category": "rata",
+      "userId": 1,
+      "id": 34
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Maria",
+      "lastName": "Natalia",
+      "email": "qvidiu123456@gmail.com",
+      "password": "$2a$10$njViIR8Z1tPLAm98S5F1JOTtNHEtfO8Tw3TNQrUA83eD.hr1.GCnm"
+    }
+  ],
   "expenses": [],
   "login": [],
-  "income": [],
+  "income": [
+    {
+      "date": "2026-05-01",
+      "amount": 700,
+      "type": "active",
+      "category": "salariu",
+      "details": "test1",
+      "deleted": false,
+      "userId": 1,
+      "id": 1
+    },
+    {
+      "date": "2026-05-02",
+      "amount": 2300,
+      "type": "active",
+      "deleted": false,
+      "details": "tes",
+      "category": "rent",
+      "userId": 1,
+      "id": 2
+    },
+    {
+      "date": "2026-05-01",
+      "amount": 7200,
+      "type": "active",
+      "category": "salariu",
+      "details": "test1",
+      "deleted": false,
+      "userId": 1,
+      "id": 3
+    },
+    {
+      "date": "2026-05-02",
+      "amount": 1300,
+      "type": "passive",
+      "category": "rent",
+      "details": "tes",
+      "deleted": false,
+      "userId": 1,
+      "id": 4
+    },
+    {
+      "date": "2026-05-01",
+      "amount": 1700,
+      "type": "active",
+      "category": "salariu",
+      "details": "test1",
+      "deleted": false,
+      "userId": 1,
+      "id": 5
+    },
+    {
+      "date": "2026-05-02",
+      "amount": 200,
+      "type": "passive",
+      "category": "rent",
+      "details": "tes",
+      "deleted": false,
+      "userId": 1,
+      "id": 6
+    },
+    {
+      "date": "2026-05-04",
+      "amount": 700,
+      "type": "active",
+      "category": "salariu",
+      "details": "test1",
+      "deleted": false,
+      "userId": 1,
+      "id": 7
+    },
+    {
+      "date": "2026-05-05",
+      "amount": 2300,
+      "type": "passive",
+      "category": "rent",
+      "details": "tes",
+      "deleted": false,
+      "userId": 1,
+      "id": 8
+    }
+  ],
   "firstpage": [
     {
+      "id": 1,
       "title": "Monitor your expenses easily and efficiently",
       "subtitle": "Keep your finances under control, create budgets, and see where your money goes, all in one modern app.",
       "sectionTitle": "Features",
