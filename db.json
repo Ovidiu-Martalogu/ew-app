@@ -166,6 +166,13 @@
       "category": "rata",
       "userId": 1,
       "id": 34
+    },
+    {
+      "date": "2026-05-18",
+      "amount": 700,
+      "category": "Lidl",
+      "userId": 2,
+      "id": 112
     }
   ],
   "users": [
@@ -175,6 +182,13 @@
       "lastName": "Natalia",
       "email": "qvidiu123456@gmail.com",
       "password": "$2a$10$njViIR8Z1tPLAm98S5F1JOTtNHEtfO8Tw3TNQrUA83eD.hr1.GCnm"
+    },
+    {
+      "email": "a@admin.com",
+      "password": "$2a$10$UQck16/iOuS/WbXcQsaioursPPJVmAmMecx9YPJebOA4KuViZkMNG",
+      "firstName": "Ovidiu",
+      "lastName": "Ovi",
+      "id": 2
     }
   ],
   "expenses": [],
@@ -214,9 +228,9 @@
       "date": "2026-05-02",
       "amount": 1300,
       "type": "passive",
-      "category": "rent",
-      "details": "tes",
       "deleted": false,
+      "details": "tes",
+      "category": "rent",
       "userId": 1,
       "id": 4
     },
@@ -259,6 +273,26 @@
       "deleted": false,
       "userId": 1,
       "id": 8
+    },
+    {
+      "date": "2026-05-18",
+      "amount": 700,
+      "type": "passive",
+      "category": "salariu",
+      "details": "din mai",
+      "deleted": false,
+      "userId": 2,
+      "id": 9
+    },
+    {
+      "date": "2026-05-19",
+      "amount": 2300,
+      "type": "active",
+      "category": "salariu",
+      "details": "restant din luna aprilie",
+      "deleted": false,
+      "userId": 2,
+      "id": 10
     }
   ],
   "firstpage": [
